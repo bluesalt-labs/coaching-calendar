@@ -14,3 +14,15 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+//$app->group(['middleware' => 'auth'], function() use ($app) {
+    $app->group(['prefix' => 'api/v1'], function() use ($app) {
+        class User extends Illuminate\Database\Eloquent\Model {  }
+
+        $app->get('user/{id}', function($id) {
+            return User::findOrFail($id);
+        });
+    });
+
+//});
+
