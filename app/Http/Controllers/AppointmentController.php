@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 class AppointmentController extends Controller
 {
     /**
@@ -9,9 +13,15 @@ class AppointmentController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct() {  }
+
+    public function createAppointment(Request $request) {
+        // if there is data submitted. also, have required fields, and check for duplicate users
+
+        $appt = new Appointment();
+
+
+
     }
 
     //

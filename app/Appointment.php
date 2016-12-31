@@ -16,7 +16,7 @@ class Appointment extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_type', 'first_name', 'last_name', 'email', 'phone',
+        'start_datetime', 'end_datetime', 'type', 'status', 'coach_user_id', 'customer_user_id',
     ];
 
     /**
@@ -25,4 +25,6 @@ class Appointment extends Model {
      * @var array
      */
     //protected $hidden = [ 'password', ];
+
+
 }
