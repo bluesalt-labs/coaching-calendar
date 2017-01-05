@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * UserController constructor.
      */
     public function __construct() {  }
 
@@ -19,11 +16,11 @@ class UserController extends Controller
         return User::all();
     }
 
-    public function getUser($id = null) {
+    public function get($id = null) {
         return User::findOrFail($id);
     }
 
-    public function createUser(Request $request) {
+    public function create(Request $request) {
         // if there is data submitted. also, have required fields, and check for duplicate users
 
         $user = new User();

@@ -17,13 +17,30 @@ $app->get('/', function () use ($app) {
 
 //$app->group(['middleware' => 'auth'], function() use ($app) {
     $app->group(['prefix' => 'api/v1'], function() use ($app) {
-        class User extends Illuminate\Database\Eloquent\Model {  }
+        $app->group(['prefix' => 'user'], function() use ($app) {
+            class User extends Illuminate\Database\Eloquent\Model {  }
+            $app->get('/', 'UserController@getAll');
+            $app->get('get/{id}', 'UserController@get');
+            $app->post('create', 'UserController@create');
+        });
 
-        $app->get('user', 'UserController@getAll');
-        $app->get('user/{id}', 'UserController@getUser');
-        $app->post('user', 'UserController@createUser');
-
+        $app->group(['prefix' => 'appointment'], function() use ($app) {
+            class Appointment extends Illuminate\Database\Eloquent\Model {  }
+            $app->get('/', 'AppointmentController@getAll');
+            $app->get('get/{id}', 'AppointmentController@get');
+            $app->post('create', 'AppointmentController@create');
+        });
     });
 
 //});
+
+
+// Debug views
+$app->get('/', function() {
+    return view('front-end');
+});
+
+$app->get('admin', function() {
+    return view('back-end');
+});
 
