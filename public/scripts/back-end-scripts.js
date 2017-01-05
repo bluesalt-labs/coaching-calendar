@@ -1,3 +1,5 @@
+// Thank you <http://blog.garstasio.com/you-dont-need-jquery/ajax/>
+
 function scheduleAppointment(apptId, customerId) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/v1/appointment/create');
