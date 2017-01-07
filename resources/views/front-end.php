@@ -9,23 +9,27 @@
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap-calendar/css/calendar.min.css">
         <link rel="stylesheet" type="text/css" href="/styles/front-end-styles.css" />
 
         <!-- Javascript -->
 		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/bower_components/underscore/underscore-min.js"></script>
 		<!--<script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>-->
         <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-		<script type="text/javascript" src="/bower_components/bootstrap-calendar/js/calendar.min.js"></script>
-		<!--<script type="text/javascript" src="/bower_components/bootstrap-calendar/js/app.js"></script>-->
         <script type="text/javascript" src="/scripts/front-end-scripts.js"></script>
-
     </head>
     <body>
-        <div class="container">
-            <div id="calendar"></div>
+        <!-- Dev Container -->
+        <div class="container" id="dev">
+            <div class="row">
+                <div class="col-sm-6" id="testing">
+
+                </div>
+                <pre class="col-sm-6" id="output">
+
+                </pre>
+            </div>
         </div>
-</body>
+        <!-- End Dev Container -->
+    </body>
 </html>

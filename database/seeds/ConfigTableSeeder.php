@@ -3,12 +3,15 @@
 use App\Config;
 use Illuminate\Database\Seeder;
 
+
 class ConfigTableSeeder extends Seeder
 {
     public function run() {
         Config::create([
-            'key'   => '',
-            'data'  => '{}',
+            'key'   => 'appointment_length',
+            'data'  => "{".
+                "'default':{'time':30,'unit':'minutes'}".
+            "}",
         ]);
     }
 }

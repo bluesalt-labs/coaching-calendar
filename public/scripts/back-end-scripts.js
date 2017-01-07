@@ -2,7 +2,7 @@
 
 function scheduleAppointment(apptId, customerId) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/v1/appointment/create');
+    xhr.open('POST', '/api/v1/appointment/schedule');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status === 200) {

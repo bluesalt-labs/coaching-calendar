@@ -29,6 +29,7 @@ $app->get('/', function () use ($app) {
             $app->get('/', 'AppointmentController@getAll');
             $app->get('get/{id}', 'AppointmentController@get');
             $app->post('create', 'AppointmentController@create');
+            $app->post('schedule', 'AppointmentController@schedule');
         });
     });
 

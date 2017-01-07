@@ -10,7 +10,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run() {
-        $this->call('UsersTableSeeder');
-        $this->call('AppointmentsTableSeeder');
+        //$this->call('UsersTableSeeder');
+        //$this->call('AppointmentsTableSeeder');
+        $this->call('ConfigTableSeeder');
     }
 }
