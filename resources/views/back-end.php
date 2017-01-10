@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap-calendar/js/calendar.min.js"></script>
     <!--<script type="text/javascript" src="bower_components/bootstrap-calendar/js/app.js"></script>-->
+    <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/back-end-scripts.js"></script>
 
 </head>

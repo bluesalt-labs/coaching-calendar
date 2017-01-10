@@ -15,39 +15,53 @@
 		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 		<!--<script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>-->
         <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+        <script type="text/javascript" src="/scripts/scripts.js"></script>
         <script type="text/javascript" src="/scripts/front-end-scripts.js"></script>
     </head>
     <body>
-        <!-- Dev Container -->
+        <div class="container">
+            <!-- Calendar View -->
+            <!-- todo: this is moved in the dev container for now -->
+            <!--<div id="calendar">Loading Calendar...</div>-->
 
+            <!-- List View -->
+
+            <!-- Search/Filters? -->
+
+            <!--  -->
+        </div>
+
+        <!-- Dev -->
         <style type="text/css">
-            #dev .string { color: green; }
-            #dev .number { color: darkorange; }
-            #dev .boolean { color: blue; }
-            #dev .null { color: magenta; }
-            #dev .key { color: red; }
+            #dev #output pre { color: #C3D3DE; background-color: #263238; }
+            #dev #output pre .string { color: #C3E887; }
+            #dev #output pre .number { color: #F77669; }
+            #dev #output pre .boolean { color: #C792EA; }
+            #dev #output pre .null { color: #C792EA; }
+            #dev #output pre .key { color: #C3D3DE; }
         </style>
 
         <div class="container-fluid" id="dev">
+            <hr />
             <div class="row">
                 <div class="col-sm-8" id="testing">
-
+                    <div id="calendar-container">Loading Calendar...</div>
                 </div>
                 <div class="col-sm-4" id="output">
                     <h2>Users</h2>
                     <pre id="users" class="well">
-
+                        Loading...
                     </pre>
                     <hr />
                     <h2>Appointments</h2>
                     <pre id="appointments" class="well">
-
+                        Loading...
                     </pre>
                     <button class="btn btn-success" id="refresh-dev-display" onclick="refreshDevDisplay();">Refresh</button>
+                    <br /><br />
                 </div>
             </div>
         </div>
-        <!-- End Dev Container -->
+        <!-- End Dev -->
     </body>
 </html>

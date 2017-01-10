@@ -31,10 +31,13 @@ $app->get('/', function () use ($app) {
             $app->post('create', 'AppointmentController@create');
             $app->post('schedule', 'AppointmentController@schedule');
         });
+
+        $app->group(['prefix' => 'calendar'], function() use ($app) {
+            $app->get('/get/{year}/{month}/{day}', 'CalendarController@getCalendar');
+        });
     });
 
 //});
-
 
 // Debug views
 $app->get('/', function() {
