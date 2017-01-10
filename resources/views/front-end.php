@@ -20,14 +20,32 @@
     </head>
     <body>
         <!-- Dev Container -->
-        <div class="container" id="dev">
+
+        <style type="text/css">
+            #dev .string { color: green; }
+            #dev .number { color: darkorange; }
+            #dev .boolean { color: blue; }
+            #dev .null { color: magenta; }
+            #dev .key { color: red; }
+        </style>
+
+        <div class="container-fluid" id="dev">
             <div class="row">
-                <div class="col-sm-6" id="testing">
+                <div class="col-sm-8" id="testing">
 
                 </div>
-                <pre class="col-sm-6" id="output">
+                <div class="col-sm-4" id="output">
+                    <h2>Users</h2>
+                    <pre id="users" class="well">
 
-                </pre>
+                    </pre>
+                    <hr />
+                    <h2>Appointments</h2>
+                    <pre id="appointments" class="well">
+
+                    </pre>
+                    <button class="btn btn-success" id="refresh-dev-display" onclick="refreshDevDisplay();">Refresh</button>
+                </div>
             </div>
         </div>
         <!-- End Dev Container -->
