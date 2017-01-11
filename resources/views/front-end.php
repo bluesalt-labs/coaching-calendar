@@ -45,7 +45,21 @@
             <hr />
             <div class="row">
                 <div class="col-sm-8" id="testing">
-                    <div id="calendar-container">Loading Calendar...</div>
+                    <!-- Really? -->
+                    <?php
+                    $year   = (int)date('Y');
+                    $month  = (int)date('n');
+                    $day    = (int)date('j');
+
+                    $today = date("now");
+
+                    echo view('calendar', array(
+                        'year'  => $year,
+                        'month' => $month,
+                        'day' => $day,
+                        'today' => $today,
+                    ));
+                    ?>
                 </div>
                 <div class="col-sm-4" id="output">
                     <h2>Users</h2>

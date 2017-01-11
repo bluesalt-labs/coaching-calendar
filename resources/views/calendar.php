@@ -1,24 +1,29 @@
 <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="/styles/calendar.css" />
 
-<script type="text/javascript" src="/scripts/scripts.js"></script>
+
+<!--<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>-->
 <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-<script type="text/javascript" src="/scripts/calendar-scripts.js"></script>
+
+<script type="text/javascript" src="/scripts/scripts.js"></script>
+<!--<script type="text/javascript" src="/scripts/calendar-scripts.js"></script>-->
 
 <script type="text/javascript">
-    $(window).bind("load", function() {
-        var calendar = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
-    });
+    //var cal;
+
+    //document.addEventListener("onload", function(event) {
+        //cal = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
+    //});
 </script>
 
 <table id="calendar">
     <thead>
         <tr>
             <td colspan="7" id="calendar-header">
-                <button class="btn-month-nav" id="btn-prev-month" onclick="onPrevMonthClick">
+                <button class="btn-month-nav" id="btn-prev-month" onclick="cal.onPrevMonthClick();">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 </button>
-                <button class="btn-month-nav" id="btn-next-month" onclick="onNextMonthClick">
+                <button class="btn-month-nav" id="btn-next-month" onclick="cal.onNextMonthClick();">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
                 <span id="calendar-month">...</span>
@@ -91,3 +96,67 @@
         </tr>
     </tbody>
 </table>
+
+<script type="text/javascript">
+    var CoachingCalendar = function(year, month, day) {
+        this.dateToday = new moment();
+        this.calendarDate = new moment( {year: year, month: (month - 1), day: day} );
+
+        this.init = function() {
+            this.refreshCalendar();
+        };
+
+        /**
+         *
+         */
+        this.refreshCalendar = function () {
+            document.getElementById('calendar-month').innerHTML =
+                this.calendarDate.format('MMMM') +
+                " " +
+                this.calendarDate.format('YYYY');
+        };
+
+        /**
+         * gets appointments via API
+         */
+        this.getAppointments = function () {
+
+        };
+
+        /**
+         * refreshes displayed appointments
+         */
+        this.refreshAppointments = function () {
+
+        };
+
+        /**
+         * removes displayed appointments on the calendar
+         */
+        this.clearAppointments = function () {
+
+        };
+
+        /**
+         * Selects previous month and refreshes calendar
+         */
+        this.onPrevMonthClick = function () {
+            this.calendarDate.subtract(1, 'months');
+            console.log(this.calendarDate.format()); // debug
+            this.refreshCalendar();
+        };
+
+        /**
+         * Selects next month and refreshes calendar
+         */
+        this.onNextMonthClick = function () {
+            this.calendarDate.add(1, 'months');
+            console.log(this.calendarDate.format()); // debug
+            this.refreshCalendar();
+        };
+
+        this.init();
+    };
+
+    var cal = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
+</script>

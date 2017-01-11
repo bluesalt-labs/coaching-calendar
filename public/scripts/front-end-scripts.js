@@ -1,9 +1,9 @@
 
 function getCalendarView() {
     var today = new Date();
-    var data = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+    var url = 'get/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
 
-    apiGet('calendar', 'get/' + data, [], function(data) {
+    apiGet('calendar', url, [], function(data) {
         document.getElementById("calendar-container").innerHTML = data;
     });
 }
@@ -49,8 +49,9 @@ function syntaxHighlight(json) {
     });
 }
 
-$(window).bind("load", function() {
+//$(window).bind("load", function() {
+document.addEventListener("DOMContentLoaded", function(event) {
     refreshDevDisplay();
-    getCalendarView();
+    //getCalendarView();
 });
 
