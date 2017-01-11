@@ -1,7 +1,7 @@
 
 function getCalendarView() {
     var today = new Date();
-    var url = 'get/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+    var url = 'get/' + today.getFullYear() + '/' + (today.getMonth()) + '/' + (today.getDate());
 
     apiGet('calendar', url, [], function(data) {
         document.getElementById("calendar-container").innerHTML = data;
