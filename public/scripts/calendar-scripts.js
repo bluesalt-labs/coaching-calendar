@@ -2,12 +2,16 @@ var CoachingCalendar = function(year, month, day) {
     this.dateToday = new moment();
     this.calendarDate = new moment( {year: year, month: (month - 1), day: day} );
 
+    /**
+     * initializes the calendar. Called when a new CoachingCalendar object is created
+     */
     this.init = function() {
         this.refreshCalendar();
     };
 
-
-
+    /**
+     * Updates years available in the '#year-dd' select menu
+     */
     this.updateYearDDSelections = function() {
         var innerHTML = '';
         var year = this.calendarDate.get('year');
@@ -54,6 +58,7 @@ var CoachingCalendar = function(year, month, day) {
             var dSpan = d.getElementsByClassName('day-num')[0];
 
             d.className += " outside-month";
+            //d.addEventListener('click', this.onClick.bind(this));
             dSpan.innerHTML = tempMoment.date();
 
             tempMoment.add(1, 'days');
@@ -63,8 +68,15 @@ var CoachingCalendar = function(year, month, day) {
             var d = document.getElementById('day-'+i);
             var dSpan = d.getElementsByClassName('day-num')[0];
 
-            if(tempMoment.month() != thisMonth) { d.className += " outside-month"; }
-            else { d.className = 'day'; }
+            if(tempMoment.month() != thisMonth) {
+                //d.addEventListener('click', this.onClick.bind(this));
+                d.className += " outside-month";
+            }
+            else {
+                //d.removeEventListener('click', this.onClick.bind(this));
+                //d.removeEventListener('click', this.onClick.bind(this));
+                d.className = 'day';
+            }
             dSpan.innerHTML = tempMoment.date();
             tempMoment.add(1, 'days');
         }

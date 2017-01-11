@@ -22,9 +22,8 @@
         <div class="container">
             <!-- Calendar View -->
             <!-- todo: this is moved in the dev container for now -->
-            <!--<div id="calendar">Loading Calendar...</div>-->
 
-            <!-- List View -->
+            <!-- Agenda View -->
 
             <!-- Search/Filters? -->
 

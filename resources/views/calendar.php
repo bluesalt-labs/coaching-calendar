@@ -9,7 +9,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/calendar-styles.css" />
 
     <!-- Javascript -->
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
@@ -32,23 +32,27 @@
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
                 <div id="calendar-month">
-                    <label for="month-dd" class="sr-only">Calendar Month</label>
-                    <select name="month-dd" id="month-dd" onchange="cal.onMonthDDChange();">
-                        <option value="0">January</option>
-                        <option value="1">February</option>
-                        <option value="2">March</option>
-                        <option value="3">April</option>
-                        <option value="4">May</option>
-                        <option value="5">June</option>
-                        <option value="6">July</option>
-                        <option value="7">August</option>
-                        <option value="8">September</option>
-                        <option value="9">October</option>
-                        <option value="10">November</option>
-                        <option value="11">December</option>
-                    </select>
-                    <label for="year-dd" class="sr-only">Calendar Year</label>
-                    <select name="year-dd" id="year-dd" onchange="cal.onYearDDChange();"></select>
+                    <div class="form-group">
+                        <label for="month-dd" class="sr-only">Calendar Month</label>
+                        <select name="month-dd" id="month-dd" dir="rtl" onchange="cal.onMonthDDChange();">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year-dd" class="sr-only">Calendar Year</label>
+                        <select name="year-dd" id="year-dd" onchange="cal.onYearDDChange();"></select>
+                    </div>
                 </div>
                 <!--<span id="calendar-month">...</span>-->
             </td>
