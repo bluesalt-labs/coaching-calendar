@@ -1,23 +1,26 @@
-<link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="/styles/calendar.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coaching Calendar</title>
 
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/calendar.css" />
 
-<!--<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>-->
-<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/scripts.js"></script>
+    <script type="text/javascript" src="/scripts/calendar-scripts.js"></script>
 
-<script type="text/javascript" src="/scripts/scripts.js"></script>
-<!--<script type="text/javascript" src="/scripts/calendar-scripts.js"></script>-->
-
-<script type="text/javascript">
-    //var cal;
-
-    //document.addEventListener("onload", function(event) {
-        //cal = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
-    //});
-
-    console.log("From PHP - year: <?=$year?> month: <?=$month?> day: <?=$day?>"); // debug
-</script>
-
+    <script type="text/javascript">
+        console.log("From PHP - year: <?=$year?> month: <?=$month?> day: <?=$day?>"); // debug
+    </script>
+</head>
+<body>
 <table id="calendar">
     <thead>
         <tr>
@@ -28,7 +31,26 @@
                 <button class="btn-month-nav" id="btn-next-month" onclick="cal.onNextMonthClick();">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
-                <span id="calendar-month">...</span>
+                <div id="calendar-month">
+                    <label for="month-dd" class="sr-only">Calendar Month</label>
+                    <select name="month-dd" id="month-dd" onchange="cal.onMonthDDChange();">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                    <label for="year-dd" class="sr-only">Calendar Year</label>
+                    <select name="year-dd" id="year-dd" onchange="cal.onYearDDChange();"></select>
+                </div>
+                <!--<span id="calendar-month">...</span>-->
             </td>
         </tr>
         <tr>
@@ -100,113 +122,8 @@
 </table>
 
 <script type="text/javascript">
-    var CoachingCalendar = function(year, month, day) {
-        this.dateToday = new moment();
-        this.calendarDate = new moment( {year: year, month: (month - 1), day: day} );
-
-        this.init = function() {
-            this.refreshCalendar();
-        };
-
-        /**
-         *
-         */
-        this.refreshCalendar = function () {
-            document.getElementById('calendar-month').innerHTML =
-                this.calendarDate.format('MMMM') +
-                " " +
-                this.calendarDate.format('YYYY');
-
-            /*
-            * There are 42 days in this calendar.
-            * find first day of month, set it's value to 1
-            * if there are any days before the first day of the month,
-            * traverse backwards through them and populate them with days of the previous month.
-            * add .outside-month class to them as well
-            * go back to the first day of the month and populate the rest of the
-            * days of the month.
-            * keep going until the end of the calendar is reached (even though we're going into
-            * the next month). Don't forget to set .outside-month class to the end days as well.
-            * I might want to create an array of element id's to days in month for reference.
-            * either that or add an id to each span with the day of the month. however, to my
-            * knowledge searching and modifying the DOM is more taxing than referencing an array.
-            */
-
-            var thisYear    = this.calendarDate.get('year');
-            var thisMonth   = this.calendarDate.get('month');
-            var thisDay     = this.calendarDate.get('day');
-            var tempMoment = new moment({
-                year:   thisYear,
-                month:  thisMonth,
-                day:    thisDay
-            });
-
-            var firstDayOfWeek = tempMoment.day();
-
-            tempMoment.subtract(1, 'months').endOf('month').subtract(firstDayOfWeek, 'days');
-
-            for(var i = 0; i <= firstDayOfWeek; i++){
-                var d = document.getElementById('day-'+i);
-                var dSpan = d.getElementsByClassName('day-num')[0];
-
-                d.className += " outside-month";
-                dSpan.innerHTML = tempMoment.date();
-
-                tempMoment.add(1, 'days');
-            }
-
-            for(var i = firstDayOfWeek + 1; i < 42; i++) {
-                var d = document.getElementById('day-'+i);
-                var dSpan = d.getElementsByClassName('day-num')[0];
-
-                if(tempMoment.month() > thisMonth) { d.className += " outside-month"; }
-                else { d.className = 'day'; }
-                dSpan.innerHTML = tempMoment.date();
-                tempMoment.add(1, 'days');
-            }
-        };
-
-        /**
-         * gets appointments via API
-         */
-        this.getAppointments = function () {
-
-        };
-
-        /**
-         * refreshes displayed appointments
-         */
-        this.refreshAppointments = function () {
-
-        };
-
-        /**
-         * removes displayed appointments on the calendar
-         */
-        this.clearAppointments = function () {
-
-        };
-
-        /**
-         * Selects previous month and refreshes calendar
-         */
-        this.onPrevMonthClick = function () {
-            this.calendarDate.subtract(1, 'months');
-            console.log(this.calendarDate.format()); // debug
-            this.refreshCalendar();
-        };
-
-        /**
-         * Selects next month and refreshes calendar
-         */
-        this.onNextMonthClick = function () {
-            this.calendarDate.add(1, 'months');
-            console.log(this.calendarDate.format()); // debug
-            this.refreshCalendar();
-        };
-
-        this.init();
-    };
-
     var cal = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
 </script>
+
+</body>
+</html>

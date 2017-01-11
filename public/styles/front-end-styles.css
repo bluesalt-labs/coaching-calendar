@@ -3,3 +3,12 @@
     position: relative;
     width: 100%;
 }
+
+#calendar-iframe {
+    position: relative;
+    width: 100%;
+    border: none;
+    height: 100%;
+    min-height: 650px;
+    overflow: hidden;
+}

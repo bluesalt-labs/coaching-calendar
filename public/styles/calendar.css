@@ -7,7 +7,7 @@ table#calendar #calendar-header {
 }
 
 table#calendar #calendar-header > button,
-table#calendar #calendar-header > span {
+table#calendar #calendar-header > #calendar-month {
     margin: 0;
     text-align: center;
 }
@@ -22,18 +22,18 @@ table#calendar #calendar-header > button {
 }
 table#calendar #calendar-header > button:hover,
 table#calendar #calendar-header > button:active {
-    background-color: #ddd;
+    background-color: #f3f3f3;
 }
 table#calendar #calendar-header > button#btn-prev-month {
-    border-right: 1px solid #222;
+    border-right: 1px solid #aaa;
     float: left;
 }
 table#calendar #calendar-header > button#btn-next-month {
-    border-left: 1px solid #222;
+    border-left: 1px solid #aaa;
     float: right;
 }
 
-table#calendar #calendar-header > span {
+table#calendar #calendar-header > #calendar-month {
     height: 30px;
     padding: 10px 0;
     display: block;
@@ -67,7 +67,7 @@ table#calendar {
 table#calendar #calendar-header,
 table#calendar .day-header,
 table#calendar .day {
-    border: 1px solid #222;
+    border: 1px solid #aaa;
 }
 
 table#calendar .day { position: relative; }
@@ -80,7 +80,7 @@ table#calendar .day > .day-num {
 }
 
 table#calendar .day.outside-month {
-    border-color: #aaa;
+    background-color: #f6f6f6;
 }
 
 table#calendar .day.outside-month > .day-num {

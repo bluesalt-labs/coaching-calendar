@@ -1,4 +1,5 @@
 
+/*
 function getCalendarView() {
     var today = new Date();
     var url = 'get/' + today.getFullYear() + '/' + (today.getMonth()) + '/' + (today.getDate());
@@ -7,6 +8,7 @@ function getCalendarView() {
         document.getElementById("calendar-container").innerHTML = data;
     });
 }
+*/
 
 function refreshDevDisplay() {
     updateUsersDisp();
