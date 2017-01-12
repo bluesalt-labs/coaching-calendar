@@ -13,7 +13,7 @@
 
     <!-- Javascript -->
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="/scripts/scripts.js"></script>
+    <!--<script type="text/javascript" src="/scripts/scripts.js"></script>-->
     <script type="text/javascript" src="/scripts/calendar-scripts.js"></script>
 
     <script type="text/javascript">

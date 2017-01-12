@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
+use DateTime;
+
 class Appointment extends Model
 {
     const STATUS_AVAILABLE  = 0;
@@ -52,4 +54,15 @@ class Appointment extends Model
         }
     }
 
+    public static function getByDateRange(DateTime $startDate, DateTime $endDate, $availOnly = true) {
+        $qry = Appointment::whereBetween('start_datetime', array(
+                $startDate->format(DateTime::ATOM),
+                $endDate->format(DateTime::ATOM),
+            )
+        );
+
+        if($availOnly) { $qry->where('status', Appointment::STATUS_AVAILABLE); }
+
+        return $qry->get();
+    }
 }

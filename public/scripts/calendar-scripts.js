@@ -57,7 +57,7 @@ var CoachingCalendar = function(year, month, day) {
         // See if we should shift the calendar down a week
         if(41 - (daysInMonth + firstDayOfWeek) > 8) { firstDayOfWeek += 7; }
 
-        tempMoment.subtract(1, 'months').endOf('month').subtract(firstDayOfWeek, 'days');
+        tempMoment.subtract(1, 'months').endOf('month').subtract(firstDayOfWeek - 1, 'days');
 
         for(var i = 0; i <= firstDayOfWeek; i++){
             var d = document.getElementById('day-'+i);
@@ -69,6 +69,9 @@ var CoachingCalendar = function(year, month, day) {
 
             tempMoment.add(1, 'days');
         }
+
+        // We didn't need to add a day the last time through the loop above. Subtract that day.
+        tempMoment.subtract(1, 'days');
 
         for(var i = firstDayOfWeek; i < 42; i++) {
             var d = document.getElementById('day-'+i);
@@ -101,16 +104,40 @@ var CoachingCalendar = function(year, month, day) {
             tempMoment.add(1, 'days');
         }
 
-        console.log(this.cacheArr); // debug
+        //console.log(this.cacheArr); // debug
 
         this.refreshAppointments();
     };
 
     /**
-     * gets appointments via API
+     * gets appointments for the selected via API
      */
     this.getAppointments = function() {
 
+        // todo: check cache for appointments (and refresh it?)
+
+        var thisYear    = this.calendarDate.get('year');
+        var thisMonth   = this.calendarDate.get('month');
+        var lastDay     = this.calendarDate.daysInMonth();
+
+        var startDate = new moment({
+            year:   thisYear,
+            month:  thisMonth,
+            day:    1
+        });
+
+        var endDate = new moment({
+            year:   thisYear,
+            month:  thisMonth,
+            day:    lastDay
+        });
+
+        var reqData = {
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString()
+        };
+
+        var apiData = this.apiGet('appointment', 'getByDateRange', reqData, this.getAppointmentsCallback.bind(this));
     };
 
     /**
@@ -125,7 +152,72 @@ var CoachingCalendar = function(year, month, day) {
      * removes displayed appointments on the calendar
      */
     this.clearAppointments = function() {
+        // todo: clear from cache (this.cacheArr)
+        var toRemove = document.getElementsByClassName('cal-event');
+        var removeCap = 999;
 
+        while( (toRemove.length > 0) && (removeCap > 0) ) {
+            toRemove[0].parentNode.removeChild(toRemove[0]);
+            removeCap--;
+        }
+    };
+
+    /**
+     * Callback for getAppointments that (will cache) appointments and adds them to the calendar
+     * @param data
+     */
+    this.getAppointmentsCallback = function(data) {
+        if(data.length > 0) {
+            //var thisYear    = this.calendarDate.get('year');
+            //var thisMonth   = this.calendarDate.get('month');
+
+            // Add elements to the calendar todo: add to cache (this.cacheArr)
+            for(var key in data) {
+                // Find the day this appointment belongs to
+                var startDate   = new moment(data[key]['start_datetime']);
+                var endDate     = new moment(data[key]['end_datetime']);
+
+                var dayElID = this.findDayIDByDate(startDate);
+
+                if(dayElID !== "") {
+                    var dayEl = document.getElementById(dayElID);
+                    var eventEl = document.createElement("span");
+
+                    // Add appropriate class names
+                    eventEl.className = ("cal-event " + this.getApptStatusText(data[key]['status'])).trim();
+                    eventEl.innerHTML = startDate.format('hh:mm a');
+
+                    dayEl.appendChild(eventEl);
+                }
+            }
+        }
+    };
+
+    /**
+     *
+     * @param d - start date (Moment object)
+     * @returns {*|string}
+     */
+    this.findDayIDByDate = function(d) {
+        var dayNum = this.cacheArr[d.get('year')][d.get('month')][d.get('date')]['id'];
+
+        if(dayNum) { return 'day-' + dayNum; }
+        else { return ""; }
+    };
+
+    this.getApptStatusText = function(statusID) {
+        switch( parseInt(statusID) ) {
+            case 0 : // const STATUS_AVAILABLE  = 0;
+                return "available";
+            case 1: // const STATUS_REQUESTED  = 1;
+                return "requested";
+            case 2: // const STATUS_CONFIRMED  = 2;
+                return "confirmed";
+            case 3: // const STATUS_CANCELED   = 3;
+                return "canceled";
+            default:
+                return "";
+        }
     };
 
     /**
@@ -172,7 +264,15 @@ var CoachingCalendar = function(year, month, day) {
         this.refreshCalendar();
     };
 
-    this.apiRequest = function(method, model, action, args = [], callback) {
+    this.apiGet = function(model, action, args, callback) {
+        this.apiRequest('GET', model, action, args, callback);
+    };
+
+    this.apiPost = function(model, action, args, callback) {
+        this.apiRequest('POST', model, action, args, callback);
+    };
+
+    this.apiRequest = function(method, model, action, args, callback) {
         if(!(model.length > 0)) {
             console.log("Request failed: Must specify model!");
             callback('');
@@ -185,13 +285,24 @@ var CoachingCalendar = function(year, month, day) {
             return;
         }
 
+        var url = this.apiUrl + model + '/' + (action == 'all' ? '' : action);
+
+        if(method === 'GET' && args !== {}) {
+            var urlAdd = '?';
+            for(var key in args) {
+                urlAdd += key + '=' + encodeURIComponent(args[key]) + '&';
+            }
+            url += urlAdd.slice(0, -1);
+        }
+
         var xhr = new XMLHttpRequest();
-        xhr.open(method, this.apiUrl + model + '/' + (action == 'all' ? '' : action), true);
-        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open(method, url, true);
+        xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    callback(xhr.responseText);
+                    callback(xhr.response);
                 } else {
                     console.log('Request failed.  Returned status of ' + xhr.status);
                     callback('');
@@ -199,15 +310,7 @@ var CoachingCalendar = function(year, month, day) {
             }
         };
 
-        var toSend = '';
-        if(Array.isArray(args) && args.length > 0) {
-
-
-            for(var i = 0; i < args.length; i++) {
-                toSend += args.key(i) + '=' + args[i]; // todo: make sure this works
-            }
-        }
-        if(toSend !== '') { xhr.send(encodeURI(toSend)); }
+        if(method === 'POST' && args !== {}) { xhr.send(JSON.stringify(args)); }
         else { xhr.send(); }
     };
 

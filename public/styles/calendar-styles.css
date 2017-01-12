@@ -169,26 +169,39 @@ table#calendar .day > .cal-event {
     padding: 3px 8px;
 }
 table#calendar .day > .cal-event {
-    background: #5CE546;
-    height: 16px; /* todo: make these different sizes for responsive calendar */
+    height: 20%; /* todo: make these different sizes for responsive calendar */
     margin: 2px;
+    font-size: 10px;
+    /*color: rgba(255, 255, 255, 0);*/
+    color: #fff;
+
     -webkit-border-radius: 4px;
     border-radius: 4px;
-
     -webkit-box-shadow: 0 0 0 0 #aaa;
     -moz-box-shadow: 0 0 0 0 #aaa;
     box-shadow: 0 0 0 0 #aaa;
 
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+    /*
     -webkit-transition: box-shadow 100ms, background 100ms;
     transition: box-shadow 100ms, background 100ms;
+    */
 }
 
 table#calendar .day > .cal-event:hover {
+    /*color: rgba(255, 255, 255, 1);*/
+    height: 50%;
     cursor: pointer;
     -webkit-box-shadow: 0 0 3px 0 #000;
     -moz-box-shadow: 0 0 3px 0 #000;
     box-shadow: 0 0 3px 0 #000;
 }
+
+table#calendar .day > .cal-event.available { background: #6E96DF; }
+table#calendar .day > .cal-event.requested { background: #FFCD70; }
+table#calendar .day > .cal-event.confirmed { background: #5CE546; }
+table#calendar .day > .cal-event.canceled { background: #FE979F; }
 
 table#calendar .day.today {
     /* http://paletton.com/#uid=72M0X0khYP96LYWcWUCmhInqx-N */

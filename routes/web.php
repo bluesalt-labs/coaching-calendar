@@ -27,9 +27,12 @@ $app->get('/', function () use ($app) {
         $app->group(['prefix' => 'appointment'], function() use ($app) {
             class Appointment extends Illuminate\Database\Eloquent\Model {  }
             $app->get('/', 'AppointmentController@getAll');
+            $app->get('/getByDateRange/', 'AppointmentController@getByDateRange');
             $app->get('get/{id}', 'AppointmentController@get');
             $app->post('create', 'AppointmentController@create');
             $app->post('schedule', 'AppointmentController@schedule');
+
+            //$app->get('getTest/{startDate}/{endDate}', 'AppointmentController@getTest'); // debug
         });
 
         $app->group(['prefix' => 'calendar'], function() use ($app) {

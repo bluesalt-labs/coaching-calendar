@@ -38,11 +38,9 @@ function apiRequest(method, model, action, args = [], callback) {
     };
 
     var toSend = '';
-    if(Array.isArray(args) && args.length > 0) {
-
-
-        for(var i = 0; i < args.length; i++) {
-            toSend += args.key(i) + '=' + args[i]; // todo: make sure this works
+    if(Array.isArray(args)) {
+        for(var key in args) {
+            toSend += key + '=' + args[key]; // todo: make sure this works
         }
     }
     if(toSend !== '') { xhr.send(encodeURI(toSend)); }
