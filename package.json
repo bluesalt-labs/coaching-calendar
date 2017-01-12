@@ -1,0 +1,26 @@
+{
+  "name": "coaching-calendar",
+  "description": "A basic scheduling calendar UI.",
+  "main": "public/index.php",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bower": "0.6.x"
+  },
+  "scripts": {
+    "postinstall": "public/node_modules/bower/bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluesalt-labs/coaching-calendar.git"
+  },
+  "author": "Luke Sontrop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bluesalt-labs/coaching-calendar/issues"
+  },
+  "homepage": "https://github.com/bluesalt-labs/coaching-calendar#readme"
+}
+
+
