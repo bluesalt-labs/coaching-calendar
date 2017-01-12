@@ -1,6 +1,6 @@
 # Coaching Calendar
 
-A basic scheduling calendar UI.
+A basic scheduling calendar UI.This project is currently in development (and thus the develop branch is currently the default). 
 <br />
 * Based on the [Lumen Framework](https://lumen.laravel.com/) (v5.3).
 * Front end currently utilizing: 
