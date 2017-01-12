@@ -6,4 +6,4 @@ Homestead.yaml
 .DS_Store
 /public/node_modules/
 /public/bower_components/
-database/database.sqlite
+/database/database.sqlite
