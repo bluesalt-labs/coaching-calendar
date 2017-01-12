@@ -39,11 +39,10 @@ var CoachingCalendar = function(year, month, day) {
 
         var thisYear    = this.calendarDate.get('year');
         var thisMonth   = this.calendarDate.get('month');
-        var thisDay     = this.calendarDate.get('day');
         var tempMoment = new moment({
             year:   thisYear,
             month:  thisMonth,
-            day:    thisDay
+            day:    1
         });
 
         // Create this year's cache if it doesn't exist
@@ -71,7 +70,7 @@ var CoachingCalendar = function(year, month, day) {
             tempMoment.add(1, 'days');
         }
 
-        for(var i = firstDayOfWeek + 1; i < 42; i++) {
+        for(var i = firstDayOfWeek; i < 42; i++) {
             var d = document.getElementById('day-'+i);
             var dSpan = d.getElementsByClassName('day-num')[0];
 
