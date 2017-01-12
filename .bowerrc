@@ -1,10 +1,4 @@
 {
   "directory": "public/bower_components/",
   "timeout": 120000,
-  "registry": {
-    "search": [
-      "http://localhost:8000",
-      "https://coaching-calendar.herokuapp.com"
-    ]
-  }
 }
