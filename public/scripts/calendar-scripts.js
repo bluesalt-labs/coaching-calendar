@@ -1,6 +1,9 @@
 var CoachingCalendar = function(year, month, day) {
+    this.apiUrl = '/api/v1/';
     this.dateToday = new moment();
     this.calendarDate = new moment( {year: year, month: (month - 1), day: day} );
+
+    this.cacheArr = [];
 
     /**
      * initializes the calendar. Called when a new CoachingCalendar object is created
@@ -30,11 +33,9 @@ var CoachingCalendar = function(year, month, day) {
         document.getElementById('month-dd').value = this.calendarDate.month();
         this.updateYearDDSelections();
 
-        /*
-         * I might want to create an array of element id's to days in month for reference.
-         * either that or add an id to each span with the day of the month. however, to my
-         * knowledge searching and modifying the DOM is more taxing than referencing an array.
-         */
+        // Hide today button if this is the current month
+        if(this.calendarDate.isSame(this.dateToday, 'month')) { document.getElementById('btn-today').className = "month-is-cur"; }
+        else { document.getElementById('btn-today').className = ""; }
 
         var thisYear    = this.calendarDate.get('year');
         var thisMonth   = this.calendarDate.get('month');
@@ -44,6 +45,12 @@ var CoachingCalendar = function(year, month, day) {
             month:  thisMonth,
             day:    thisDay
         });
+
+        // Create this year's cache if it doesn't exist
+        if(this.cacheArr[thisYear] === undefined) { this.cacheArr[thisYear] = []; }
+
+        // Create this month's cache if it doesn't exist
+        if(this.cacheArr[thisYear][thisMonth] === undefined) { this.cacheArr[thisYear][thisMonth] = []; }
 
         var firstDayOfWeek = tempMoment.day();
         var daysInMonth = tempMoment.daysInMonth();
@@ -70,16 +77,34 @@ var CoachingCalendar = function(year, month, day) {
 
             if(tempMoment.month() != thisMonth) {
                 //d.addEventListener('click', this.onClick.bind(this));
-                d.className += " outside-month";
-            }
-            else {
+                d.className += ' outside-month';
+            } else {
+                // todo: enable more caching ability with `this.cacheArr`?
+                var tempDay = tempMoment.date();
                 //d.removeEventListener('click', this.onClick.bind(this));
                 //d.removeEventListener('click', this.onClick.bind(this));
+                if(this.cacheArr[thisYear][thisMonth][tempDay] === undefined) {
+                    this.cacheArr[thisYear][thisMonth][tempDay] = [];
+                }
+                this.cacheArr[thisYear][thisMonth][tempDay]['id'] = i;
+                this.cacheArr[thisYear][thisMonth][tempDay]['ofWeek']  = tempMoment.day();
                 d.className = 'day';
+
+                if(tempMoment.isSame(this.dateToday, 'day')) {
+                    d.className += ' today';
+                    this.cacheArr[thisYear][thisMonth][tempDay]['isToday'] = true;
+                } else {
+                    this.cacheArr[thisYear][thisMonth][tempDay]['isToday'] = false;
+                }
             }
+
             dSpan.innerHTML = tempMoment.date();
             tempMoment.add(1, 'days');
         }
+
+        console.log(this.cacheArr); // debug
+
+        this.refreshAppointments();
     };
 
     /**
@@ -93,7 +118,8 @@ var CoachingCalendar = function(year, month, day) {
      * refreshes displayed appointments
      */
     this.refreshAppointments = function() {
-
+        this.clearAppointments();
+        this.getAppointments();
     };
 
     /**
@@ -133,6 +159,57 @@ var CoachingCalendar = function(year, month, day) {
     this.onYearDDChange = function() {
         this.calendarDate.set('year', event.currentTarget.value);
         this.refreshCalendar();
+    };
+
+    /**
+     * Jumps the calendar to the current month
+     */
+    this.onTodayClick = function() {
+        this.calendarDate.set({
+            'year':     this.dateToday.get('year'),
+            'month':    this.dateToday.get('month'),
+            'date':      1,
+        });
+        this.refreshCalendar();
+    };
+
+    this.apiRequest = function(method, model, action, args = [], callback) {
+        if(!(model.length > 0)) {
+            console.log("Request failed: Must specify model!");
+            callback('');
+            return;
+        }
+
+        if(!(action.length > 0)) {
+            console.log("Request failed: Must specify action!");
+            callback('');
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, this.apiUrl + model + '/' + (action == 'all' ? '' : action), true);
+        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    callback(xhr.responseText);
+                } else {
+                    console.log('Request failed.  Returned status of ' + xhr.status);
+                    callback('');
+                }
+            }
+        };
+
+        var toSend = '';
+        if(Array.isArray(args) && args.length > 0) {
+
+
+            for(var i = 0; i < args.length; i++) {
+                toSend += args.key(i) + '=' + args[i]; // todo: make sure this works
+            }
+        }
+        if(toSend !== '') { xhr.send(encodeURI(toSend)); }
+        else { xhr.send(); }
     };
 
     this.init();

@@ -53,8 +53,8 @@
                         <label for="year-dd" class="sr-only">Calendar Year</label>
                         <select name="year-dd" id="year-dd" onchange="cal.onYearDDChange();"></select>
                     </div>
+                    <button id="btn-today" class="month-is-cur" onclick="cal.onTodayClick();">Today</button>
                 </div>
-                <!--<span id="calendar-month">...</span>-->
             </td>
         </tr>
         <tr>
