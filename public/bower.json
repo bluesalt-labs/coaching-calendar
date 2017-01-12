@@ -1,0 +1,22 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/bluesalt-labs/coaching-calendar",
+  "authors": [
+    "Luke Sontrop <luke@bluesaltlabs.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.17.1"
+  }
+}
