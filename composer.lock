@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a815280569e271c8d1ace1f04b0430bd",
-    "content-hash": "b9f2776924f23cf3813783cd8c1fff03",
+    "hash": "f771baf2bd2030a9b5a2ac4a6581ce38",
+    "content-hash": "1df14054f21aa1e1cfc13de714c6a234",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -73,62 +73,6 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
-        },
-        {
-            "name": "fxp/composer-asset-plugin",
-            "version": "v1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fxpio/composer-asset-plugin.git",
-                "reference": "60bc94db574103dfc73acb907fa79c6dfc86c96e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/60bc94db574103dfc73acb907fa79c6dfc86c96e",
-                "reference": "60bc94db574103dfc73acb907fa79c6dfc86c96e",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "composer/composer": "^1.0.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
-                "branch-alias": {
-                    "dev-master": "1.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fxp\\Composer\\AssetPlugin\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Pluchino",
-                    "email": "francois.pluchino@gmail.com"
-                }
-            ],
-            "description": "NPM/Bower Dependency Manager for Composer",
-            "homepage": "https://github.com/fxpio/composer-asset-plugin",
-            "keywords": [
-                "asset",
-                "bower",
-                "composer",
-                "dependency manager",
-                "nodejs",
-                "npm",
-                "package"
-            ],
-            "time": "2016-10-12 08:03:45"
         },
         {
             "name": "illuminate/auth",
@@ -1482,52 +1426,6 @@
                 "routing"
             ],
             "time": "2016-10-20 17:36:47"
-        },
-        {
-            "name": "npm-asset/bower",
-            "version": "1.8.0",
-            "dist": {
-                "type": "tar",
-                "url": "https://registry.npmjs.org/bower/-/bower-1.8.0.tgz",
-                "reference": null,
-                "shasum": "55dbebef0ad9155382d9e9d3e497c1372345b44a"
-            },
-            "bin": {
-                "bower": "bin/bower"
-            },
-            "type": "npm-asset-library",
-            "extra": {
-                "npm-asset-bugs": {
-                    "url": "https://github.com/bower/bower/issues"
-                },
-                "npm-asset-files": [
-                    "bin",
-                    "lib"
-                ],
-                "npm-asset-main": "lib",
-                "npm-asset-directories": [],
-                "npm-asset-repository": {
-                    "type": "git",
-                    "url": "git+https://github.com/bower/bower.git"
-                },
-                "npm-asset-scripts": [],
-                "npm-asset-engines": {
-                    "node": ">=0.10.0"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Twitter"
-                }
-            ],
-            "description": "The browser package manager",
-            "homepage": "http://bower.io",
-            "keywords": [
-                "bower"
-            ]
         },
         {
             "name": "paragonie/random_compat",
