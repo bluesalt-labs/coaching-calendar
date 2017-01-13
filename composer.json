@@ -7,12 +7,13 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/lumen-framework": "5.3.*",
-        "vlucas/phpdotenv": "~2.2"
-    },
-    "require-dev": {
+        "vlucas/phpdotenv": "~2.2",
         "fzaninotto/faker": "~1.4",
         "phpunit/phpunit": "~5.0",
         "mockery/mockery": "~0.9"
+    },
+    "require-dev": {
+
     },
     "autoload": {
         "psr-4": {
@@ -28,7 +29,7 @@
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\"",
-            "bower update"
+            "php artisan migrate:refresh --seed"
         ]
     },
     "extra": {
