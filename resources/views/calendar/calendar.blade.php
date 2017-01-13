@@ -1,4 +1,6 @@
-@extends('calendar.base')
+@extends('layouts.calendar')
+
+@section('title', 'Calendar View')
 
 @section('content')
     <table id="calendar">

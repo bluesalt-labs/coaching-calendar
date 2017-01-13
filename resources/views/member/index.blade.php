@@ -1,4 +1,4 @@
-@extends('member.base')
+@extends('layouts.member')
 
 @section('title', 'Home')
 
