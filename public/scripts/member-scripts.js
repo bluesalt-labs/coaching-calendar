@@ -16,17 +16,15 @@ function refreshDevDisplay() {
 }
 
 function updateUsersDisp() {
-    apiGet('user', 'all', [], function(data) {
-        var obj = JSON.parse(data);
-        var str = JSON.stringify(obj, undefined, 4);
+    apiGet('user', 'all', null, function(data) {
+        var str = JSON.stringify(data, undefined, 4);
         document.getElementById("users").innerHTML = syntaxHighlight(str);
     });
 }
 
 function updateAppointmentsDisp() {
-    apiGet('appointment', 'all', [], function(data) {
-        var obj = JSON.parse(data);
-        var str = JSON.stringify(obj, undefined, 4);
+    apiGet('appointment', 'all', null, function(data) {
+        var str = JSON.stringify(data, undefined, 4);
         document.getElementById("appointments").innerHTML = syntaxHighlight(str);
     });
 }

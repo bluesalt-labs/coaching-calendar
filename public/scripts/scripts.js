@@ -2,6 +2,8 @@
  * Created by luke on 1/11/17.
  */
 
+var apiUrl = '/api/v1/';
+
 function apiGet(model, action, args, callback) {
     apiRequest('GET', model, action, args, callback);
 }
@@ -10,7 +12,7 @@ function apiPost(model, action, args, callback) {
     apiRequest('POST', model, action, args, callback);
 }
 
-function apiRequest(method, model, action, args = [], callback) {
+function apiRequest(method, model, action, args, callback) {
     if(!(model.length > 0)) {
         console.log("Request failed: Must specify model!");
         callback('');
@@ -23,13 +25,24 @@ function apiRequest(method, model, action, args = [], callback) {
         return;
     }
 
+    var url = apiUrl + model + '/' + (action == 'all' ? '' : action + '/');
+
+    if(method === 'GET' && args != null) {
+        var urlAdd = '?';
+        for(var key in args) {
+            urlAdd += key + '=' + encodeURIComponent(args[key]) + '&';
+        }
+        url += urlAdd.slice(0, -1);
+    }
+
     var xhr = new XMLHttpRequest();
-    xhr.open(method, '/api/v1/' + model + '/' + (action == 'all' ? '' : action), true);
-    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.open(method, url, true);
+    xhr.responseType = 'json';
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                callback(xhr.responseText);
+                callback(xhr.response);
             } else {
                 console.log('Request failed.  Returned status of ' + xhr.status);
                 callback('');
@@ -37,12 +50,6 @@ function apiRequest(method, model, action, args = [], callback) {
         }
     };
 
-    var toSend = '';
-    if(Array.isArray(args)) {
-        for(var key in args) {
-            toSend += key + '=' + args[key]; // todo: make sure this works
-        }
-    }
-    if(toSend !== '') { xhr.send(encodeURI(toSend)); }
+    if(method === 'POST' && args != null) { xhr.send(JSON.stringify(args)); }
     else { xhr.send(); }
 }

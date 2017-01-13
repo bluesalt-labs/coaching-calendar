@@ -12,7 +12,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
 
-    const TYPE_USER     = 0;
+    const TYPE_MEMBER   = 0;
     const TYPE_COACH    = 1;
     const TYPE_MANAGER  = 2;
     const TYPE_ADMIN    = 3;
@@ -34,7 +34,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getTypeId($typeName) {
         switch(strtolower($typeName)) {
-            case "user":    return User::TYPE_USER;     break;
+            case "user":    return User::TYPE_MEMBER;   break;
             case "coach":   return User::TYPE_COACH;    break;
             case "manager": return User::TYPE_MANAGER;  break;
             case "admin":   return User::TYPE_ADMIN;    break;

@@ -15,6 +15,7 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+// API and Back End
 //$app->group(['middleware' => 'auth'], function() use ($app) {
     $app->group(['prefix' => 'api/v1'], function() use ($app) {
         $app->group(['prefix' => 'user'], function() use ($app) {
@@ -22,6 +23,8 @@ $app->get('/', function () use ($app) {
             $app->get('/', 'UserController@getAll');
             $app->get('get/{id}', 'UserController@get');
             $app->post('create', 'UserController@create');
+            $app->delete('delete/{id}', 'UserController@delete');
+
         });
 
         $app->group(['prefix' => 'appointment'], function() use ($app) {
@@ -34,23 +37,32 @@ $app->get('/', function () use ($app) {
 
             //$app->get('getTest/{startDate}/{endDate}', 'AppointmentController@getTest'); // debug
         });
+    });
 
-        $app->group(['prefix' => 'calendar'], function() use ($app) {
-            $app->get('/get/{year}/{month}/{day}', 'CalendarController@getCalendar');
-        });
+    $app->group(['prefix' => 'calendar'], function() use ($app) {
+        $app->get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
     });
 
 //});
 
+// Front End
+
 //$app->group(['middleware' => 'auth'], function() use ($app) {
     $app->group(['prefix' => 'admin'], function() use ($app) {
-        $app->get('/', function() { return view('back-end'); });
-});
+        $app->get('/', 'AdminController@index');
+
+        $app->group(['prefix' => 'calendar'], function() use ($app) {
+            $app->get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
+        });
+    });
+
+    $app->group(['prefix' => 'member'], function() use ($app) {
+        $app->get('/', 'MemberController@index');
+    });
 //});
 
-// Debug views
-$app->get('/', function() {
-    return view('front-end');
-});
+
+// Member Home page for debug. todo: Change to login page
+$app->get('/', 'MemberController@index');
 
 

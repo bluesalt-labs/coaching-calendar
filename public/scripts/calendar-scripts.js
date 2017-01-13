@@ -285,9 +285,9 @@ var CoachingCalendar = function(year, month, day) {
             return;
         }
 
-        var url = this.apiUrl + model + '/' + (action == 'all' ? '' : action);
+        var url = this.apiUrl + model + '/' + (action == 'all' ? '' : action + '/');
 
-        if(method === 'GET' && args !== {}) {
+        if(method === 'GET' && args != null) {
             var urlAdd = '?';
             for(var key in args) {
                 urlAdd += key + '=' + encodeURIComponent(args[key]) + '&';
@@ -310,7 +310,7 @@ var CoachingCalendar = function(year, month, day) {
             }
         };
 
-        if(method === 'POST' && args !== {}) { xhr.send(JSON.stringify(args)); }
+        if(method === 'POST' && args != null) { xhr.send(JSON.stringify(args)); }
         else { xhr.send(); }
     };
 
