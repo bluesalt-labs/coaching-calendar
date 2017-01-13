@@ -1,3 +1,5 @@
+/* Color Pallet: http://paletton.com/#uid=72M0X0khYP96LYWcWUCmhInqx-N */
+
 html, body {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -108,6 +110,15 @@ table#calendar #calendar-header > #calendar-month > .form-group > select:hover {
     box-shadow: 0 0 8px 0 #888;
 }
 
+table#calendar #calendar-header button#btn-today:active,
+table#calendar #calendar-header > .btn-month-nav:active,
+table#calendar #calendar-header > #calendar-month > .form-group > select:active {
+    background: rgba(46, 94, 182, 0.25);
+    -webkit-box-shadow: inset 0 0 8px 0 #888;
+    -moz-box-shadow: inset 0 0 8px 0 #888;
+    box-shadow: inset 0 0 8px 0 #888;
+}
+
 table#calendar .day-header {
     text-align: center;
     font-weight: bold;
@@ -169,11 +180,11 @@ table#calendar .day > .cal-event {
     padding: 3px 8px;
 }
 table#calendar .day > .cal-event {
-    height: 20%; /* todo: make these different sizes for responsive calendar */
+    height: 15%; /* todo: make these different sizes for responsive calendar */
     margin: 2px;
     font-size: 10px;
-    /*color: rgba(255, 255, 255, 0);*/
-    color: #fff;
+    color: rgba(255, 255, 255, 0);
+    /*color: #fff;*/
 
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -189,36 +200,31 @@ table#calendar .day > .cal-event {
     */
 }
 
-table#calendar .day > .cal-event:hover {
-    /*color: rgba(255, 255, 255, 1);*/
-    height: 50%;
+table#calendar .day > .cal-event:hover,
+table#calendar .day > .cal-event:active,
+table#calendar .day > .cal-event:focus {
     cursor: pointer;
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    height: 50%;
     -webkit-box-shadow: 0 0 3px 0 #000;
     -moz-box-shadow: 0 0 3px 0 #000;
     box-shadow: 0 0 3px 0 #000;
 }
+table#calendar .day > .cal-event:active {
+    -webkit-box-shadow: inset 0 0 3px 0 #000;
+    -moz-box-shadow: inset 0 0 3px 0 #000;
+    box-shadow: inset 0 0 3px 0 #000;
+}
+
 
 table#calendar .day > .cal-event.available { background: #6E96DF; }
 table#calendar .day > .cal-event.requested { background: #FFCD70; }
 table#calendar .day > .cal-event.confirmed { background: #5CE546; }
 table#calendar .day > .cal-event.canceled { background: #FE979F; }
 
-table#calendar .day.today {
-    /* http://paletton.com/#uid=72M0X0khYP96LYWcWUCmhInqx-N */
-    background: rgba(123, 239, 105, 0.25);
+table#calendar .day.today { background: rgba(123, 239, 105, 0.25); }
 
+table#calendar .day.outside-month { background-color: #f6f6f6; }
 
-}
-
-table#calendar .day.outside-month {
-    background-color: #f6f6f6;
-}
-
-table#calendar .day.outside-month > .day-num {
-    color: #aaa;
-}
-
-
-
-
-
+table#calendar .day.outside-month > .day-num { color: #aaa; }

@@ -4,19 +4,31 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Coaching Calendar</title>
+		<title>Coaching Calendar - Home</title>
 
         <!-- Stylesheets -->
+        <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <?php else:?>
         <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css" />
+        <?php endif;?>
+
         <link rel="stylesheet" type="text/css" href="/styles/front-end-styles.css" />
 
         <!-- Javascript -->
-		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-		<!--<script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>-->
+        <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <?php else:?>
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <?php endif;?>
+
         <script type="text/javascript" src="/scripts/scripts.js"></script>
         <script type="text/javascript" src="/scripts/front-end-scripts.js"></script>
+
     </head>
     <body>
         <div class="container">
@@ -48,7 +60,7 @@
         <div class="container-fluid" id="dev">
             <hr />
             <button class="btn btn-success" id="refresh-dev-display" onclick="refreshDevDisplay();">Refresh Dev Output</button>
-            <hr />
+            <br />
             <div class="row">
                 <div class="output col-sm-6">
                     <h2>Users</h2>
@@ -65,7 +77,7 @@
             </div><!-- row -->
             <hr />
             <br /><br />
-        </div><!-- container-fluid
+        </div><!-- container-fluid -->
         <!-- End Dev -->
     </body>
 </html>

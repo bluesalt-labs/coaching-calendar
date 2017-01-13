@@ -63,6 +63,6 @@ class Appointment extends Model
 
         if($availOnly) { $qry->where('status', Appointment::STATUS_AVAILABLE); }
 
-        return $qry->get();
+        return $qry->orderBy('start_datetime', 'asc')->get();
     }
 }

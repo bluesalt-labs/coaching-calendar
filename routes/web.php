@@ -42,12 +42,15 @@ $app->get('/', function () use ($app) {
 
 //});
 
+//$app->group(['middleware' => 'auth'], function() use ($app) {
+    $app->group(['prefix' => 'admin'], function() use ($app) {
+        $app->get('/', function() { return view('back-end'); });
+});
+//});
+
 // Debug views
 $app->get('/', function() {
     return view('front-end');
 });
 
-$app->get('admin', function() {
-    return view('back-end');
-});
 
