@@ -81,7 +81,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-if(!$app->environment('production')) {
+if( (!$app->environment('production')) && strpos($_SERVER['SERVER_NAME'], 'herokuapp') == false ) {
     $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 }
 
