@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    // The following is for testing only. I don't want to deal with authentication right now.
+
+
     /**
      * If admin is logged in, return admin dashboard
      */
-    public function index() {
+    public function index(Request $request) {
         return view('admin.index');
+    }
+
+    public function settings(Request $request) {
+        return view('admin.settings');
     }
 }

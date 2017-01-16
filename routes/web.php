@@ -18,13 +18,34 @@ $app->get('/', function () use ($app) {
 // API and Back End
 //$app->group(['middleware' => 'auth'], function() use ($app) {
     $app->group(['prefix' => 'api/v1'], function() use ($app) {
+        $app->group(['prefix' => 'docs'], function() use ($app) {
+            $app->get('/', 'DocsController@index');
+            $app->group(['prefix' => 'admin'], function() use ($app) {
+                $app->get('/', 'DocsController@adminIndex');
+            });
+            $app->group(['prefix' => 'appointment'], function() use ($app) {
+                $app->get('/', 'DocsController@appointmentIndex');
+            });
+            $app->group(['prefix' => 'calendar'], function() use ($app) {
+                $app->get('/', 'DocsController@calendarIndex');
+            });
+            $app->group(['prefix' => 'config'], function() use ($app) {
+                $app->get('/', 'DocsController@configIndex');
+            });
+            $app->group(['prefix' => 'member'], function() use ($app) {
+                $app->get('/', 'DocsController@memberIndex');
+            });
+            $app->group(['prefix' => 'user'], function() use ($app) {
+                $app->get('/', 'DocsController@userIndex');
+            });
+        });
+
         $app->group(['prefix' => 'user'], function() use ($app) {
             class User extends Illuminate\Database\Eloquent\Model {  }
             $app->get('/', 'UserController@getAll');
             $app->get('get/{id}', 'UserController@get');
             $app->post('create', 'UserController@create');
             $app->delete('delete/{id}', 'UserController@delete');
-
         });
 
         $app->group(['prefix' => 'appointment'], function() use ($app) {
@@ -47,7 +68,7 @@ $app->get('/', function () use ($app) {
 
 // Front End
 
-//$app->group(['middleware' => 'auth'], function() use ($app) {
+//$app->group(['middleware' => 'admin-auth'], function() use ($app) {
     $app->group(['prefix' => 'admin'], function() use ($app) {
         $app->get('/', 'AdminController@index');
 
@@ -62,7 +83,5 @@ $app->get('/', function () use ($app) {
 //});
 
 
-// Member Home page for debug. todo: Change to login page
+// Member Home page for debug. todo: Change to docs page?
 $app->get('/', 'MemberController@index');
-
-
