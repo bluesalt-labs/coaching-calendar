@@ -2,12 +2,9 @@
 
 @section('title', 'Home')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-    <div class="container">
+    @parent
 
-    </div>
+    <h1>We just need some content here. </h1>
+
 @endsection

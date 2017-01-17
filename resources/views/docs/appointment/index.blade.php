@@ -2,10 +2,6 @@
 
 @section('title', 'Appointment')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
     <div class="container">
 

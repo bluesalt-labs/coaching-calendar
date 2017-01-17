@@ -2,10 +2,6 @@
 
 @section('title', 'Config')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
     <div class="container">
 

@@ -11,15 +11,12 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
-
 // API and Back End
 //$app->group(['middleware' => 'auth'], function() use ($app) {
     $app->group(['prefix' => 'api/v1'], function() use ($app) {
         $app->group(['prefix' => 'docs'], function() use ($app) {
             $app->get('/', 'DocsController@index');
+
             $app->group(['prefix' => 'admin'], function() use ($app) {
                 $app->get('/', 'DocsController@adminIndex');
             });

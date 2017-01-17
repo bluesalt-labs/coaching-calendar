@@ -7,54 +7,70 @@ use Illuminate\Http\Request;
 
 class DocsController extends Controller
 {
-
     public function index() {
-        return view('docs.index');
+        return view('docs.index', ['navLinks' => $this->getRoutes('Home')]);
     }
     public function adminIndex() {
-        return view('docs.admin.index');
+        return view('docs.admin.index', ['navLinks' => $this->getRoutes('Admin')]);
     }
 
     public function appointmentIndex() {
-        return view('docs.appointment.index');
+        return view('docs.appointment.index', ['navLinks' => $this->getRoutes('Appointment')]);
     }
 
     public function calendarIndex() {
-        return view('docs.calendar.index');
+        return view('docs.calendar.index', ['navLinks' => $this->getRoutes('Calendar')]);
     }
 
     public function configIndex() {
-        return view('docs.config.index');
+        return view('docs.config.index', ['navLinks' => $this->getRoutes('Config')]);
     }
 
     public function memberIndex() {
-        return view('docs.member.index');
+        return view('docs.member.index', ['navLinks' => $this->getRoutes('Member')]);
     }
 
     public function userIndex() {
-        return view('docs.user.index');
+        return view('docs.user.index', ['navLinks' => $this->getRoutes('User')]);
+    }
+
+    /**
+     * Sorry, I can't figure out a better way to do this.
+     * If the `/api/v1/docs/` part of the url changes, this won't be updated
+     * @return array of route urls
+     */
+    public static function getRoutes($activeName) {
+        $baseUrl = '/api/v1/docs/';
+        return Array(
+            'Home'          => Array(
+                'active'        => ('Home' === $activeName),
+                'url'           => $baseUrl,
+                ),
+            'Admin'         => Array(
+                'active'        => ('Admin' === $activeName),
+                'url'           => $baseUrl . 'admin',
+            ),
+            'Appointment'   => Array(
+                'active'        => ('Appointment' === $activeName),
+                'url'           => $baseUrl . 'appointment',
+            ),
+            'Calendar'      => Array(
+                'active'        => ('Calendar' === $activeName),
+                'url'           => $baseUrl . 'calendar',
+            ),
+            'Config'        => Array(
+                'active'        => ('Config' === $activeName),
+                'url'           => $baseUrl . 'config',
+            ),
+            'Member'        => Array(
+                'active'        => ('Member' === $activeName),
+                'url'           => $baseUrl . 'member',
+            ),
+            'User'          => Array(
+                'active'        => ('User' === $activeName),
+                'url'           => $baseUrl . 'user',
+            ),
+        );
     }
 }
 
-
-/*
-
-$app->group(['prefix' => 'user'], function() use ($app) {
-    $app->get('/', 'DocsController@user');
-});
-$app->group(['prefix' => 'appointment'], function() use ($app) {
-    $app->get('/', 'DocsController@appointment');
-});
-$app->group(['prefix' => 'calendar'], function() use ($app) {
-    $app->get('/', 'DocsController@calendar');
-});
-$app->group(['prefix' => 'member'], function() use ($app) {
-    $app->get('/', 'DocsController@member');
-});
-$app->group(['prefix' => 'admin'], function() use ($app) {
-    $app->get('/', 'DocsController@admin');
-});
-$app->group(['prefix' => 'config'], function() use ($app) {
-    $app->get('/', 'DocsController@config');
-});
- */
