@@ -43,6 +43,9 @@
                 </div>
             </li>
             @foreach($navLinks as $name => $data)
+                <li<?=($data['active'] ? ' class="active"' : '')?>>
+                    <a href="<?=$data['url']?>"><?=$name?></a>
+                </li>
                 @if($data['nested'])
                     <ul>
                         @foreach($data['nested'] as $name => $data)
@@ -51,12 +54,7 @@
                             </li>
                         @endforeach
                     </ul>
-                @else
-                    <li<?=($data['active'] ? ' class="active"' : '')?>>
-                        <a href="<?=$data['url']?>"><?=$name?></a>
-                    </li>
                 @endif
-
             @endforeach
         </ul>
     </nav><!-- #main-sidebar -->

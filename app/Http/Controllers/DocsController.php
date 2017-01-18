@@ -65,14 +65,6 @@ class DocsController extends Controller
         );
     }
 
-    public function userTest() {
-        return view('docs.user.test', Array(
-            'navLinks' => $this->getRoutes('User.Test'),
-            'breadcrumbs' => self::getBreadcrumbs('User', ['Test']),
-            )
-        );
-    }
-
     public static function getRouteUrl($routeName) {
         switch($routeName) {
             case 'Home':        return self::BASE_URL; break;
@@ -82,7 +74,6 @@ class DocsController extends Controller
             case 'Config':      return self::BASE_URL.'config/'; break;
             case 'Member':      return self::BASE_URL.'member/'; break;
             case 'User':        return self::BASE_URL.'user/'; break;
-            case 'User.Test':   return self::BASE_URL.'user/'.'test/'; break;
             default:            return self::BASE_URL;
         }
     }
@@ -128,12 +119,7 @@ class DocsController extends Controller
             'User'          => Array(
                 'active'        => ('User' === $activeName),
                 'url'           => self::getRouteUrl('User'),
-                'nested'        => Array(
-                    'Test'  => Array(
-                        'active'    => ('User.Test' === $activeName),
-                        'url'       => self::getRouteUrl('User.Test'),
-                    ),
-                ),
+                'nested'        => false,
             ),
         );
     }
