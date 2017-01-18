@@ -142,6 +142,7 @@ html, body {
 #page-container.sidebar-active #page-content { margin-left: 265px; }
 
 @media(max-width: 768px) {
+    #main-header > #header-brand > span { font-size: 14px; }
     #main-header > #btn-nav-toggle > i:before { content: "\f150"; }
     #page-container.sidebar-active #main-header > #btn-nav-toggle > i:before { content: "\f151"; }
 
@@ -171,5 +172,8 @@ html, body {
 
     #page-content,
     #page-container.sidebar-active #page-content { margin: auto; }
+}
 
+@media(max-width: 300px) {
+    #main-header > #header-brand { display: none; }
 }

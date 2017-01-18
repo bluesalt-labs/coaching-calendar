@@ -15,7 +15,7 @@
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <?php endif;?>
 
-    <!--<script type="text/javascript" src="/scripts/scripts.js"></script>--> <!-- may or may not need this. -->
+    <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/docs-scripts.js"></script>
     <script async defer src="//buttons.github.io/buttons.js"></script>
 @endsection
