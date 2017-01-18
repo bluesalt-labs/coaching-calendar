@@ -52,7 +52,7 @@
 
     <!-- Page Content -->
     @section('content')
-    <div class="container" id="page-content">
+    <div class="container-fluid" id="page-content">
         @show
     </div><!-- content container -->
 </div><!-- #page-container -->

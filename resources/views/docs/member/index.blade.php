@@ -3,7 +3,6 @@
 @section('title', 'Member')
 
 @section('content')
-    <div class="container">
+    @parent
 
-    </div>
 @endsection
