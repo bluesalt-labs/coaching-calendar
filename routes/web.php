@@ -34,6 +34,7 @@
             });
             $app->group(['prefix' => 'user'], function() use ($app) {
                 $app->get('/', 'DocsController@userIndex');
+                $app->get('test', 'DocsController@userTest');
             });
         });
 

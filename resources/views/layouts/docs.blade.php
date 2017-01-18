@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('base-title') API Documentation - @yield('title') @endsection
+@section('base-title') API Documentation | @yield('title') @endsection
 
 @section('base-stylesheets')
     <link rel="stylesheet" type="text/css" href="/styles/docs-styles.css" />
@@ -43,9 +43,20 @@
                 </div>
             </li>
             @foreach($navLinks as $name => $data)
-                <li<?=($data['active'] ? ' class="active"' : '')?>>
-                    <a href="<?=$data['url']?>"><?=$name?></a>
-                </li>
+                @if($data['nested'])
+                    <ul>
+                        @foreach($data['nested'] as $name => $data)
+                            <li<?=($data['active'] ? ' class="active"' : '')?>>
+                                <a href="<?=$data['url']?>"><?=$name?></a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <li<?=($data['active'] ? ' class="active"' : '')?>>
+                        <a href="<?=$data['url']?>"><?=$name?></a>
+                    </li>
+                @endif
+
             @endforeach
         </ul>
     </nav><!-- #main-sidebar -->
@@ -53,20 +64,27 @@
     <!-- Page Content -->
     @section('content')
     <div class="container-fluid" id="page-content">
+        @if($breadcrumbs)
+        <ol class="breadcrumb">
+            @foreach($breadcrumbs as $name => $data)
+                <li<?=($data['active'] ? ' class="active"' : '')?>>
+                    @if($data['active'])
+                        <?=$name?>
+                    @else
+                        <a href="<?=$data['url']?>"><?=$name?></a>
+                    @endif
+                </li>
+            @endforeach
+        </ol>
+        @endif
         @show
     </div><!-- content container -->
 </div><!-- #page-container -->
 
-    <!-- Footer -->
-    <footer id="main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-4 col-offset-8">
-                    <a class="github-button" href="https://github.com/bluesalt-labs/coaching-calendar" data-icon="octicon-star" data-count-href="/bluesalt-labs/coaching-calendar/stargazers" data-count-api="/repos/bluesalt-labs/coaching-calendar#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star bluesalt-labs/coaching-calendar on GitHub">Star</a>
-                    <a class="github-button" href="https://github.com/bluesalt-labs" data-count-href="/bluesalt-labs/followers" data-count-api="/users/bluesalt-labs#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @bluesalt-labs on GitHub">Follow @bluesalt-labs</a>
-                </div>
-            </div>
-        </div><!-- footer container -->
-    </footer><!-- #main-footer -->
-</div><!-- #page-container -->
+<!-- Footer -->
+<footer id="main-footer">
+    <div class="container">
+
+    </div><!-- footer container -->
+</footer><!-- #main-footer -->
 @endsection

@@ -89,7 +89,8 @@ html, body {
     transition: left 150ms;
 }
 
-#main-sidebar #sidebar-links {
+#main-sidebar #sidebar-links,
+#main-sidebar #sidebar-links ul {
     list-style: none;
     padding: 15px 0 0 0;
     margin: 0;
@@ -99,10 +100,13 @@ html, body {
     height: 100%;
 }
 
-#main-sidebar #sidebar-links > li { border-bottom: 1px solid #dcdcdc; }
-#main-sidebar #sidebar-links > li.active { background: #dcdcdc; }
+#main-sidebar #sidebar-links ul { padding: 0; }
+#main-sidebar #sidebar-links ul > li > a { padding-left: 45px; }
 
-#main-sidebar #sidebar-links > li > a {
+#main-sidebar #sidebar-links li { border-bottom: 1px solid #dcdcdc; }
+#main-sidebar #sidebar-links li.active { background: #dcdcdc; }
+
+#main-sidebar #sidebar-links li > a {
     display: block;
     height: 40px;
     padding: 5px 15px;
@@ -110,14 +114,14 @@ html, body {
     color: #222;
 }
 
-#main-sidebar #sidebar-links > li > a:active,
-#main-sidebar #sidebar-links > li > a:hover {
+#main-sidebar #sidebar-links li > a:active,
+#main-sidebar #sidebar-links li > a:hover {
     background: #cecece;
     text-decoration: none;
     cursor: pointer;
 }
 
-#main-sidebar #sidebar-links > li.form-inline {
+#main-sidebar #sidebar-links li.form-inline {
     height: 50px;
     border-color: #cecece;
     padding-left: 15px;
@@ -159,8 +163,8 @@ html, body {
         transition: top 150ms;
     }
 
-    #main-sidebar #sidebar-links > li.form-inline input { display: inline-block; max-width: 85%; }
-    #main-sidebar #sidebar-links > li.form-inline button { max-width: 15%; }
+    #main-sidebar #sidebar-links li.form-inline input { display: inline-block; max-width: 85%; }
+    #main-sidebar #sidebar-links li.form-inline button { max-width: 15%; }
     #main-sidebar #sidebar-links { width: 100%; }
 
     #page-container.sidebar-active #main-sidebar {
