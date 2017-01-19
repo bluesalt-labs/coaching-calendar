@@ -16,42 +16,41 @@
     <span>This ensures that the server time is used (?)</span>
     <pre>
         <code class="php">
-        <?php
-        echo htmlspecialchars('
-            <?php
-                $year   = (int)date(\'Y\');
-                $month  = (int)date(\'n\');
-                $day    = (int)date(\'j\');
-            ?>
-        ');
-        ?>
+<?php echo htmlspecialchars(
+'<?php
+    $year   = (int)date(\'Y\');
+    $month  = (int)date(\'n\');
+    $day    = (int)date(\'j\');
+?>'
+);?>
         </code>
         <code class="html">
-            <?php echo htmlspecialchars('<iframe id="calendar-iframe" scrolling="no" src="/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>'); ?>
+<?php echo htmlspecialchars('<iframe id="calendar-iframe" scrolling="no" src="/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>'); ?>
         </code>
     </pre>
 
     <h3>JavaScript</h3>
     <pre>
         <code class="javascript">
-            function attachCalendar(targetID) {
-                var targetEl = document.getElementById(targetID);
+function attachCalendar(targetID) {
+    var targetEl = document.getElementById(targetID);
 
-                if(targetEl != null) {
-                    var today = new Date();
-                    var iframe = document.createElement('iframe');
-                    iframe.src = '/calendar/embed/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+    if(targetEl != null) {
+        var today = new Date();
+        var iframe = document.createElement('iframe');
+        iframe.src = '/calendar/embed/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
 
-                    targetEl.appendChild(iframe);
-                }
-            }
+        targetEl.appendChild(iframe);
+    }
+}
 
-            document.addEventListener("DOMContentLoaded", function() {
-                attachCalendar('calendar-iframe');
-            });
+document.addEventListener("DOMContentLoaded", function() {
+    attachCalendar('calendar-iframe');
+});
         </code>
+
         <code class="html">
-            <?php echo htmlspecialchars('<div id="calendar-iframe"></div>'); ?>
+<?php echo htmlspecialchars('<div id="calendar-iframe"></div>'); ?>
         </code>
     </pre>
 
@@ -59,35 +58,19 @@
     <span>Here is some example styling for the calendar iframe:</span>
     <pre>
         <code class="css">
-            #calendar-iframe {
-                position: relative;
-                width: 100%;
-                border: none;
-                height: 100%;
-                min-height: 650px;
-                overflow: hidden;
-            }
+#calendar-iframe {
+    position: relative;
+    width: 100%;
+    border: none;
+    height: 100%;
+    min-height: 650px;
+    overflow: hidden;
+}
         </code>
     </pre>
 <hr />
 
     <script type="text/javascript">
         hljs.initHighlightingOnLoad();
-
-        function attachCalendar(targetID) {
-            var targetEl = document.getElementById(targetID);
-
-            if(targetEl != null) {
-                var today = new Date();
-                var iframe = document.createElement('iframe');
-                iframe.src = '/calendar/embed/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-
-                targetEl.appendChild(iframe);
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            attachCalendar('calendar-container');
-        });
     </script>
 @endsection

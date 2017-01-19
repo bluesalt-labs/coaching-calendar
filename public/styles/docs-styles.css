@@ -5,6 +5,21 @@ html, body {
     top: 0; right: 0; bottom: 0; left: 0;
 }
 
+/* Let's try out a darker theme */
+/*
+html, body, #page-container {
+    background: #282b2e;
+    color: #fefefe;
+}
+
+ol.breadcrumb,
+code,
+pre {
+    background: #323538;
+    white-space: nowrap;
+}
+*/
+
 #page-container {
     position: relative;
     padding-top: 60px;
@@ -144,6 +159,9 @@ html, body {
 }
 
 #page-container.sidebar-active #page-content { margin-left: 265px; }
+
+pre {    white-space: nowrap; }
+pre code.hljs span { white-space: nowrap; }
 
 @media(max-width: 768px) {
     #main-header > #header-brand > span { font-size: 14px; }

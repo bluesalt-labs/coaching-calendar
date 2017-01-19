@@ -37,14 +37,14 @@
             <div class="output col-sm-6">
                 <h2>Users</h2>
                 <pre id="users" class="well">
-                            Loading...
-                        </pre>
+                    Loading...
+                </pre>
             </div>
             <div class="output col-sm-6">
                 <h2>Appointments</h2>
                 <pre id="appointments" class="well">
-                            Loading...
-                        </pre>
+                    Loading...
+                </pre>
             </div>
         </div><!-- row -->
         <hr />
