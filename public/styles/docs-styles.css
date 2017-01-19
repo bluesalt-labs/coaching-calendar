@@ -121,7 +121,7 @@ html, body {
     cursor: pointer;
 }
 
-#main-sidebar #sidebar-links li.form-inline {
+#main-sidebar #sidebar-links li#search-container {
     height: 50px;
     border-color: #cecece;
     padding-left: 15px;
@@ -163,8 +163,8 @@ html, body {
         transition: top 150ms;
     }
 
-    #main-sidebar #sidebar-links li.form-inline input { display: inline-block; max-width: 85%; }
-    #main-sidebar #sidebar-links li.form-inline button { max-width: 15%; }
+    #main-sidebar #sidebar-links li#search-container input { display: inline-block; max-width: 85%; }
+    #main-sidebar #sidebar-links li#search-container button { max-width: 15%; }
     #main-sidebar #sidebar-links { width: 100%; }
 
     #page-container.sidebar-active #main-sidebar {

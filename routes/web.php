@@ -16,6 +16,7 @@
     $app->group(['prefix' => 'api/v1'], function() use ($app) {
         $app->group(['prefix' => 'docs'], function() use ($app) {
             $app->get('/', 'DocsController@index');
+            $app->get('search', 'DocsController@searchIndex');
 
             $app->group(['prefix' => 'admin'], function() use ($app) {
                 $app->get('/', 'DocsController@adminIndex');

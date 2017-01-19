@@ -3,23 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\App;
 
 class DocsController extends Controller
 {
+
     const BASE_URL = '/api/v1/docs/';
 
     public function index() {
         return view('docs.index', Array(
-            'navLinks' => $this->getRoutes('Home'),
+            'navLinks' => self::getRoutes('Home'),
             'breadcrumbs' => self::getBreadcrumbs(),
+            )
+        );
+    }
+
+    /**
+     * Searches the API docs
+     * TODO
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function searchIndex(Request $request) {
+        $searchQuery = $request->input('q');
+
+       return view('docs.search', Array(
+               'searchQuery' => $searchQuery,
+               'navLinks' => self::getRoutes('Search'),
+               'breadcrumbs' => self::getBreadcrumbs('Search'),
             )
         );
     }
 
     public function adminIndex() {
         return view('docs.admin.index', Array(
-            'navLinks' => $this->getRoutes('Admin'),
+            'navLinks' => self::getRoutes('Admin'),
             'breadcrumbs' => self::getBreadcrumbs('Admin'),
             )
         );
@@ -27,7 +45,7 @@ class DocsController extends Controller
 
     public function appointmentIndex() {
         return view('docs.appointment.index', Array(
-            'navLinks' => $this->getRoutes('Appointment'),
+            'navLinks' => self::getRoutes('Appointment'),
             'breadcrumbs' => self::getBreadcrumbs('Appointment'),
             )
         );
@@ -35,7 +53,7 @@ class DocsController extends Controller
 
     public function calendarIndex() {
         return view('docs.calendar.index', Array(
-            'navLinks' => $this->getRoutes('Calendar'),
+            'navLinks' => self::getRoutes('Calendar'),
             'breadcrumbs' => self::getBreadcrumbs('Calendar'),
             )
         );
@@ -43,7 +61,7 @@ class DocsController extends Controller
 
     public function configIndex() {
         return view('docs.config.index', Array(
-            'navLinks' => $this->getRoutes('Config'),
+            'navLinks' => self::getRoutes('Config'),
             'breadcrumbs' => self::getBreadcrumbs('Config'),
             )
         );
@@ -51,7 +69,7 @@ class DocsController extends Controller
 
     public function memberIndex() {
         return view('docs.member.index', Array(
-            'navLinks' => $this->getRoutes('Member'),
+            'navLinks' => self::getRoutes('Member'),
             'breadcrumbs' => self::getBreadcrumbs('Member'),
             )
         );
@@ -59,7 +77,7 @@ class DocsController extends Controller
 
     public function userIndex() {
         return view('docs.user.index', Array(
-            'navLinks' => $this->getRoutes('User'),
+            'navLinks' => self::getRoutes('User'),
             'breadcrumbs' => self::getBreadcrumbs('User'),
             )
         );
@@ -68,6 +86,7 @@ class DocsController extends Controller
     public static function getRouteUrl($routeName) {
         switch($routeName) {
             case 'Home':        return self::BASE_URL; break;
+            case 'Search':        return self::BASE_URL.'search/'; break;
             case 'Admin':       return self::BASE_URL.'admin/'; break;
             case 'Appointment': return self::BASE_URL.'appointment/'; break;
             case 'Calendar':    return self::BASE_URL.'calendar/'; break;
