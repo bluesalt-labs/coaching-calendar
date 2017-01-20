@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     top: 0; right: 0; bottom: 0; left: 0;
 }
+hr { border-color: #eeeeee; }
 
 #page-container {
     position: relative;
@@ -63,7 +64,6 @@ html, body {
 
 /* Desktop Styles */
 @media(min-width: 768px) {
-    hr { border-color: #eeeeee; }
     #page-content,
     #main-sidebar {
         margin: 0;

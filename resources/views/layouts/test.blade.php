@@ -7,9 +7,14 @@
 @endsection
 
 @section('base-scripts')
+    <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
+    <script type="text/javascript" src="//sidebar-links.bluesaltlabs.com/sidebar-links.min.js"></script>
+    <?php else:?>
+    <script type="text/javascript" src="/bower_components/sidebar-links/sidebar-links.min.js"></script>
+    <?php endif;?>
+
     <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/test-scripts.js"></script>
-    <script type="text/javascript" src="/scripts/sidebar-links.js"></script>
 @endsection
 
 @section('base-content')
