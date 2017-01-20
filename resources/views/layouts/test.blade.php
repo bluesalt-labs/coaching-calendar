@@ -9,6 +9,7 @@
 @section('base-scripts')
     <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/test-scripts.js"></script>
+    <script type="text/javascript" src="/scripts/sidebar-links.js"></script>
 @endsection
 
 @section('base-content')

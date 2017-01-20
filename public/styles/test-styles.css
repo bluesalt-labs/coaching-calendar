@@ -53,9 +53,13 @@ html, body {
     background: #fefefe;
 }
 
-#main-sidebar > #sidebar-links {
-    list-style: none;
-}
+#main-sidebar > #sidebar-links,
+#main-sidebar > #sidebar-links li { list-style: none; }
+
+/*
+#main-sidebar > #sidebar-links ul { display: none; }
+#main-sidebar > #sidebar-links li
+*/
 
 /* Desktop Styles */
 @media(min-width: 768px) {
