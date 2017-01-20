@@ -80,6 +80,13 @@
     });
 //});
 
+/*************************************** Testing and debug ***************************************/
 
-// Member Home page for debug. todo: Change to docs page?
-$app->get('/', 'MemberController@index');
+$app->group(['prefix' => 'test'], function() use ($app) {
+    $app->get('/', 'TestController@index');
+});
+
+/*************************************************************************************************/
+
+// Sets the site index to the docs
+$app->get('/', 'DocsController@index');

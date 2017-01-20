@@ -12,7 +12,9 @@
         <a class="github-button" href="https://github.com/bluesalt-labs" data-count-href="/bluesalt-labs/followers" data-count-api="/users/bluesalt-labs#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @bluesalt-labs on GitHub">Follow @bluesalt-labs</a>
     </div>
     <br /><br />
+    <span><a href="/test/">Visit the test page.</a></span><br /><br />
     <span>This project is currently in development (and thus the develop branch is currently the default).</span>
+
     <br />
     <ul>
         <li>Based on the <a href="https://lumen.laravel.com/" target="_blank">Lumen Framework</a> (v5.3)</li>

@@ -1,0 +1,110 @@
+html, body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100%;
+}
+
+#main-header { display: none; }
+
+#main-header > #btn-nav-toggle {
+    display: inline-block;
+    color: #fefefe;
+    background: #3c3c3c;
+    vertical-align: middle;
+    height: 40px;
+    margin: 5px;
+
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 40px;
+    font-size: 40px;
+    position: relative;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 150ms;
+    transition: all 150ms;
+}
+
+#main-header > #btn-nav-toggle > i:before { content: "\f150"; }
+#page-container.sidebar-active #main-header > #btn-nav-toggle > i:before { content: "\f151"; }
+#main-header > #btn-nav-toggle > i {
+    position: absolute;
+    top: 0; left: 0;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+}
+
+#main-header > #btn-nav-toggle > i:before { vertical-align: middle; }
+
+#main-header > #btn-nav-toggle:hover,
+#main-header > #btn-nav-toggle:active {
+    color: #3c3c3c;
+    background: #fefefe;
+}
+
+#main-sidebar > #sidebar-links {
+    list-style: none;
+}
+
+/* Desktop Styles */
+@media(min-width: 768px) {
+    hr { border-color: #eeeeee; }
+    #page-content,
+    #main-sidebar {
+        margin: 0;
+        height: 100%;
+    }
+    #page-content { width: 70%; }
+    #main-sidebar {
+        width: 30%;
+        height: 100%;
+        position: fixed;
+        top: 0; right: 0;
+        border-left: 1px solid #eeeeee;
+    }
+}
+
+/* Medium Width Styles */
+@media(min-width:992px) {
+    #page-content { width: 75%; }
+    #main-sidebar { width: 25%; }
+}
+
+/* Large Width Styles*/
+@media(min-width:1200px) {
+    #page-content { width: 80%; }
+    #main-sidebar { width: 20%; }
+}
+
+/* Mobile Styles */
+@media(max-width: 768px) {
+    #page-container {
+        padding-top: 60px;
+    }
+
+    #main-header {
+        display: block;
+        z-index: 99999;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 50px;
+        padding: 0 15px;
+        margin: 0;
+        background: #3c3c3c;
+    }
+
+
+
+}

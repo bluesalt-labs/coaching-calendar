@@ -38,6 +38,7 @@ function attachCalendar(targetID) {
     if(targetEl != null) {
         var today = new Date();
         var iframe = document.createElement('iframe');
+        iframe.id = 'calendar-iframe';
         iframe.src = '/calendar/embed/' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
 
         targetEl.appendChild(iframe);
@@ -45,12 +46,12 @@ function attachCalendar(targetID) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    attachCalendar('calendar-iframe');
+    attachCalendar('calendar-container');
 });
         </code>
 
         <code class="html">
-<?php echo htmlspecialchars('<div id="calendar-iframe"></div>'); ?>
+<?php echo htmlspecialchars('<div id="calendar-container"></div>'); ?>
         </code>
     </pre>
 
