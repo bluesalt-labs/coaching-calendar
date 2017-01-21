@@ -24,9 +24,10 @@
             <li><a href="http://fontawesome.io/" target="_blank">Font Awesome</a> (v4.7.0)</li>
             <li><a href="http://momentjs.com/" target="_blank">Moment.js</a> (v2.17.1)</li>
         </ul>
-        <li>Docs are utilizing:</li>
+        <li>Docs and examples are utilizing:</li>
         <ul>
             <li><a href="https://highlightjs.org/" target="_blank">highlight.js</a> (v9.9.0)</li>
+            <li><a href="http://sidebar-links.bluesaltlabs.com/" target="_blank">sidebar-links.js</a></li>
         </ul>
         <li>Author: BlueSalt Labs - Luke Sontrop</li>
         <li>Coaching Calendar is open-sourced software licensed under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a></li>
