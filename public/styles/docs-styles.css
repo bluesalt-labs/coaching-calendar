@@ -163,7 +163,7 @@ pre {    white-space: nowrap; }
 pre code.hljs span { white-space: nowrap; }
 
 /* Fixes issue with links to headers appearing under fixed navbar */
-h1, h2, h3, h4, h5, h6 { padding-top: 60px; margin-top: -50px; }
+h1, h2, h3, h4, h5, h6 { padding-top: 60px; margin-top: -40px; }
 
 @media(max-width: 768px) {
     #main-header > #header-brand > span { font-size: 14px; }

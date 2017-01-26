@@ -3,14 +3,22 @@
 @section('base-title') Tests | @yield('title') @endsection
 
 @section('base-stylesheets')
+    <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css" />
+    <?php else:?>
+    <link rel="stylesheet" type="text/css" href="/bower_components/highlightjs/styles/androidstudio.css" />
+    <?php endif;?>
+
     <link rel="stylesheet" type="text/css" href="/styles/test-styles.css" />
 @endsection
 
 @section('base-scripts')
     <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
     <script type="text/javascript" src="//sidebar-links.bluesaltlabs.com/sidebar-links.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <?php else:?>
     <script type="text/javascript" src="/bower_components/sidebar-links/sidebar-links.min.js"></script>
+    <script type="text/javascript" src="/bower_components/highlightjs/highlight.pack.min.js"></script>
     <?php endif;?>
 
     <script type="text/javascript" src="/scripts/scripts.js"></script>

@@ -89,6 +89,11 @@ h2.sidebar-link > code:hover { background: none; }
     overflow: hidden;
 }
 
+.test-output > code {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
 /* Desktop Styles */
 @media(min-width: 768px) {
     #page-content,

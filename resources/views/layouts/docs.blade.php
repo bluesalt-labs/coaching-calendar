@@ -4,8 +4,9 @@
 
 @section('base-stylesheets')
     <link rel="stylesheet" type="text/css" href="/styles/docs-styles.css" />
+
     <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css" />
     <?php else:?>
     <link rel="stylesheet" type="text/css" href="/bower_components/highlightjs/styles/androidstudio.css" />
     <?php endif;?>
@@ -13,12 +14,12 @@
 
 @section('base-scripts')
     <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <?php else:?>
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="/bower_components/highlightjs/highlight.pack.min.js"></script>
     <?php endif;?>
 
