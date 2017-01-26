@@ -178,16 +178,24 @@ apiGet('user', 'get/1', [], function(data){
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function(event) {
             apiGet('appointment', 'all', [], function(data){
-                document.getElementById('appointment-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
+                if(data != '') {
+                    document.getElementById('appointment-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
+                }
             });
             apiGet('appointment', 'get/1', [], function(data){
-                document.getElementById('appointment-get-output').innerHTML = JSON.stringify(data, undefined, 4);
+                if(data != '') {
+                    document.getElementById('appointment-get-output').innerHTML = JSON.stringify(data, undefined, 4);
+                }
             });
             apiGet('user', 'all', [], function(data){
-                document.getElementById('user-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
+                if(data != '') {
+                    document.getElementById('user-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
+                }
             });
             apiGet('user', 'get/1', [], function(data){ // todo change this to a dropdown or something.
-                document.getElementById('user-get-output').innerHTML = JSON.stringify(data, undefined, 4);
+                if(data != '') {
+                    document.getElementById('user-get-output').innerHTML = JSON.stringify(data, undefined, 4);
+                }
 
                 <!-- Loads highlighjs for any code output -->
                 hljs.initHighlightingOnLoad();
