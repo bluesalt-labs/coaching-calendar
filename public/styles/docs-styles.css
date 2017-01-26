@@ -22,7 +22,6 @@ pre {
 
 #page-container {
     position: relative;
-    padding-top: 60px;
     min-height: 100%;
 }
 
@@ -153,7 +152,7 @@ pre {
 #page-container.sidebar-active #main-header > #btn-nav-toggle > i:before { content: "\f191"; }
 
 #page-content {
-    margin: 0;
+    margin: 60px 0 0 0;
     -webkit-transition: margin 150ms;
     transition: margin 150ms;
 }
@@ -162,6 +161,9 @@ pre {
 
 pre {    white-space: nowrap; }
 pre code.hljs span { white-space: nowrap; }
+
+/* Fixes issue with links to headers appearing under fixed navbar */
+h1, h2, h3, h4, h5, h6 { padding-top: 60px; margin-top: -50px; }
 
 @media(max-width: 768px) {
     #main-header > #header-brand > span { font-size: 14px; }

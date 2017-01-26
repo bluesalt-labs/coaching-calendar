@@ -7,12 +7,14 @@
 
     <h1>Coaching Calendar</h1>
     <h4>A basic scheduling calendar UI</h4>
+    <img class="img-responsive" alt="Coaching Calendar Logo" src="/icons/logo-256.png" />
     <div>
         <a class="github-button" href="https://github.com/bluesalt-labs/coaching-calendar" data-icon="octicon-star" data-count-href="/bluesalt-labs/coaching-calendar/stargazers" data-count-api="/repos/bluesalt-labs/coaching-calendar#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star bluesalt-labs/coaching-calendar on GitHub">Star</a>
         <a class="github-button" href="https://github.com/bluesalt-labs" data-count-href="/bluesalt-labs/followers" data-count-api="/users/bluesalt-labs#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @bluesalt-labs on GitHub">Follow @bluesalt-labs</a>
     </div>
     <br /><br />
-    <span><a href="/test/">Visit the test page.</a></span><br /><br />
+    <span><a href="/test/">Visit the tests page.</a></span>
+    <br /><br />
     <span>This project is currently in development (and thus the develop branch is currently the default).</span>
 
     <br />

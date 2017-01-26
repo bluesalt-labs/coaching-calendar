@@ -259,7 +259,7 @@ var CoachingCalendar = function(year, month, day) {
         this.calendarDate.set({
             'year':     this.dateToday.get('year'),
             'month':    this.dateToday.get('month'),
-            'date':      1,
+            'date':      1
         });
         this.refreshCalendar();
     };

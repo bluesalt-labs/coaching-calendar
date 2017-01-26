@@ -4,9 +4,7 @@ function onNavBtnClick() {
 }
 
 function checkCloseSidebar() {
-    var width = 0;
-
-    width = (document.body.clientWidth || window.innerWidth) + 15;
+    var width = ( (document.body.clientWidth || window.innerWidth) + 15 ) || 0;
 
     if(width >  0 && width < 768) {
         document.getElementById('page-container').className = '';

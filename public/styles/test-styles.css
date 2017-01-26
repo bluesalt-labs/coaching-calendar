@@ -54,6 +54,8 @@ hr { border-color: #eeeeee; }
     background: #fefefe;
 }
 
+#main-sidebar ul { margin-left: -20px; }
+
 #main-sidebar > #sidebar-links,
 #main-sidebar > #sidebar-links li { list-style: none; }
 
@@ -61,6 +63,31 @@ hr { border-color: #eeeeee; }
 #main-sidebar > #sidebar-links ul { display: none; }
 #main-sidebar > #sidebar-links li
 */
+
+.docs-link { color: inherit; }
+
+h2.sidebar-link > code:active,
+h2.sidebar-link > code:hover { background: none; }
+
+.docs-link:active:after,
+.docs-link:hover:after {
+    content:"View In Docs";
+    display: inline-block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 0.5em;
+    padding-left: 15px;
+    color: #333;
+}
+
+/* for Calendar > embed */
+#calendar-iframe {
+    position: relative;
+    width: 100%;
+    border: none;
+    height: 100%;
+    min-height: 650px;
+    overflow: hidden;
+}
 
 /* Desktop Styles */
 @media(min-width: 768px) {
