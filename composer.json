@@ -1,5 +1,5 @@
 {
-    "name": "laravel/lumen",
+    "name": "bluesalt-labs/coaching-calendar",
     "description": "The Laravel Lumen Framework.",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
@@ -7,12 +7,13 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/lumen-framework": "5.3.*",
-        "vlucas/phpdotenv": "~2.2"
-    },
-    "require-dev": {
+        "vlucas/phpdotenv": "~2.2",
         "fzaninotto/faker": "~1.4",
         "phpunit/phpunit": "~5.0",
         "mockery/mockery": "~0.9"
+    },
+    "require-dev": {
+        "appzcoder/lumen-routes-list": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -27,8 +28,14 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"copy('.env.example', '.env');\"",
+            "php artisan migrate:refresh --seed"
         ]
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "public/bower_components"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

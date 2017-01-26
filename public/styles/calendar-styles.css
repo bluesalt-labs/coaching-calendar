@@ -1,0 +1,215 @@
+/* Color Pallet: http://paletton.com/#uid=72M0X0khYP96LYWcWUCmhInqx-N */
+
+table#calendar {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 800px;
+
+    height: 100%;
+    min-height: 600px;
+}
+
+table#calendar > thead {
+    height: 74px; /* 50 + 18 + 6*/
+}
+
+table#calendar #calendar-header {
+    border-bottom: none;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+}
+
+table#calendar #calendar-header > button.button.btn-month-nav,
+table#calendar #calendar-header > #calendar-month {
+    margin: 0;
+    text-align: center;
+}
+
+table#calendar #calendar-header button#btn-today,
+table#calendar #calendar-header > button.btn-month-nav {
+    height: 100%;
+    padding: 0;
+    width: 60px;
+    border: none;
+    cursor: pointer;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+table#calendar #calendar-header > button#btn-prev-month {
+    border-right: 1px solid #e2e2e2;
+    float: left;
+}
+table#calendar #calendar-header > button#btn-next-month {
+    border-left: 1px solid #e2e2e2;
+    float: right;
+}
+
+table#calendar #calendar-header > #calendar-month {
+    height: 40px;
+    padding-top: 10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+table#calendar #calendar-header > #calendar-month > .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+table#calendar #calendar-header > #calendar-month > .form-group > select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: none;
+    padding: 0 5px;
+}
+
+table#calendar #calendar-header > button.btn-month-nav,
+table#calendar #calendar-header button#btn-today,
+table#calendar #calendar-header > #calendar-month > .form-group > select {
+    /* background: rgba(170, 170, 170, 0); */
+    background: rgba(46, 94, 182, 0);
+
+    -webkit-box-shadow: 0 0 0 0 #aaa;
+    -moz-box-shadow: 0 0 0 0 #aaa;
+    box-shadow: 0 0 0 0 #aaa;
+
+    -webkit-transition: box-shadow 100ms, background 100ms;
+    transition: box-shadow 100ms, background 100ms;
+}
+
+table#calendar #calendar-header button#btn-today:focus,
+table#calendar #calendar-header button#btn-today:active,
+table#calendar #calendar-header button#btn-today:hover,
+table#calendar #calendar-header > .btn-month-nav:focus,
+table#calendar #calendar-header > .btn-month-nav:active,
+table#calendar #calendar-header > .btn-month-nav:hover,
+table#calendar #calendar-header > #calendar-month > .form-group > select:focus,
+table#calendar #calendar-header > #calendar-month > .form-group > select:active,
+table#calendar #calendar-header > #calendar-month > .form-group > select:hover {
+    outline:0 solid transparent;
+    cursor:pointer;
+    /* background-color: rgba(170, 170, 170, 0.3); */
+    background: rgba(46, 94, 182, 0.25);
+    -webkit-box-shadow: 0 0 8px 0 #888;
+    -moz-box-shadow: 0 0 8px 0 #888;
+    box-shadow: 0 0 8px 0 #888;
+}
+
+table#calendar #calendar-header button#btn-today:active,
+table#calendar #calendar-header > .btn-month-nav:active,
+table#calendar #calendar-header > #calendar-month > .form-group > select:active {
+    background: rgba(46, 94, 182, 0.25);
+    -webkit-box-shadow: inset 0 0 8px 0 #888;
+    -moz-box-shadow: inset 0 0 8px 0 #888;
+    box-shadow: inset 0 0 8px 0 #888;
+}
+
+table#calendar .day-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 3px 0;
+    height: 18px;
+}
+
+table#calendar .day-header,
+table#calendar .day {
+    width: 14.285%;
+}
+
+table#calendar #calendar-header button#btn-today {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    left: 15px;
+
+    font-weight: normal;
+    font-size: 0.6em;
+    border: 1px solid #e2e2e2;
+}
+
+table#calendar #calendar-header button.month-is-cur#btn-today { visibility: hidden; }
+
+table#calendar,
+table#calendar #calendar-header,
+table#calendar .day-header,
+table#calendar .day {
+    border: 1px solid #e2e2e2;
+}
+
+table#calendar .day {
+    height: 14.3%;
+    vertical-align: top;
+}
+
+/* Just for fun. Probably will take this out later
+table#calendar .day:hover {
+    -webkit-box-shadow: inset 0 0 3px 0 #aaa;
+    -moz-box-shadow: inset 0 0 3px 0 #aaa;
+    box-shadow: inset 0 0 3px 0 #aaa;
+}
+end just for fun */
+
+table#calendar .day > .day-num,
+table#calendar .day > .cal-event {
+    display:block;
+    padding: 3px 8px;
+}
+table#calendar .day > .cal-event {
+    height: 15%; /* todo: make these different sizes for responsive calendar */
+    margin: 2px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0);
+    /*color: #fff;*/
+
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 0 0 #aaa;
+    -moz-box-shadow: 0 0 0 0 #aaa;
+    box-shadow: 0 0 0 0 #aaa;
+
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+    /*
+    -webkit-transition: box-shadow 100ms, background 100ms;
+    transition: box-shadow 100ms, background 100ms;
+    */
+}
+
+table#calendar .day > .cal-event:hover,
+table#calendar .day > .cal-event:active,
+table#calendar .day > .cal-event:focus {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    height: 50%;
+    -webkit-box-shadow: 0 0 3px 0 #000;
+    -moz-box-shadow: 0 0 3px 0 #000;
+    box-shadow: 0 0 3px 0 #000;
+}
+table#calendar .day > .cal-event:active {
+    -webkit-box-shadow: inset 0 0 3px 0 #000;
+    -moz-box-shadow: inset 0 0 3px 0 #000;
+    box-shadow: inset 0 0 3px 0 #000;
+}
+
+
+table#calendar .day > .cal-event.available { background: #6E96DF; }
+table#calendar .day > .cal-event.requested { background: #FFCD70; }
+table#calendar .day > .cal-event.confirmed { background: #5CE546; }
+table#calendar .day > .cal-event.canceled { background: #FE979F; }
+
+table#calendar .day.today { background: rgba(123, 239, 105, 0.25); }
+
+table#calendar .day.outside-month { background-color: #f6f6f6; }
+
+table#calendar .day.outside-month > .day-num { color: #aaa; }

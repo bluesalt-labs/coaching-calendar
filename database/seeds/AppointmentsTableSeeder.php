@@ -7,22 +7,23 @@ use Carbon\Carbon;
 class AppointmentsTableSeeder extends Seeder
 {
     public function run() {
-        $date = Carbon::create(2016, 12, 30, 8, 0, 0);
+        // todo: figure out how to make a bunch of random appointments that don't overlap
+        $date = Carbon::create(date('Y'), date('m'), 30, 8, 0, 0);
         $date1Start = $date->toDateTimeString();
 
-        $date = Carbon::create(2016, 12, 30, 8, 30, 0);
+        $date = Carbon::create(date('Y'), date('m'), 30, 8, 30, 0);
         $date1End = $date->toDateTimeString();
 
-        $date = Carbon::create(2016, 12, 30, 9, 0, 0);
+        $date = Carbon::create(date('Y'), date('m'), 30, 9, 0, 0);
         $date2Start = $date->toDateTimeString();
 
-        $date = Carbon::create(2016, 12, 30, 9, 30, 0);
+        $date = Carbon::create(date('Y'), date('m'), 30, 9, 30, 0);
         $date2End = $date->toDateTimeString();
 
-        $date = Carbon::create(2016, 12, 30, 10, 0, 0);
+        $date = Carbon::create(date('Y'), date('m'), 30, 10, 0, 0);
         $date3Start = $date->toDateTimeString();
 
-        $date = Carbon::create(2016, 12, 30, 10, 30, 0);
+        $date = Carbon::create(date('Y'), date('m'), 30, 10, 30, 0);
         $date3End = $date->toDateTimeString();
 
         Appointment::create([

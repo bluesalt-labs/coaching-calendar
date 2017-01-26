@@ -1,0 +1,203 @@
+html, body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+/* Let's try out a darker theme */
+/*
+html, body, #page-container {
+    background: #282b2e;
+    color: #fefefe;
+}
+
+ol.breadcrumb,
+code,
+pre {
+    background: #323538;
+    white-space: nowrap;
+}
+*/
+
+#page-container {
+    position: relative;
+    min-height: 100%;
+}
+
+#main-header {
+    z-index: 99999;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    margin: 0;
+    background: #3c3c3c;
+}
+
+#main-header > #btn-nav-toggle,
+#main-header > #header-brand {
+    display: inline-block;
+    color: #fefefe;
+    background: #3c3c3c;
+    vertical-align: middle;
+    height: 40px;
+    margin: 5px;
+}
+
+#main-header > #header-brand > span {
+    font-size: 18px;
+    display: inline-block;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+#main-header > #btn-nav-toggle {
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 40px;
+    font-size: 40px;
+    position: relative;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 150ms;
+    transition: all 150ms;
+}
+
+#main-header > #btn-nav-toggle > i {
+    position: absolute;
+    top: 0; left: 0;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+}
+
+#main-header > #btn-nav-toggle > i:before { vertical-align: middle; }
+
+#main-header > #btn-nav-toggle:hover,
+#main-header > #btn-nav-toggle:active {
+    color: #3c3c3c;
+    background: #fefefe;
+}
+
+#main-sidebar {
+    z-index: 9999;
+    position: fixed;
+    top: 50px;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #fafafa;
+    -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+    -webkit-transition: left 150ms;
+    transition: left 150ms;
+}
+
+#main-sidebar #sidebar-links,
+#main-sidebar #sidebar-links ul {
+    list-style: none;
+    padding: 15px 0 0 0;
+    margin: 0;
+    width: 250px;
+    display: block;
+    border-right: 1px solid #dcdcdc;
+    height: 100%;
+}
+
+#main-sidebar #sidebar-links ul { padding: 0; }
+#main-sidebar #sidebar-links ul > li > a { padding-left: 45px; }
+
+#main-sidebar #sidebar-links li { border-bottom: 1px solid #dcdcdc; }
+#main-sidebar #sidebar-links li.active { background: #dcdcdc; }
+
+#main-sidebar #sidebar-links li > a {
+    display: block;
+    height: 40px;
+    padding: 5px 15px;
+    line-height: 30px;
+    color: #222;
+}
+
+#main-sidebar #sidebar-links li > a:active,
+#main-sidebar #sidebar-links li > a:hover {
+    background: #cecece;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#main-sidebar #sidebar-links li#search-container {
+    height: 50px;
+    border-color: #cecece;
+    padding-left: 15px;
+}
+
+/* i.e. #main-sidebar.active */
+#page-container.sidebar-active #main-sidebar {
+    left: 0;
+    -webkit-box-shadow: 4px 0 8px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 0 8px -4px rgba(0,0,0,0.75);
+    box-shadow: 4px 0 8px -4px rgba(0,0,0,0.75);
+}
+#main-header > #btn-nav-toggle > i:before { content: "\f152"; }
+#page-container.sidebar-active #main-header > #btn-nav-toggle > i:before { content: "\f191"; }
+
+#page-content {
+    margin: 60px 0 0 0;
+    -webkit-transition: margin 150ms;
+    transition: margin 150ms;
+}
+
+#page-container.sidebar-active #page-content { margin-left: 265px; }
+
+pre {    white-space: nowrap; }
+pre code.hljs span { white-space: nowrap; }
+
+/* Fixes issue with links to headers appearing under fixed navbar */
+h1, h2, h3, h4, h5, h6 { padding-top: 60px; margin-top: -50px; }
+
+@media(max-width: 768px) {
+    #main-header > #header-brand > span { font-size: 14px; }
+    #main-header > #btn-nav-toggle > i:before { content: "\f150"; }
+    #page-container.sidebar-active #main-header > #btn-nav-toggle > i:before { content: "\f151"; }
+
+    #main-sidebar {
+        top: -500px;
+        left: 0;
+        width: 100%;
+        height: auto;
+        background: #fafafa;
+        -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+        -moz-box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+        -webkit-transition: top 150ms;
+        transition: top 150ms;
+    }
+
+    #main-sidebar #sidebar-links li#search-container input { display: inline-block; max-width: 85%; }
+    #main-sidebar #sidebar-links li#search-container button { max-width: 15%; }
+    #main-sidebar #sidebar-links { width: 100%; }
+
+    #page-container.sidebar-active #main-sidebar {
+        top: 50px;
+        -webkit-box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
+        box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
+    }
+
+    #page-content,
+    #page-container.sidebar-active #page-content { margin: auto; }
+}
+
+@media(max-width: 300px) {
+    #main-header > #header-brand { display: none; }
+}

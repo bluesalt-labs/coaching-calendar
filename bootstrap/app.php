@@ -65,6 +65,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    //'admin-auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
 /*
@@ -81,6 +82,13 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+if((php_sapi_name() === 'cli' OR defined('STDIN')) || // This is so `php artisan` works
+  (!$app->environment('production') && // Don't need this service on production site
+   strpos($_SERVER['SERVER_NAME'], 'herokuapp') == false ) // This can be removed once Heroku is running the production branch.
+) {
+    $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
+}
 
 /*
 |--------------------------------------------------------------------------
