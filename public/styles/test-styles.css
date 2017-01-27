@@ -89,7 +89,7 @@ h2.sidebar-link > code:hover { background: none; }
     overflow: hidden;
 }
 
-.test-output > code {
+.test-code > code {
     max-height: 300px;
     overflow-y: scroll;
 }

@@ -21,8 +21,8 @@
     <span>Request Type: <code>GET</code></span>
 
     <h3>JavaScript</h3>
-    <pre class="test-output">
-        <code class="javascript">s
+    <pre class="test-code test-start">
+        <code class="javascript">
 apiGet('appointment', 'all', [], function(data){
     document.getElementById('appointment-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
 });
@@ -30,7 +30,7 @@ apiGet('appointment', 'all', [], function(data){
     </pre>
 
     <h3>Output</h3>
-    <pre class="test-output">
+    <pre class="test-code test-output">
         <code class="json" id="appointment-getAll-output"></code>
     </pre>
     <!-- End Appointment->getAll -->
@@ -48,7 +48,7 @@ apiGet('appointment', 'all', [], function(data){
     <span>Request Type: <code>GET</code></span>
 
     <h3>JavaScript</h3>
-    <pre class="test-output">
+    <pre class="test-code test-start">
         <code class="javascript">
 apiGet('appointment', 'get/1', [], function(data){
     document.getElementById('appointment-get-output').innerHTML = JSON.stringify(data, undefined, 4);
@@ -57,7 +57,7 @@ apiGet('appointment', 'get/1', [], function(data){
     </pre>
 
     <h3>Output</h3>
-    <pre class="test-output">
+    <pre class="test-code test-output">
         <code class="json" id="appointment-get-output"></code>
     </pre>
     <!-- End Appointment->get(id) -->
@@ -124,7 +124,7 @@ apiGet('appointment', 'get/1', [], function(data){
     <span>Request Type: <code>GET</code></span>
 
     <h3>JavaScript</h3>
-    <pre class="test-output">
+    <pre class="test-code test-start">
         <code class="javascript">
 apiGet('user', 'all', [], function(data){
     document.getElementById('user-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
@@ -133,7 +133,7 @@ apiGet('user', 'all', [], function(data){
     </pre>
 
     <h3>Output</h3>
-    <pre class="test-output">
+    <pre class="test-code test-output">
         <code class="json" id="user-getAll-output"></code>
     </pre>
     <!-- End User->getAll -->
@@ -143,7 +143,7 @@ apiGet('user', 'all', [], function(data){
     <span>Request Type: <code>GET</code></span>
 
     <h3>JavaScript</h3>
-    <pre class="test-output">
+    <pre class="test-code test-start">
         <code class="javascript">
 apiGet('user', 'get/1', [], function(data){
     document.getElementById('user-get-output').innerHTML = JSON.stringify(data, undefined, 4);
@@ -152,7 +152,7 @@ apiGet('user', 'get/1', [], function(data){
     </pre>
 
     <h3>Output</h3>
-    <pre class="test-output">
+    <pre class="test-code test-output">
         <code class="json" id="user-get-output"></code>
     </pre>
     <!-- End User->get(id) -->
@@ -176,31 +176,28 @@ apiGet('user', 'get/1', [], function(data){
     <hr />
 
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function(event) {
-            apiGet('appointment', 'all', [], function(data){
-                if(data != '') {
-                    document.getElementById('appointment-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
-                }
-            });
-            apiGet('appointment', 'get/1', [], function(data){
-                if(data != '') {
-                    document.getElementById('appointment-get-output').innerHTML = JSON.stringify(data, undefined, 4);
-                }
-            });
-            apiGet('user', 'all', [], function(data){
-                if(data != '') {
-                    document.getElementById('user-getAll-output').innerHTML = JSON.stringify(data, undefined, 4);
-                }
-            });
-            apiGet('user', 'get/1', [], function(data){ // todo change this to a dropdown or something.
-                if(data != '') {
-                    document.getElementById('user-get-output').innerHTML = JSON.stringify(data, undefined, 4);
-                }
+        //function get
+        document.addEventListener("DOMContentLoaded", function() {
+            highlightExisting();
 
-                <!-- Loads highlighjs for any code output -->
-                hljs.initHighlightingOnLoad();
-            });
+            apiGet('appointment', 'all', [], outputDataTo.bind(this, 'appointment-getAll-output'));
+            apiGet('appointment', 'get/1', [], outputDataTo.bind(this, 'appointment-get-output'));
+            apiGet('user', 'all', [], outputDataTo.bind(this, 'user-getAll-output'));
+            apiGet('user', 'get/1', [], outputDataTo.bind(this, 'user-get-output'));
         });
+
+        function outputDataTo() {
+            var block = document.getElementById(arguments[0])
+            block.innerHTML = JSON.stringify(arguments[1], undefined, 4);
+            hljs.highlightBlock(block);
+        }
+
+        function highlightExisting() {
+            var elements = document.querySelectorAll('pre.test-start > code');
+            for(var i = 0; i < elements.length; i++) {
+                hljs.highlightBlock(elements[i]);
+            }
+        }
     </script>
 
 @endsection
