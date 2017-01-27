@@ -1,92 +1,81 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
 // API and Back End
-//$app->group(['middleware' => 'auth'], function() use ($app) {
-$app->group(['prefix' => 'api/v1'], function() use ($app) {
-    $app->group(['prefix' => 'docs'], function() use ($app) {
-        $app->get('/', 'DocsController@index');
-        $app->get('search', 'DocsController@searchIndex');
-
-        $app->group(['prefix' => 'admin'], function() use ($app) {
-            $app->get('/', 'DocsController@adminIndex');
+//Route::group(['middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'api/v1'], function() {
+        Route::group(['prefix' => 'docs'], function() {
+            Route::get('/', 'DocsController@index');
+            Route::get('search', 'DocsController@searchIndex');
+    
+            Route::group(['prefix' => 'admin'], function() {
+                Route::get('/', 'DocsController@adminIndex');
+            });
+            Route::group(['prefix' => 'appointment'], function() {
+                Route::get('/', 'DocsController@appointmentIndex');
+            });
+            Route::group(['prefix' => 'calendar'], function() {
+                Route::get('/', 'DocsController@calendarIndex');
+            });
+            Route::group(['prefix' => 'config'], function() {
+                Route::get('/', 'DocsController@configIndex');
+            });
+            Route::group(['prefix' => 'member'], function() {
+                Route::get('/', 'DocsController@memberIndex');
+            });
+            Route::group(['prefix' => 'user'], function() {
+                Route::get('/', 'DocsController@userIndex');
+            });
         });
-        $app->group(['prefix' => 'appointment'], function() use ($app) {
-            $app->get('/', 'DocsController@appointmentIndex');
+    
+        Route::group(['prefix' => 'user'], function() {
+            class User extends Illuminate\Database\Eloquent\Model {  }
+            Route::get('/', 'UserController@getAll');
+            Route::get('get/{id}', 'UserController@get');
+            Route::post('create', 'UserController@create');
+            Route::delete('delete/{id}', 'UserController@delete');
         });
-        $app->group(['prefix' => 'calendar'], function() use ($app) {
-            $app->get('/', 'DocsController@calendarIndex');
-        });
-        $app->group(['prefix' => 'config'], function() use ($app) {
-            $app->get('/', 'DocsController@configIndex');
-        });
-        $app->group(['prefix' => 'member'], function() use ($app) {
-            $app->get('/', 'DocsController@memberIndex');
-        });
-        $app->group(['prefix' => 'user'], function() use ($app) {
-            $app->get('/', 'DocsController@userIndex');
+    
+        Route::group(['prefix' => 'appointment'], function() {
+            class Appointment extends Illuminate\Database\Eloquent\Model {  }
+            Route::get('/', 'AppointmentController@getAll');
+            Route::get('/getByDateRange/', 'AppointmentController@getByDateRange');
+            Route::get('get/{id}', 'AppointmentController@get');
+            Route::post('create', 'AppointmentController@create');
+            Route::post('schedule', 'AppointmentController@schedule');
+    
+            //Route::get('getTest/{startDate}/{endDate}', 'AppointmentController@getTest'); // debug
         });
     });
-
-    $app->group(['prefix' => 'user'], function() use ($app) {
-        class User extends Illuminate\Database\Eloquent\Model {  }
-        $app->get('/', 'UserController@getAll');
-        $app->get('get/{id}', 'UserController@get');
-        $app->post('create', 'UserController@create');
-        $app->delete('delete/{id}', 'UserController@delete');
+    
+    Route::group(['prefix' => 'calendar'], function() {
+        Route::get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
     });
-
-    $app->group(['prefix' => 'appointment'], function() use ($app) {
-        class Appointment extends Illuminate\Database\Eloquent\Model {  }
-        $app->get('/', 'AppointmentController@getAll');
-        $app->get('/getByDateRange/', 'AppointmentController@getByDateRange');
-        $app->get('get/{id}', 'AppointmentController@get');
-        $app->post('create', 'AppointmentController@create');
-        $app->post('schedule', 'AppointmentController@schedule');
-
-        //$app->get('getTest/{startDate}/{endDate}', 'AppointmentController@getTest'); // debug
-    });
-});
-
-$app->group(['prefix' => 'calendar'], function() use ($app) {
-    $app->get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
-});
 
 //});
 
 // Front End
 
-//$app->group(['middleware' => 'admin-auth'], function() use ($app) {
-$app->group(['prefix' => 'admin'], function() use ($app) {
-    $app->get('/', 'AdminController@index');
-
-    $app->group(['prefix' => 'calendar'], function() use ($app) {
-        $app->get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
+//Route::group(['middleware' => 'admin-auth'], function() {
+    Route::group(['prefix' => 'admin'], function() {
+        Route::get('/', 'AdminController@index');
+    
+        Route::group(['prefix' => 'calendar'], function() {
+            Route::get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');
+        });
     });
-});
-
-$app->group(['prefix' => 'member'], function() use ($app) {
-    $app->get('/', 'MemberController@index');
-});
+    
+    Route::group(['prefix' => 'member'], function() {
+        Route::get('/', 'MemberController@index');
+    });
 //});
 
 /*************************************** Testing and debug ***************************************/
 
-$app->group(['prefix' => 'test'], function() use ($app) {
-    $app->get('/', 'TestController@index');
+Route::group(['prefix' => 'test'], function() {
+    Route::get('/', 'TestController@index');
 });
 
 /*************************************************************************************************/
 
 // Sets the site index to the docs
-$app->get('/', 'DocsController@index');
+Route::get('/', 'DocsController@index');
