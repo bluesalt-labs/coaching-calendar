@@ -2,15 +2,12 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Authenticatable
 {
-    use Authenticatable, Authorizable;
+    use Notifiable;
 
     const TYPE_MEMBER   = 0;
     const TYPE_COACH    = 1;
@@ -42,10 +39,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
     }
 
+
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [ 'password', ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 }
