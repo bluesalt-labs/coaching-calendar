@@ -5,6 +5,10 @@
 @section('content')
     @parent
 
+    <h1>API Tests Page</h1>
+    <span><a href="/api/v1/docs/">Back to Documentation</a></span>
+    <hr />
+
     <!-- Admin Controller -->
     <h1 class="sidebar-link" id="admin">Admin</h1>
     <br />
@@ -174,30 +178,5 @@ apiGet('user', 'get/1', [], function(data){
 
     <!-- End User Controller -->
     <hr />
-
-    <script type="text/javascript">
-        //function get
-        document.addEventListener("DOMContentLoaded", function() {
-            highlightExisting();
-
-            apiGet('appointment', 'all', [], outputDataTo.bind(this, 'appointment-getAll-output'));
-            apiGet('appointment', 'get/1', [], outputDataTo.bind(this, 'appointment-get-output'));
-            apiGet('user', 'all', [], outputDataTo.bind(this, 'user-getAll-output'));
-            apiGet('user', 'get/1', [], outputDataTo.bind(this, 'user-get-output'));
-        });
-
-        function outputDataTo() {
-            var block = document.getElementById(arguments[0])
-            block.innerHTML = JSON.stringify(arguments[1], undefined, 4);
-            hljs.highlightBlock(block);
-        }
-
-        function highlightExisting() {
-            var elements = document.querySelectorAll('pre.test-start > code');
-            for(var i = 0; i < elements.length; i++) {
-                hljs.highlightBlock(elements[i]);
-            }
-        }
-    </script>
 
 @endsection
