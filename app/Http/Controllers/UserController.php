@@ -21,6 +21,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return string JSON
      */
+    /*
     public function create(Request $request) {
         // if there is data submitted. also, have required fields, and check for duplicate users
 
@@ -28,7 +29,10 @@ class UserController extends Controller
 
         $user->save();
         return response()->json($user);
+
+        //Auth\RegisterController::create();
     }
+    */
 
     /**
      * Returns the specified user.

@@ -10,6 +10,9 @@ class AdminController extends Controller
     const BASE_URL = '/admin/';
     // The following is for testing only. I don't want to deal with authentication right now.
 
+    public function __construct(){
+        //$this->middleware('auth');
+    }
 
     /**
      * If admin is logged in, return admin dashboard
@@ -23,9 +26,45 @@ class AdminController extends Controller
     }
 
 
-    public function login(Request $request) {
+    public function doLogin(Request $request) {
+        $rules = array(
+            'email'     => 'required|email',
+            'password'  => 'required|alphaNum|min:3',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('login')
+                ->withErrors($validator) // send back all errors to the login form
+                ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+        } else {
+
+            // create our user data for the authentication
+            $userdata = array(
+                'email' => Input::get('email'),
+                'password' => Input::get('password')
+            );
+
+            // attempt to do the login
+            if (Auth::attempt($userdata)) {
+                echo 'SUCCESS!';
+            } else {
+                // validation not successful, send back to form
+                return Redirect::to('admin/login');
+            }
+        }
+    }
+
+    public function showReset(Request $request) {
+        return view('admin.passwords.reset');
+    }
+
+
+    public function doReset(Request $request) {
         // todo
     }
+
 
     public function settings(Request $request) {
         return view('admin.settings', Array(

@@ -21,6 +21,9 @@
         <a id="header-brand" href="{{ $navLinks['Dashboard']['active'] ? '#' : $navLinks['Dashboard']['url'] }}">
             <span>Coaching Calendar Admin</span>
         </a>
+        <div class="pull-right">
+            <!--{ { Auth::user()->getName(); } }-->
+        </div>
     </header><!-- Admin Navbar -->
 
     <!-- Admin Sidebar -->
