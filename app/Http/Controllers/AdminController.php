@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\App;
@@ -25,37 +27,7 @@ class AdminController extends Controller
         );
     }
 
-
-    public function doLogin(Request $request) {
-        $rules = array(
-            'email'     => 'required|email',
-            'password'  => 'required|alphaNum|min:3',
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return Redirect::to('login')
-                ->withErrors($validator) // send back all errors to the login form
-                ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
-        } else {
-
-            // create our user data for the authentication
-            $userdata = array(
-                'email' => Input::get('email'),
-                'password' => Input::get('password')
-            );
-
-            // attempt to do the login
-            if (Auth::attempt($userdata)) {
-                echo 'SUCCESS!';
-            } else {
-                // validation not successful, send back to form
-                return Redirect::to('admin/login');
-            }
-        }
-    }
-
+    /*
     public function showReset(Request $request) {
         return view('admin.passwords.reset');
     }
@@ -64,6 +36,8 @@ class AdminController extends Controller
     public function doReset(Request $request) {
         // todo
     }
+
+    */
 
 
     public function settings(Request $request) {
@@ -88,7 +62,7 @@ class AdminController extends Controller
      * @param $activeName
      * @return array of route urls
      */
-    public static function getRoutes($activeName) {
+    public static function getRoutes($activeName = '') {
         return Array(
             'Dashboard'          => Array(
                 'active'        => ('Dashboard' === $activeName),

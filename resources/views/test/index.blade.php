@@ -97,7 +97,7 @@ apiGet('appointment', 'get/1', [], function(data){
         $month  = (int)date('n');
         $day    = (int)date('j');
         ?>
-        <iframe id="calendar-iframe" scrolling="no" src="/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>
+        <iframe id="calendar-iframe" scrolling="no" src="/api/v1/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>
     </div>
     <!-- End Calendar->embed -->
 

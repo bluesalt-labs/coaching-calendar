@@ -38,6 +38,7 @@ Route::group(['prefix' => 'v1/docs'], function() {
 Route::group(['prefix' => 'admin'], function() {
     Auth::routes();
     Route::get('/', 'AdminController@index');
+    Route::get('settings', 'AdminController@settings');
 
 
     // Authentication Routes...
@@ -74,6 +75,3 @@ Route::group(['prefix' => 'test'], function() {
 });
 
 /*************************************************************************************************/
-
-
-Auth::routes();

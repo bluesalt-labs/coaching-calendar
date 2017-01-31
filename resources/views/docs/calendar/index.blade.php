@@ -25,7 +25,7 @@
 );?>
         </code>
         <code class="html">
-<?php echo htmlspecialchars('<iframe id="calendar-iframe" scrolling="no" src="/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>'); ?>
+<?php echo htmlspecialchars('<iframe id="calendar-iframe" scrolling="no" src="/api/v1/calendar/embed/<?=$year?>/<?=$month?>/<?=$day?>"></iframe>'); ?>
         </code>
     </pre>
 

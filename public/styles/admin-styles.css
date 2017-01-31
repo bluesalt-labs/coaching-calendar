@@ -36,6 +36,7 @@ pre {
     background: #3c3c3c;
 }
 
+
 #main-header > #btn-nav-toggle,
 #main-header > #header-brand {
     display: inline-block;
@@ -85,6 +86,30 @@ pre {
     color: #3c3c3c;
     background: #fefefe;
 }
+
+#main-header .dropdown #userDropdown {
+    font-size: 18px;
+    background: #3c3c3c;
+    color: #fff;
+    border: none;
+    outline: none;
+    height: 40px;
+    margin: 5px;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 150ms;
+    transition: all 150ms;
+}
+
+#main-header .dropdown #userDropdown:hover,
+#main-header .dropdown #userDropdown:active {
+    background: #fefefe;
+    color: #3c3c3c;
+}
+
+
 
 #main-sidebar {
     z-index: 9999;

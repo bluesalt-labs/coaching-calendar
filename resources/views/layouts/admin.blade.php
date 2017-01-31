@@ -7,6 +7,14 @@
 @endsection
 
 @section('base-scripts')
+    <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php else:?>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <?php endif;?>
+
     <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/admin-scripts.js"></script>
 @endsection
@@ -21,12 +29,24 @@
         <a id="header-brand" href="{{ $navLinks['Dashboard']['active'] ? '#' : $navLinks['Dashboard']['url'] }}">
             <span>Coaching Calendar Admin</span>
         </a>
-        <div class="pull-right">
-            <!--{ { Auth::user()->getName(); } }-->
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/logout') }}">
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-primary">Logout</button>
-            </form>
+        <div class="dropdown pull-right">
+            <button class="btn btn-default dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span id="username">
+                @if(Auth::user())
+                    {{ Auth::user()->getName() }}
+                @else
+                    Guest
+                @endif
+                </span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a href="/admin/settings">Settings</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" onclick="onLogoutClick()">Logout</a></li>
+            </ul>
+
+
 
         </div>
     </header><!-- Admin Navbar -->
@@ -78,3 +98,16 @@
     </div><!-- footer container -->
 </footer><!-- #main-footer -->
 @endsection
+
+<script type="text/javascript">
+
+    function onLogoutClick() {
+        var form = document.createElement('form');
+        form.innerHTML = '{{ csrf_field() }}';
+
+        form.method = 'POST';
+        form.action = '{{ url('/admin/logout') }}';
+
+        form.submit();
+    }
+</script>

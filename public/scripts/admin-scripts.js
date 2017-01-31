@@ -39,4 +39,3 @@ addEvent(window, "resize", checkCloseSidebar);
 document.addEventListener("DOMContentLoaded", function(event) {
     checkCloseSidebar();
 });
-

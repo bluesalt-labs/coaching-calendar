@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -42,8 +43,17 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-    public function logout() {
-        parent::logout();
+    /**
+     * Overrides the default login method to freaking use $redirectAfterLogout
+     * Not sure what the point of that variable is if it doesn't use it, but whatever.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout(Request $request) {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect($this->redirectAfterLogout);
     }
 
 }
