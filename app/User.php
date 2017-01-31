@@ -24,6 +24,29 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token', 'api_token'
+    ];
+
+
+    public function __construct(array $attributes = []) {
+        parent::__construct($attributes);
+
+        /*
+        // todo: figure out if this is the correct place for this
+        if($this->api_token == null || $this->api_token == '') {
+            $this->api_token = str_random(60);
+            $this->save();
+        }
+        */
+    }
+
+
+    /**
      * Returns the int value of a member type by name
      *
      * @param $typeName
@@ -40,12 +63,8 @@ class User extends Authenticatable
     }
 
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function getName() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    
 }

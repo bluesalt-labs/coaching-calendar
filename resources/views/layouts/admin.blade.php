@@ -21,6 +21,14 @@
         <a id="header-brand" href="{{ $navLinks['Dashboard']['active'] ? '#' : $navLinks['Dashboard']['url'] }}">
             <span>Coaching Calendar Admin</span>
         </a>
+        <div class="pull-right">
+            <!--{ { Auth::user()->getName(); } }-->
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/logout') }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+
+        </div>
     </header><!-- Admin Navbar -->
 
     <!-- Admin Sidebar -->
