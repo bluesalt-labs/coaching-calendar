@@ -36,11 +36,13 @@ class User extends Authenticatable
     public function __construct(array $attributes = []) {
         parent::__construct($attributes);
 
+        /*
         // todo: figure out if this is the correct place for this
         if($this->api_token == null || $this->api_token == '') {
             $this->api_token = str_random(60);
             $this->save();
         }
+        */
     }
 
 

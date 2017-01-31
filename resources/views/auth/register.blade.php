@@ -1,3 +1,4 @@
+<span>This is the <code>views/auth/register.blade.php</code> file</span>
 <?php /*
 @extends('layouts.app')
 

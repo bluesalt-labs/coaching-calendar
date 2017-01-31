@@ -11,7 +11,7 @@ class AdminController extends Controller
     // The following is for testing only. I don't want to deal with authentication right now.
 
     public function __construct(){
-        //$this->middleware('auth');
+        $this->middleware('auth:web');
     }
 
     /**

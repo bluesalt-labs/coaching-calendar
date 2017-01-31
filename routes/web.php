@@ -2,6 +2,9 @@
 
 // API Docs
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 // Sets the site index to the docs
 Route::get('/', 'DocsController@index');
 
@@ -32,26 +35,28 @@ Route::group(['prefix' => 'v1/docs'], function() {
 
 // Admin Views
 
-Route::group(['prefix' => 'admin', /*'middleware' => 'auth:web'*/], function() {
+Route::group(['prefix' => 'admin'], function() {
+    Auth::routes();
     Route::get('/', 'AdminController@index');
 
-    /*
+
     // Authentication Routes...
-    $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    $this->post('login', 'Auth\LoginController@login');
-    $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+    /*
+       $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 
-    // Registration Routes...
-    $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    $this->post('register', 'Auth\RegisterController@register');
+       $this->post('login', 'Auth\LoginController@login');
+       $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
-    // Password Reset Routes...
-    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-    $this->post('password/reset', 'Auth\ResetPasswordController@reset');
-    */
-    Auth::routes();
+       // Registration Routes...
+       $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+       $this->post('register', 'Auth\RegisterController@register');
+
+       // Password Reset Routes...
+       $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+       $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+       $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+       $this->post('password/reset', 'Auth\ResetPasswordController@reset');
+       */
 
     Route::group(['prefix' => 'calendar'], function() {
         Route::get('/embed/{year}/{month}/{day}', 'CalendarController@getCalendar');

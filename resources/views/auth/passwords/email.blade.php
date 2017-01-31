@@ -1,3 +1,5 @@
+<span>This is the <code>views/auth/passwords/email.blade.php</code> file</span>
+<?php /*
 @extends('layouts.app')
 
 @section('content')
@@ -44,3 +46,5 @@
     </div>
 </div>
 @endsection
+ */
+?>
