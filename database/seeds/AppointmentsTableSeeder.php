@@ -26,7 +26,7 @@ class AppointmentsTableSeeder extends Seeder
         $date = Carbon::create(date('Y'), date('m'), 30, 10, 30, 0);
         $date3End = $date->toDateTimeString();
 
-        Appointment::create([
+        DB::table('appointments')->insert([
             'start_datetime'    => $date1Start,
             'end_datetime'      => $date1End,
             'type'              => 1,
@@ -35,7 +35,7 @@ class AppointmentsTableSeeder extends Seeder
             'customer_user_id'  => 3,
         ]);
 
-        Appointment::create([
+        DB::table('appointments')->insert([
             'start_datetime'    => $date2Start,
             'end_datetime'      => $date2End,
             'type'              => 1,
@@ -44,7 +44,7 @@ class AppointmentsTableSeeder extends Seeder
             'customer_user_id'  => 4,
         ]);
 
-        Appointment::create([
+        DB::table('appointments')->insert([
             'start_datetime'    => $date3Start,
             'end_datetime'      => $date3End,
             'type'              => 1,
