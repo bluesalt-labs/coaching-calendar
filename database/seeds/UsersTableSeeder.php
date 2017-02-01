@@ -8,6 +8,16 @@ class UsersTableSeeder extends Seeder
 {
     public function run() {
         DB::table('users')->insert([ // id: 0
+            'type'          => 4,
+            'first_name'    => 'Local',
+            'last_name'     => 'API',
+            'email'         => 'api@bluesaltlabs.com',
+            'phone'         => '0000000000',
+            'api_token'     => 'HxtDz8REhkLwazfrq9lj2VZCV0Ofh7w7t1jaewA4Ko4PfVAjiuTnFs1hQXHz',
+            'password'      => bcrypt('HxtDz8REhkLwazfrq9lj2VZCV0Ofh7w7t1jaewA4Ko4PfVAjiuTnFs1hQXHz'),
+        ]);
+
+        DB::table('users')->insert([ // id: 1
             'type'          => 1,
             'first_name'    => 'Luke',
             'last_name'     => 'S',
@@ -17,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'password'      => bcrypt('password0'),
         ]);
 
-        DB::table('users')->insert([ // id: 1
+        DB::table('users')->insert([ // id: 2
             'type'          => 1,
             'first_name'    => 'Bob',
             'last_name'     => 'Smith',
@@ -27,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'password'      => bcrypt('password1'),
         ]);
 
-        DB::table('users')->insert([ // id: 2
+        DB::table('users')->insert([ // id: 3
             'type'          => 1,
             'first_name'    => 'Jane',
             'last_name'     => 'Doe',
@@ -37,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'password'      => bcrypt('password2'),
         ]);
 
-        DB::table('users')->insert([ // id: 3
+        DB::table('users')->insert([ // id: 4
             'type'          => 2,
             'first_name'    => 'Test',
             'last_name'     => 'Member 1',
@@ -47,7 +57,7 @@ class UsersTableSeeder extends Seeder
             'password'      => bcrypt('password3'),
         ]);
 
-        DB::table('users')->insert([ // id: 4
+        DB::table('users')->insert([ // id: 5
             'type'          => 2,
             'first_name'    => 'Test',
             'last_name'     => 'Member 2',
@@ -57,7 +67,7 @@ class UsersTableSeeder extends Seeder
             'password'      => bcrypt('password4'),
         ]);
 
-        DB::table('users')->insert([ // id: 5
+        DB::table('users')->insert([ // id: 6
             'type'          => 2,
             'first_name'    => 'Test',
             'last_name'     => 'Member 3',

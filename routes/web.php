@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin'], function() {
     Auth::routes();
     Route::get('/', 'AdminController@index');
     Route::get('settings', 'AdminController@settings');
+    Route::get('apiKeys', 'AdminController@apiKeys');
 
 
     // Authentication Routes...

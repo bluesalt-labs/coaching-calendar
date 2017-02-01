@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,6 +14,7 @@ class User extends Authenticatable
     const TYPE_COACH    = 1;
     const TYPE_MANAGER  = 2;
     const TYPE_ADMIN    = 3;
+    const TYPE_API      = 4;
 
     /**
      * The attributes that are mass assignable.
@@ -58,6 +60,7 @@ class User extends Authenticatable
             case "coach":   return User::TYPE_COACH;    break;
             case "manager": return User::TYPE_MANAGER;  break;
             case "admin":   return User::TYPE_ADMIN;    break;
+            case "api":     return User::TYPE_API;      break;
             default: return -1;
         }
     }

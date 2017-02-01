@@ -39,6 +39,7 @@ function apiRequest(method, model, action, args, callback) {
     xhr.open(method, url, true);
     xhr.responseType = 'json';
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {

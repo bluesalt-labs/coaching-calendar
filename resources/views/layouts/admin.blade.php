@@ -108,6 +108,7 @@
         form.method = 'POST';
         form.action = '{{ url('/admin/logout') }}';
 
+        form = document.body.appendChild(form);
         form.submit();
     }
 </script>

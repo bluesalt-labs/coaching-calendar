@@ -299,6 +299,7 @@ var CoachingCalendar = function(year, month, day) {
         xhr.open(method, url, true);
         xhr.responseType = 'json';
         xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {

@@ -27,22 +27,18 @@ class AdminController extends Controller
         );
     }
 
-    /*
-    public function showReset(Request $request) {
-        return view('admin.passwords.reset');
-    }
-
-
-    public function doReset(Request $request) {
-        // todo
-    }
-
-    */
-
 
     public function settings(Request $request) {
         return view('admin.settings', Array(
                 'navLinks' => self::getRoutes(),
+                'breadcrumbs' => self::getBreadcrumbs(),
+            )
+        );
+    }
+
+    public function apiKeys(Request $request) {
+        return view('admin.apikeys', Array(
+                'navLinks' => self::getRoutes('API Keys'),
                 'breadcrumbs' => self::getBreadcrumbs(),
             )
         );
@@ -53,6 +49,7 @@ class AdminController extends Controller
         switch($routeName) {
             case 'Dashboard':   return self::BASE_URL; break;
             case 'Settings':    return self::BASE_URL.'settings/'; break;
+            case 'API Keys':    return self::BASE_URL.'apiKeys/'; break;
             default:            return self::BASE_URL;
         }
     }
@@ -64,14 +61,14 @@ class AdminController extends Controller
      */
     public static function getRoutes($activeName = '') {
         return Array(
-            'Dashboard'          => Array(
+            'Dashboard'     => Array(
                 'active'        => ('Dashboard' === $activeName),
                 'url'           => self::getRouteUrl('Dashboard'),
                 'nested'        => false,
             ),
-            'Settings'         => Array(
-                'active'        => ('Settings' === $activeName),
-                'url'           => self::getRouteUrl('Settings'),
+            'API Keys'      => Array(
+                'active'        => ('API Keys' === $activeName),
+                'url'           => self::getRouteUrl('API Keys'),
                 'nested'        => false,
             ),
         );
