@@ -7,16 +7,12 @@
 @endsection
 
 @section('base-scripts')
-    <?php if( strpos($_SERVER['SERVER_NAME'], 'herokuapp') !== false):?>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <?php else:?>
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <?php endif;?>
+    <script type="text/javascript" src="/js/app.js"></script>
 
     <script type="text/javascript" src="/scripts/scripts.js"></script>
     <script type="text/javascript" src="/scripts/admin-scripts.js"></script>
+    @yield('scripts')
+
 @endsection
 
 @section('base-content')
@@ -45,9 +41,6 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="#" onclick="onLogoutClick()">Logout</a></li>
             </ul>
-
-
-
         </div>
     </header><!-- Admin Navbar -->
 
@@ -73,22 +66,22 @@
 
     <!-- Page Content -->
     @section('content')
-        <div class="container-fluid" id="page-content">
-            @if($breadcrumbs)
-                <ol class="breadcrumb">
-                    @foreach($breadcrumbs as $name => $data)
-                        <li<?=($data['active'] ? ' class="active"' : '')?>>
-                            @if($data['active'])
-                                <?=$name?>
-                            @else
-                                <a href="<?=$data['url']?>"><?=$name?></a>
-                            @endif
-                        </li>
-                    @endforeach
-                </ol>
-            @endif
-            @show
-        </div><!-- content container -->
+    <div class="container-fluid" id="page-content">
+        @if($breadcrumbs)
+            <ol class="breadcrumb">
+                @foreach($breadcrumbs as $name => $data)
+                    <li<?=($data['active'] ? ' class="active"' : '')?>>
+                        @if($data['active'])
+                            <?=$name?>
+                        @else
+                            <a href="<?=$data['url']?>"><?=$name?></a>
+                        @endif
+                    </li>
+                @endforeach
+            </ol>
+        @endif
+    @show
+    </div><!-- content container -->
 </div><!-- #page-container -->
 
 <!-- Footer -->
@@ -97,10 +90,8 @@
 
     </div><!-- footer container -->
 </footer><!-- #main-footer -->
-@endsection
 
 <script type="text/javascript">
-
     function onLogoutClick() {
         var form = document.createElement('form');
         form.innerHTML = '{{ csrf_field() }}';
@@ -112,3 +103,5 @@
         form.submit();
     }
 </script>
+
+@endsection

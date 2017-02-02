@@ -8,7 +8,9 @@ Homestead.yaml
 .env
 
 .DS_Store
+/node_modules/
 /public/node_modules/
 /public/bower_components/
 /database/database.sqlite
 /npm-debug.log
+

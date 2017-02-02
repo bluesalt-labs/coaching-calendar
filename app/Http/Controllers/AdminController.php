@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function index() {
         return view('admin.index', Array(
-                'navLinks' => self::getRoutes('Home'),
+                'navLinks' => self::getRoutes('Dashboard'),
                 'breadcrumbs' => self::getBreadcrumbs(),
             )
         );

@@ -26,10 +26,12 @@
     <?php endif;?>
     @yield('base-stylesheets')
 
-    <!-- Javascript -->
-    @yield('base-scripts')
+
 </head>
 <body>
     @yield('base-content')
+
+    <!-- Javascript -->
+    @yield('base-scripts')
 </body>
 </html>
