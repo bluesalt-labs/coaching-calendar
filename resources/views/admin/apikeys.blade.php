@@ -23,3 +23,13 @@
 
 
 @endsection
+
+<!-- wow, really? -->
+
+@section('base-scripts')
+    <script type="text/javascript" src="/js/app.js"></script>
+
+    <script type="text/javascript" src="/scripts/scripts.js"></script>
+    <script type="text/javascript" src="/scripts/admin-scripts.js"></script>
+
+@endsection

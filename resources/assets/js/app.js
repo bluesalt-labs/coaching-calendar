@@ -1,10 +1,10 @@
+require('bootstrap-sass/assets/javascripts/bootstrap.min.js');
+
 var Vue = require('vue');
 var axios = require('axios');
 
 window.Vue = Vue;
 window.axios = axios;
-
-
 
 Vue.component(
     'passport-clients',

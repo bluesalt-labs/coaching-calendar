@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Laravel\Passport\Passport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -28,8 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         // Set time until Oauth2 keys expire
-        //Passport::tokensExpireIn(Carbon::now()->addDays(15));
-        //Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+        Passport::tokensExpireIn(Carbon::now()->addDays(365));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(365));
 
 
         Passport::enableImplicitGrant();
