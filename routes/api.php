@@ -22,7 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function() {
+//Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function() {
+Route::group(['prefix' => 'v1'], function() {
     Route::group(['prefix' => 'user'], function() {
         class User extends Illuminate\Database\Eloquent\Model {  }
         Route::get('/', 'UserController@getAll');
