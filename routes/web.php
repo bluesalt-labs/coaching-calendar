@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 // Sets the site index to the docs
 Route::get('/', 'DocsController@index');
 
-Route::group(['prefix' => 'v1/docs'], function() {
+Route::group(['prefix' => 'api/v1/docs'], function() {
     Route::get('/', 'DocsController@index');
     Route::get('search', 'DocsController@searchIndex');
 
