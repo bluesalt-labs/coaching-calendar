@@ -9,7 +9,7 @@
     <span><strong>Base url: </strong><code>/api/v1/calendar/</code></span>
     <hr />
 
-    <h2 id="embed"><code>embed/{year}/{month}/{day}</code></h2>
+    <h2 id="embed"><code><a href="/test#calendar-embed" class="tests-link">embed/{year}/{month}/{day}</a></code></h2>
     The calendar can be embedded with an iframe. Examples:
 
     <h3>PHP</h3>

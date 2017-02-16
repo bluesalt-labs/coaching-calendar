@@ -28,7 +28,8 @@ Route::group(['prefix' => 'v1'], function() {
         class User extends Illuminate\Database\Eloquent\Model {  }
         Route::get('/', 'UserController@getAll');
         Route::get('get/{id}', 'UserController@get');
-        //Route::post('create', 'UserController@create');
+        Route::get('getBy/email', 'UserController@byEmail');
+        Route::get('create', 'UserController@create');
         Route::delete('delete/{id}', 'UserController@delete');
     });
 

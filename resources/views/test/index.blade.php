@@ -89,7 +89,7 @@ apiGet('appointment', 'get/1', [], function(data){
     <h1 class="sidebar-link" id="calendar">Calendar</h1>
 
     <!-- Calendar->embed -->
-    <h2 class="sidebar-link" id="calendar-embed"><code><a href="/api/v1/docs/calendar#embed" target="_blank" class="docs-link">embed</a></code></h2>
+    <h2 class="sidebar-link" id="calendar-embed"><code><a href="/api/v1/docs/calendar#embed" class="docs-link">embed</a></code></h2>
     <span>Request Type: <code>GET</code></span>
     <div>
         <?php
