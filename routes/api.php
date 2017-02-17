@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('get/{id}', 'UserController@get');
         Route::get('getBy/email', 'UserController@byEmail');
         Route::get('create', 'UserController@create');
+        Route::post('create', 'UserController@create');
         Route::delete('delete/{id}', 'UserController@delete');
     });
 

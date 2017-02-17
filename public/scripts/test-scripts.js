@@ -25,4 +25,34 @@ document.addEventListener("DOMContentLoaded", function() {
     apiGet('appointment', 'get/1', [], outputDataTo.bind(this, 'appointment-get-output'));
     apiGet('user', 'all', [], outputDataTo.bind(this, 'user-getAll-output'));
     apiGet('user', 'get/1', [], outputDataTo.bind(this, 'user-get-output'));
+
+    updateUserDropDowns();
 });
+
+function updateUserDropDowns() {
+    var userDeleteDD = document.getElementById('user-delete');
+    userDeleteDD.innerHTML = "";
+
+    var option = document.createElement('option');
+    option.text = "Select...";
+    option.value = '';
+
+    userDeleteDD.add(option);
+
+    apiGet('user', 'all', [], function(data) {
+        for(var item in data) {
+            var option = document.createElement('option');
+
+            option.text = item['first_name'] + ' ' + item['last_name'];
+            option.value = item['id'];
+
+            userDeleteDD.add(option);
+        }
+    });
+}
+
+function deleteUser(userID) {
+   console.log(userID);
+
+    updateUserDropDowns();
+}

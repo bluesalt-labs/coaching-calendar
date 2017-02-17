@@ -163,7 +163,7 @@ apiGet('user', 'get/1', [], function(data){
 
     <!-- User->create -->
     <h2 class="sidebar-link" id="user-create"><code><a href="/api/v1/docs/user#create" target="_blank" class="docs-link">create</a></code></h2>
-    <span>Request Type: <code>POST</code></span>
+    <span>Request Type: <code>GET</code></span>
     <br />
     <code>todo</code>
     <!-- End User->create -->
@@ -172,7 +172,22 @@ apiGet('user', 'get/1', [], function(data){
     <h2 class="sidebar-link" id="user-delete"><code><a href="/api/v1/docs/user#delete" target="_blank" class="docs-link">delete</a></code></h2>
     <span>Request Type: <code>DELETE</code></span>
     <br />
-    <code>todo</code>
+    <h3>JavaScript</h3>
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="user-delete">Select a user to delete</label>
+            <select id="user-delete" class="form-control">
+                <option value="">Select...</option>
+            </select>
+        </div>
+        <button class="btn btn-danger" onclick="deleteUser(document.getElementById('user-delete').value)">Delete</button>
+    </div>
+    <br /><br />
+    <pre class="test-code test-start">
+        <code class="javascript">
+
+        </code>
+    </pre>
 
     <!-- End User->delete -->
 

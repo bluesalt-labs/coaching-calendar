@@ -15,31 +15,27 @@ class UserController extends Controller
         return User::all();
     }
 
+    /**
+     * Get user by email address
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
     public function byEmail(Request $request) {
-        /*
-        $email = $request->get('email');
-        $user = User::select('id')->where('email', $email)->first();
-        return json_encode($user['id'] !== null && $user['id'] > 0);
-        */
-
         return User::where('email', $request->get('email'))->first();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new user
      *
      * @param  \Illuminate\Http\Request  $request
      * @return string JSON
      */
     public function create(Request $request) {
-        // if there is data submitted. also, have required fields, and check for duplicate users
-
-        //$user = User::create(array());
         $user = new User();
 
-
         $email = User::validateEmail( $request->get('email') );
-        $type = User::validateType(  $request->get('type') );
+        $type = User::validateType( $request->get('type') );
 
        if($email && $type) {
            $user->email = $email;
@@ -49,7 +45,6 @@ class UserController extends Controller
            $user->phone = $request->get('phone');
            $user->api_token = User::getRandomAPIString();
            $user->password = bcrypt( $request->get('password') );
-
 
            $user->save();
            return response()->json($user);
@@ -86,13 +81,18 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deletes a user by ID
      *
      * @param  int  $id
      * @return string JSON
      */
     public function delete($id) {
-        //
+        $user = User::find($id);
+        $status = ($user ? $user->delete() : false);
+
+        return response()->json(array(
+            'success' => $status
+        ));
     }
 
     /**
