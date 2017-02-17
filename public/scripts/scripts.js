@@ -12,6 +12,10 @@ function apiPost(model, action, args, callback) {
     apiRequest('POST', model, action, args, callback);
 }
 
+function apiDelete(model, id, callback) {
+    apiRequest('DELETE', model, 'delete/' + id, [], callback);
+}
+
 function apiRequest(method, model, action, args, callback) {
     if(!(model.length > 0)) {
         console.log("Request failed: Must specify model!");

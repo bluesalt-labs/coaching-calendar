@@ -26,6 +26,16 @@ class UserController extends Controller
     }
 
     /**
+     * Returns true if this is a valid email that does not already exist
+     *
+     * @param Request $request
+     * @return bool
+     */
+    public function validateEmail(Request $request) {
+        return json_encode(User::validateEmail($request->get('email')) === null);
+    }
+
+    /**
      * Create a new user
      *
      * @param  \Illuminate\Http\Request  $request
@@ -69,6 +79,11 @@ class UserController extends Controller
         return User::findOrFail($id);
     }
 
+
+    public function getTypes(){
+        return User::getTypes();
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -87,12 +102,17 @@ class UserController extends Controller
      * @return string JSON
      */
     public function delete($id) {
+        $ret = array();
         $user = User::find($id);
-        $status = ($user ? $user->delete() : false);
+        if($user){
+            $ret['userID'] = $user->id;
+            $ret['success'] = ($user ? $user->delete() : false);
+        } else {
+            $ret['success'] = false;
+            $ret['error'] = "user '" . ($id == null ? $id : 'null') . "' not found";
+        }
 
-        return response()->json(array(
-            'success' => $status
-        ));
+        return response()->json($ret);
     }
 
     /**

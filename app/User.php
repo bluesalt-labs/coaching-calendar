@@ -45,7 +45,6 @@ class User extends Authenticatable
         */
     }
 
-
     /**
      * Returns the int value of a member type by name
      *
@@ -62,6 +61,34 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Returns all user types as an array
+     *
+     * @return array
+     */
+    public static function getTypes() {
+        return array(
+            User::TYPE_MEMBER   => 'Member',
+            User::TYPE_COACH    => 'Coach',
+            User::TYPE_MANAGER  => 'Manager',
+            User::TYPE_ADMIN    => 'Admin',
+        );
+    }
+
+    /**
+     * Make sure the user type is valid
+     *
+     * @param $type
+     * @return int|null
+     */
+    public static function validateType($type) {
+        if ($type == self::TYPE_MEMBER)        { return self::TYPE_MEMBER; }
+        else if ($type == self::TYPE_COACH)    { return self::TYPE_COACH; }
+        else if ($type == self::TYPE_MANAGER)  { return self::TYPE_MANAGER; }
+        else if ($type == self::TYPE_ADMIN)    { return self::TYPE_ADMIN; }
+        else { return null; }
+    }
+
     public static function validateEmail($email) {
         $user = User::select('id')->where('email', $email)->first();
 
@@ -70,14 +97,6 @@ class User extends Authenticatable
         }
 
         return $email;
-    }
-
-    public static function validateType($type) {
-        if ($type == self::TYPE_MEMBER)        { return self::TYPE_MEMBER; }
-        else if ($type == self::TYPE_COACH)    { return self::TYPE_COACH; }
-        else if ($type == self::TYPE_MANAGER)  { return self::TYPE_MANAGER; }
-        else if ($type == self::TYPE_ADMIN)    { return self::TYPE_ADMIN; }
-        else { return null; }
     }
 
     public static function getRandomAPIString() {
