@@ -4,7 +4,7 @@ A basic scheduling calendar UI. This project is currently in development (and th
 <br />
 The `develop` branch is automatically deployed here: <https://coaching-calendar.herokuapp.com>.
 <br />
-* Based on the [Lumen Framework](https://lumen.laravel.com/) (v5.3).
+* Based on the [Laravel Framework](https://laravel.com/) (v5.4).
 * Front end currently utilizing: 
     * [Bootstrap](http://getbootstrap.com/) (v3.3.7)
     * [Font Awesome](http://fontawesome.io/) (v4.7.0)

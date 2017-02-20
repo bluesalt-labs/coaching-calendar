@@ -225,7 +225,6 @@ function createUser(userData) {
                 <div class="col-xs-12">
                     <button type="button" value="submit" class="btn btn-success pull-right" onclick="createUser()">Create</button>
                 </div>
-                <div class="clearfix"></div>
             </div>
         </form>
     </div>

@@ -2,6 +2,7 @@ var CoachingCalendar = function(year, month, day) {
     this.apiUrl = '/api/v1/';
     this.dateToday = new moment();
     this.calendarDate = new moment( {year: year, month: (month - 1), day: day} );
+    this.dateSelected = new moment();
 
     this.cacheArr = [];
 
@@ -26,6 +27,12 @@ var CoachingCalendar = function(year, month, day) {
         document.getElementById('year-dd').innerHTML = innerHTML;
     };
 
+    this.updateAgenda = function() {
+        document.getElementById('agenda-header').innerHTML = this.dateSelected.format('dddd');
+
+
+    };
+
     /**
      * Refreshes the displayed calendar
      */
@@ -48,8 +55,10 @@ var CoachingCalendar = function(year, month, day) {
         // Create this year's cache if it doesn't exist
         if(this.cacheArr[thisYear] === undefined) { this.cacheArr[thisYear] = []; }
 
-        // Create this month's cache if it doesn't exist
-        if(this.cacheArr[thisYear][thisMonth] === undefined) { this.cacheArr[thisYear][thisMonth] = []; }
+        // Clear this month's cache or create it if it doesn't exist
+        //if(this.cacheArr[thisYear][thisMonth] === undefined) { this.cacheArr[thisYear][thisMonth] = []; }
+        this.cacheArr[thisYear][thisMonth] = [];
+
 
         var firstDayOfWeek = tempMoment.day();
         var daysInMonth = tempMoment.daysInMonth();
@@ -81,12 +90,12 @@ var CoachingCalendar = function(year, month, day) {
                 //d.addEventListener('click', this.onClick.bind(this));
                 d.className += ' outside-month';
             } else {
-                // todo: enable more caching ability with `this.cacheArr`?
                 var tempDay = tempMoment.date();
                 //d.removeEventListener('click', this.onClick.bind(this));
                 //d.removeEventListener('click', this.onClick.bind(this));
                 if(this.cacheArr[thisYear][thisMonth][tempDay] === undefined) {
                     this.cacheArr[thisYear][thisMonth][tempDay] = [];
+                    this.cacheArr[thisYear][thisMonth][tempDay]['appointments'] = [];
                 }
                 this.cacheArr[thisYear][thisMonth][tempDay]['id'] = i;
                 this.cacheArr[thisYear][thisMonth][tempDay]['ofWeek']  = tempMoment.day();
@@ -104,18 +113,14 @@ var CoachingCalendar = function(year, month, day) {
             tempMoment.add(1, 'days');
         }
 
-        //console.log(this.cacheArr); // debug
-
         this.refreshAppointments();
+        this.updateAgenda();
     };
 
     /**
      * gets appointments for the selected via API
      */
     this.getAppointments = function() {
-
-        // todo: check cache for appointments (and refresh it?)
-
         var thisYear    = this.calendarDate.get('year');
         var thisMonth   = this.calendarDate.get('month');
         var lastDay     = this.calendarDate.daysInMonth();
@@ -153,7 +158,7 @@ var CoachingCalendar = function(year, month, day) {
      */
     this.clearAppointments = function() {
         // todo: clear from cache (this.cacheArr)
-        var toRemove = document.getElementsByClassName('cal-event');
+        var toRemove = document.getElementsByClassName('cal-event-count');
         var removeCap = 999;
 
         while( (toRemove.length > 0) && (removeCap > 0) ) {
@@ -168,30 +173,75 @@ var CoachingCalendar = function(year, month, day) {
      */
     this.getAppointmentsCallback = function(data) {
         if(data.length > 0) {
-            //var thisYear    = this.calendarDate.get('year');
-            //var thisMonth   = this.calendarDate.get('month');
+            var y = this.calendarDate.get('year');
+            var m = this.calendarDate.get('month');
 
-            // Add elements to the calendar todo: add to cache (this.cacheArr)
+            // Add elements to the cache
             for(var key in data) {
-                // Find the day this appointment belongs to
-                var startDate   = new moment(data[key]['start_datetime']);
-                var endDate     = new moment(data[key]['end_datetime']);
+                var startDate = new moment(data[key]['start_datetime'], 'YYYY-MM-DD HH:mm:ss');
 
-                var dayElID = this.findDayIDByDate(startDate);
+                // Add this appointment to the cacheArr
+                this.cacheArr[y][m][startDate.format('D')]['appointments'].push({
+                    startDateTime: startDate,
+                    endDateTime: new moment(data[key]['end_datetime']),
+                    type: data[key]['type'],
+                    status: data[key]['status'],
+                    coachUserId: (data[key]['coach_user_id'] || null),
+                    customerUserId: (data[key]['customer_user_id'] || null)
+                });
+            }
 
-                if(dayElID !== "") {
-                    var dayEl = document.getElementById(dayElID);
-                    var eventEl = document.createElement("span");
+            // Iterate through each day for the current month and add number of appointments to each day on the calendar
+            for(var d in this.cacheArr[y][m]) {
 
-                    // Add appropriate class names
-                    eventEl.className = ("cal-event " + this.getApptStatusText(data[key]['status'])).trim();
-                    eventEl.innerHTML = startDate.format('hh:mm a');
+                if(this.cacheArr[y][m][d]['appointments'].length > 0){
+                    var dayElID = this.findDayIDByDate( new moment({ year: y, month: m, day: d}) );
+                    var appointments = {};
 
-                    dayEl.appendChild(eventEl);
+                    // Count the number of appointments of each type
+                    if(dayElID !== "") {
+                        for(var apptID in this.cacheArr[y][m][d]['appointments']) {
+
+                            var appointment = this.cacheArr[y][m][d]['appointments'][apptID];
+
+                            if(appointments[ this.getApptStatusText(appointment['status']) ] == undefined) {
+                                appointments[ this.getApptStatusText(appointment['status']) ] = 0;
+                            }
+                            appointments[ this.getApptStatusText(appointment['status']) ]++;
+                        }
+
+                        var dayEl = document.getElementById(dayElID);
+                        // Add appointment numbers to the calendar
+                        for (var typeName in appointments) {
+                            var eventCont = document.createElement('h4');
+                            eventCont.className = 'cal-event-count label-' + typeName;
+                            var eventEl = document.createElement('span');
+                            eventEl.className = 'label';
+                            eventEl.innerText = typeName.capitalize();
+
+                            var numEl = document.createElement('span');
+                            numEl.className = 'badge';
+                            numEl.innerHTML = appointments[typeName];
+
+                            eventCont.appendChild(eventEl);
+                            eventCont.appendChild(numEl);
+                            dayEl.appendChild(eventCont);
+                        }
+
+
+                        /*
+                        // Add appropriate class names
+                        eventEl.className = ("cal-event " + this.getApptStatusText(data[key]['status'])).trim();
+                        eventEl.innerHTML = startDate.format('hh:mm a');
+
+                        dayEl.appendChild(eventEl);
+                        */
+                    }
                 }
             }
         }
     };
+
 
     /**
      *
@@ -316,3 +366,7 @@ var CoachingCalendar = function(year, month, day) {
 
     this.init();
 };
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}

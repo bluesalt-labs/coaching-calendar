@@ -19,7 +19,7 @@
 
     <br />
     <ul>
-        <li>Based on the <a href="https://lumen.laravel.com/" target="_blank">Lumen Framework</a> (v5.3)</li>
+        <li>Based on the <a href="https://laravel.com/" target="_blank">Laravel Framework</a> (v5.4)</li>
         <li>Front end currently utilizing:</li>
         <ul>
             <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> (v3.3.7)</li>

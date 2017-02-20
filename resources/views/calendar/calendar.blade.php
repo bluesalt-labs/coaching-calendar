@@ -106,6 +106,9 @@
         </tr>
         </tbody>
     </table>
+    <div id="agenda-container">
+        <div id="agenda-header"></div>
+    </div>
 
     <script type="text/javascript">
         var cal = new CoachingCalendar(<?=$year?>, <?=$month?>, <?=$day?>);
