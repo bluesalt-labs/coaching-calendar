@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateAllUserLists() {
     apiGet('user', 'all', [], outputDataTo.bind(this, 'user-getAll-output'));
     apiGet('user', 'get/1', [], outputDataTo.bind(this, 'user-get-output'));
-    updateUserDropDowns();
+    updateUserDropDowns('user-delete-dd');
 }
 
 function updateAllAppointmentLists() {
@@ -38,8 +38,8 @@ function updateAllAppointmentLists() {
     apiGet('appointment', 'get/1', [], outputDataTo.bind(this, 'appointment-get-output'));
 }
 
-function updateUserDropDowns() {
-    var userDeleteDD = document.getElementById('user-delete-dd');
+function updateUserDropDowns(targetElement) {
+    var userDeleteDD = document.getElementById(targetElement);
     userDeleteDD.innerHTML = "";
 
     var option = document.createElement('option');
@@ -64,22 +64,34 @@ function updateUserDropDowns() {
     });
 }
 
+function createAppointment() {
+    var apptData = {};
+    var formElements = document.getElementById('appointment-create-form').elements;
+
+    var y = formElements['appt-year-start'];
+    var m = formElements['appt-month-start'];
+    var d = formElements['appt-day-start'];
+    var length = formElements['appt-length'];
+
+    //apptData['']
+}
+
 function createUser() {
     var userData = {};
     var formElements = document.getElementById('user-create-form').elements;
 
-    userData['email']       = formElements['create-email-address'].value;
-    userData['first_name']  = formElements['create-first-name'].value;
-    userData['last_name']   = formElements['create-last-name'].value;
-    userData['phone']       = formElements['create-phone-number'].value;
-    userData['type']        = parseInt(formElements['create-user-type-dd'].value);
+    userData['email']       = formElements['email-address'].value;
+    userData['first_name']  = formElements['first-name'].value;
+    userData['last_name']   = formElements['last-name'].value;
+    userData['phone']       = formElements['phone-number'].value;
+    userData['type']        = parseInt(formElements['user-type-dd'].value);
 
     apiGet('user', 'create', userData, outputDataTo.bind(this, 'user-create-output'));
     updateAllUserLists();
 }
 
 function checkCreateEmail() {
-    var emailAddr = document.getElementById('create-email-address').value;
+    var emailAddr = document.getElementById('email-address').value;
 
     if( validateEmail(emailAddr) ) {
         apiGet('user', 'validateEmail', {email: emailAddr}, function(data){
@@ -92,14 +104,14 @@ function checkCreateEmail() {
 }
 
 function showEmailMsg(msg) {
-    document.getElementById('create-email-address').parentNode.parentNode.className = "form-group has-error";
+    document.getElementById('email-address').parentNode.parentNode.className = "form-group has-error";
     var emailMsg = document.getElementById('create-email-msg');
     emailMsg.style.display = '';
     emailMsg.innerHTML = msg;
 }
 
 function hideEmailMsg() {
-    var emailInput = document.getElementById('create-email-address');
+    var emailInput = document.getElementById('email-address');
     if( emailInput.value != "" ) {
         emailInput.parentNode.parentNode.className = "form-group has-success";
     }
@@ -113,7 +125,7 @@ function validateEmail(emailAddr) {
 }
 
 function updateUserTypeDD() {
-    var userTypeDD = document.getElementById('create-user-type-dd');
+    var userTypeDD = document.getElementById('user-type-dd');
 
     userTypeDD.innerHTML = "";
 

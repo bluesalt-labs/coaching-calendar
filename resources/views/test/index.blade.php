@@ -68,9 +68,81 @@ apiGet('appointment', 'get/1', [], function(data){
 
     <!-- Appointment->create -->
     <h2 class="sidebar-link" id="appointment-create"><code><a href="/api/v1/docs/appointment#create" target="_blank" class="docs-link">create</a></code></h2>
-    <span>Request Type: <code>POST</code></span>
+    <span>Request Type: <code>GET</code></span>
     <br />
-    <code>todo</code>
+    <h3>JavaScript</h3>
+    <pre class="test-code test-start">
+        <code class="javascript">
+function createAppointment() {
+    apiGet('appointment', 'create', apptData, function(data){
+        document.getElementById('appointment-create-output').innerHTML = JSON.stringify(data, undefined, 4);
+    });
+}
+        </code>
+    </pre>
+    <br />
+
+    <div class="row">
+        <form class="form-horizontal col-md-6 col-sm-8" id="appointment-create-form" name="appointment-create-form">
+            <div class="well">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="appt-year-start" class="sr-only col-xs-12 control-label">Year</label>
+                        <div class="col-xs-12">
+                            <input type="number" id="appt-year" class="form-control" placeholder="Year" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="appt-month-start" class="sr-only col-xs-12 control-label">Month</label>
+                        <div class="col-xs-12">
+                            <input type="number" id="appt-month" class="form-control" placeholder="Month" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="appt-day-start" class="sr-only col-xs-12 control-label">Day</label>
+                        <div class="col-xs-12">
+                            <input type="number" id="appt-day" class="form-control" placeholder="Day" />
+                        </div>
+                    </div>
+                </div>
+                <!-- todo: figure out how the length of an appointment will work -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="appt-length-dd" class="sr-only col-xs-12 control-label">Appointment Length</label>
+                        <div class="col-xs-12">
+                            <select class="form-control" id="appt-length-dd">
+                                <option value="0">Select Appointment Length...</option>
+                                <option value="30">30 Minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="appt-type-dd" class="sr-only col-xs-12 control-label">Appointment Type</label>
+                        <div class="col-xs-12">
+                            <select class="form-control" id="appt-type-dd"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <button type="button" value="submit" class="btn btn-success pull-right" onclick="createAppointment()">Create Appointment</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+
+    <h3>Output</h3>
+    <pre class="test-code test-output">
+        <code class="json" id="user-create-output"></code>
+    </pre>
+
 
     <!-- End Appointment->create -->
 
@@ -168,7 +240,16 @@ apiGet('user', 'get/1', [], function(data){
     <h3>JavaScript</h3>
     <pre class="test-code test-start">
         <code class="javascript">
-function createUser(userData) {
+function createUser() {
+     var userData = {};
+    var formElements = document.getElementById('user-create-form').elements;
+
+    userData['email']       = formElements['email-address'].value;
+    userData['first_name']  = formElements['first-name'].value;
+    userData['last_name']   = formElements['last-name'].value;
+    userData['phone']       = formElements['phone-number'].value;
+    userData['type']        = parseInt(formElements['user-type-dd'].value);
+
     apiGet('user', 'create', userData, function(data){
         document.getElementById('user-create-output').innerHTML = JSON.stringify(data, undefined, 4);
     });
@@ -182,42 +263,42 @@ function createUser(userData) {
             <div class="well">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="create-email-address" class="sr-only col-xs-12 control-label">Email Address</label>
+                        <label for="email-address" class="sr-only col-xs-12 control-label">Email Address</label>
                         <div class="col-xs-12">
-                            <input type="text" id="create-email-address" class="form-control" placeholder="Email Address" onchange="checkCreateEmail();" />
+                            <input type="text" id="email-address" class="form-control" placeholder="Email Address" onchange="checkCreateEmail();" />
                             <span id="create-email-msg" class="text-danger" style="display: inline;">Invalid email address</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="create-first-name" class="sr-only col-xs-12 control-label">First Name</label>
+                        <label for="first-name" class="sr-only col-xs-12 control-label">First Name</label>
                         <div class="col-xs-12">
-                            <input type="text" id="create-first-name" class="form-control" placeholder="First Name" />
+                            <input type="text" id="first-name" class="form-control" placeholder="First Name" />
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="create-last-name" class="sr-only col-xs-12 control-label">Last Name</label>
+                        <label for="last-name" class="sr-only col-xs-12 control-label">Last Name</label>
                         <div class="col-xs-12">
-                            <input type="text" id="create-last-name" class="form-control" placeholder="Last Name" />
+                            <input type="text" id="last-name" class="form-control" placeholder="Last Name" />
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="create-phone-number" class="sr-only col-xs-12 control-label">Phone Number</label>
+                        <label for="phone-number" class="sr-only col-xs-12 control-label">Phone Number</label>
                         <div class="col-xs-12">
-                            <input type="tel" id="create-phone-number" class="form-control" placeholder="Phone Number" />
+                            <input type="tel" id="phone-number" class="form-control" placeholder="Phone Number" />
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="create-user-type-dd" class="sr-only col-xs-12 control-label">User Type</label>
+                        <label for="user-type-dd" class="sr-only col-xs-12 control-label">User Type</label>
                         <div class="col-xs-12">
-                            <select class="form-control" id="create-user-type-dd"></select>
+                            <select class="form-control" id="user-type-dd"></select>
                         </div>
                     </div>
                 </div>
@@ -225,6 +306,7 @@ function createUser(userData) {
                 <div class="col-xs-12">
                     <button type="button" value="submit" class="btn btn-success pull-right" onclick="createUser()">Create</button>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </form>
     </div>
