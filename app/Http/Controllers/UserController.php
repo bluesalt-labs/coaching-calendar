@@ -25,6 +25,30 @@ class UserController extends Controller
         return User::where('email', $request->get('email'))->first();
     }
 
+    public function byType(Request $request) {
+        $types = $request->get('types');
+        $qryTypes = array();
+
+        if($types) {
+            if(is_array($types)) {
+                foreach($types as $type) {
+                    if(intval($type) >= 0 && User::validateType(intval($type))) {
+                        $qryTypes[] = intval($type);
+                    }
+                }
+            }
+            else if(intval($types) >= 0 && User::validateType(intval($types))) {
+                $qryTypes[] = intval($types);
+            }
+        }
+
+        if(sizeof($qryTypes) > 0) {
+            return User::whereIn('type', $qryTypes);
+        }
+
+        return response()->json( array('error' => 'Types is '.($types ? $types : 'null')) );
+    }
+
     /**
      * Returns true if this is a valid email that does not already exist
      *

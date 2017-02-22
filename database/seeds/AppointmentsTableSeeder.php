@@ -32,7 +32,7 @@ class AppointmentsTableSeeder extends Seeder
             'type'              => 1,
             'status'            => 0,
             'coach_user_id'     => 2,
-            'customer_user_id'  => 3,
+            'member_user_id'  => 3,
         ]);
 
         DB::table('appointments')->insert([
@@ -41,7 +41,7 @@ class AppointmentsTableSeeder extends Seeder
             'type'              => 1,
             'status'            => 0,
             'coach_user_id'     => 2,
-            'customer_user_id'  => 4,
+            'member_user_id'  => 4,
         ]);
 
         DB::table('appointments')->insert([
@@ -50,7 +50,7 @@ class AppointmentsTableSeeder extends Seeder
             'type'              => 1,
             'status'            => 0,
             'coach_user_id'     => 2,
-            'customer_user_id'  => 5,
+            'member_user_id'  => 5,
         ]);
     }
 }

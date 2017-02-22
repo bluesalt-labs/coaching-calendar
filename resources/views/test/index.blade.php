@@ -74,6 +74,18 @@ apiGet('appointment', 'get/1', [], function(data){
     <pre class="test-code test-start">
         <code class="javascript">
 function createAppointment() {
+    var apptData = {};
+    var formElements = document.getElementById('appointment-create-form').elements;
+
+    var startDate = new moment({
+        year:   parseInt(formElements['appointment-year-start']) || 0,
+        month:  parseInt(formElements['appointment-month-start']) || 0,
+        day:    parseInt(formElements['appointment-day-start']) || 0
+    });
+
+    apptData['startDate'] = startDate.format('YYYY-MM-dd hh:mm');
+    apptData['length'] = parseInt( formElements['appointment-length'] );
+
     apiGet('appointment', 'create', apptData, function(data){
         document.getElementById('appointment-create-output').innerHTML = JSON.stringify(data, undefined, 4);
     });
@@ -85,51 +97,69 @@ function createAppointment() {
     <div class="row">
         <form class="form-horizontal col-md-6 col-sm-8" id="appointment-create-form" name="appointment-create-form">
             <div class="well">
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="appt-year-start" class="sr-only col-xs-12 control-label">Year</label>
+                        <label for="appointment-year-start" class="sr-only col-xs-12 control-label">Year</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appt-year" class="form-control" placeholder="Year" />
+                            <input type="number" id="appointment-year" class="form-control" placeholder="Year" />
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="appt-month-start" class="sr-only col-xs-12 control-label">Month</label>
+                        <label for="appointment-month-start" class="sr-only col-xs-12 control-label">Month</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appt-month" class="form-control" placeholder="Month" />
+                            <input type="number" id="appointment-month" class="form-control" placeholder="Month" />
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="appt-day-start" class="sr-only col-xs-12 control-label">Day</label>
+                        <label for="appointment-day-start" class="sr-only col-xs-12 control-label">Day</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appt-day" class="form-control" placeholder="Day" />
+                            <input type="number" id="appointment-day" class="form-control" placeholder="Day" />
                         </div>
                     </div>
                 </div>
                 <!-- todo: figure out how the length of an appointment will work -->
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="appt-length-dd" class="sr-only col-xs-12 control-label">Appointment Length</label>
+                        <label for="appointment-length-dd" class="sr-only col-xs-12 control-label">Appointment Length</label>
                         <div class="col-xs-12">
-                            <select class="form-control" id="appt-length-dd">
+                            <select class="form-control" id="appointment-length-dd">
                                 <option value="0">Select Appointment Length...</option>
                                 <option value="30">30 Minutes</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="appt-type-dd" class="sr-only col-xs-12 control-label">Appointment Type</label>
+                        <label for="appointment-status-dd" class="sr-only col-xs-12 control-label">Appointment Status</label>
                         <div class="col-xs-12">
-                            <select class="form-control" id="appt-type-dd"></select>
+                            <select class="form-control" id="appointment-status-dd"></select>
                         </div>
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="appointment-create-member-dd" class="col-sm-4 control-label">Member</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="appointment-create-member-dd"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="appointment-create-coach-dd" class="col-sm-4 control-label">Coach</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="appointment-create-coach-dd"></select>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xs-12">
                     <button type="button" value="submit" class="btn btn-success pull-right" onclick="createAppointment()">Create Appointment</button>
                 </div>
@@ -140,7 +170,7 @@ function createAppointment() {
 
     <h3>Output</h3>
     <pre class="test-code test-output">
-        <code class="json" id="user-create-output"></code>
+        <code class="json" id="appointment-create-output"></code>
     </pre>
 
 

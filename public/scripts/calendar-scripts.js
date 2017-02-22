@@ -187,7 +187,7 @@ var CoachingCalendar = function(year, month, day) {
                     type: data[key]['type'],
                     status: data[key]['status'],
                     coachUserId: (data[key]['coach_user_id'] || null),
-                    customerUserId: (data[key]['customer_user_id'] || null)
+                    customerUserId: (data[key]['member_user_id'] || null)
                 });
             }
 

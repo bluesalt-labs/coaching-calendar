@@ -30,26 +30,41 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateAllUserLists() {
     apiGet('user', 'all', [], outputDataTo.bind(this, 'user-getAll-output'));
     apiGet('user', 'get/1', [], outputDataTo.bind(this, 'user-get-output'));
-    updateUserDropDowns('user-delete-dd');
+    updateUserDDs('user-delete-dd');
+    //updateUserDDs('appointment-create-member-dd', 'member');
+    updateUserDDs('appointment-create-member-dd');
+    //updateUserDDs('appointment-create-coach-dd', ['coach', 'manager', 'admin']);
+    updateUserDDs('appointment-create-coach-dd');
 }
 
 function updateAllAppointmentLists() {
     apiGet('appointment', 'all', [], outputDataTo.bind(this, 'appointment-getAll-output'));
     apiGet('appointment', 'get/1', [], outputDataTo.bind(this, 'appointment-get-output'));
+    updateApptStatusDD();
 }
 
-function updateUserDropDowns(targetElement) {
-    var userDeleteDD = document.getElementById(targetElement);
-    userDeleteDD.innerHTML = "";
+function updateUserDDs(targetElement, types) {
+    var userDD = document.getElementById(targetElement);
+    userDD.innerHTML = "";
 
     var option = document.createElement('option');
     option.text = "Select User...";
     option.value = '';
 
-    userDeleteDD.add(option);
+    userDD.add(option);
 
-    apiGet('user', 'all', [], function(data) {
+    var by = 'all';
 
+    if(types) {
+        by = 'getBy/type';
+        var typesObj = [];
+        for(var i in types) {
+            typesObj.push( memberTypeNameToInt(types[i]) );
+        }
+        typesObj = { 'types': typesObj };
+    }
+
+    apiGet('user', by, typesObj, function(data) {
         for(var i in data) {
             var option = document.createElement('option');
 
@@ -59,21 +74,65 @@ function updateUserDropDowns(targetElement) {
                 ' (' + data[i]['email'] + ')';
             option.value = data[i]['id'];
 
-            userDeleteDD.add(option);
+            userDD.add(option);
         }
     });
+}
+
+function memberTypeNameToInt(type) {
+    switch( type.toLowerCase() ){
+        case 'member':  return 0; break;
+        case 'coach':   return 1; break;
+        case 'manager': return 2; break;
+        case 'admin':   return 3; break;
+    }
 }
 
 function createAppointment() {
     var apptData = {};
     var formElements = document.getElementById('appointment-create-form').elements;
 
-    var y = formElements['appt-year-start'];
-    var m = formElements['appt-month-start'];
-    var d = formElements['appt-day-start'];
-    var length = formElements['appt-length'];
+    var startDate = new moment({
+        year:   parseInt(formElements['appointment-year-start'])    || 0,
+        month:  parseInt(formElements['appointment-month-start'])   || 0,
+        day:    parseInt(formElements['appointment-day-start'])     || 0,
+        hour:   parseInt(formElements['appointment-hour-start'])    || 0,
+        minute: parseInt(formElements['appointment-minute-start'])  || 0
+    });
 
-    //apptData['']
+    apptData['start_date'] = startDate.format('YYYY-MM-dd hh:mm');
+    apptData['length'] = parseInt( formElements['appointment-length'] );
+    apptData['status'] = parseInt( formElements['appointment-status-dd'] );
+
+    apptData['coach_id'] = parseInt( formElements['appointment-coach-dd'] );
+    apptData['member_id'] = parseInt( formElements['appointment-member-dd'] );
+
+    apiGet('appointment', 'create', apptData, outputDataTo.bind(this, 'appointment-create-output'));
+    updateAllAppointmentLists();
+}
+
+function updateApptStatusDD() {
+    var apptTypeDD = document.getElementById('appointment-status-dd');
+
+    apptTypeDD.innerHTML = "";
+
+    var option = document.createElement('option');
+    option.text = "Select Status...";
+    option.value = '';
+
+    apptTypeDD.add(option);
+
+    apiGet('appointment', 'getStatuses', [], function(data){
+
+        for(var i in data) {
+            var option = document.createElement('option');
+
+            option.text = '[' + i + '] ' + data[i];
+            option.value = i;
+
+            apptTypeDD.add(option);
+        }
+    });
 }
 
 function createUser() {

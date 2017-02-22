@@ -20,7 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('type');
             $table->integer('status');
             $table->integer('coach_user_id');
-            $table->integer('customer_user_id');
+            $table->integer('member_user_id');
             $table->timestamps();
         });
     }

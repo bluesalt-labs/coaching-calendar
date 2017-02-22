@@ -25,11 +25,11 @@ class Appointment extends Model
      * @var array
      */
     protected $fillable = [
-        'start_datetime', 'end_datetime', 'type', 'status', 'coach_user_id', 'customer_user_id',
+        'start_datetime', 'end_datetime', 'type', 'status', 'coach_user_id', 'member_user_id',
     ];
 
     public function isAvailable() {
-        return !($this->customer_user_id >= 0 || $this->status != Appointment::STATUS_AVAILABLE);
+        return !($this->member_user_id >= 0 || $this->status != Appointment::STATUS_AVAILABLE);
     }
 
     public function schedule($customerID, $statusID, $overwriteCustomer = false) {
@@ -39,10 +39,38 @@ class Appointment extends Model
         } else {
             //todo: $appointment->type?
             $this->status = $statusID;
-            $this->customer_user_id = $customerID;
+            $this->member_user_id = $customerID;
             $this->save();
             return true;
         }
+    }
+
+    /**
+     * Returns all appointment types as an array
+     *
+     * @return array
+     */
+    public static function getStatuses() {
+        return array(
+            Appointment::STATUS_AVAILABLE   => 'Available',
+            Appointment::STATUS_REQUESTED   => 'Requested',
+            Appointment::STATUS_CONFIRMED   => 'Confirmed',
+            Appointment::STATUS_CANCELED    => 'Canceled',
+        );
+    }
+
+    /**
+     * Make sure the appointment type is valid
+     *
+     * @param $type
+     * @return int|null
+     */
+    public static function validateStatus($type) {
+        if ($type == self::STATUS_AVAILABLE)        { return self::STATUS_AVAILABLE; }
+        else if ($type == self::STATUS_REQUESTED)   { return self::STATUS_REQUESTED; }
+        else if ($type == self::STATUS_CONFIRMED)   { return self::STATUS_CONFIRMED; }
+        else if ($type == self::STATUS_CANCELED)    { return self::STATUS_CANCELED; }
+        else { return null; }
     }
 
     public function getStatusId($statusName) {

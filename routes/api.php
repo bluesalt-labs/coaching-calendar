@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('get/{id}', 'UserController@get');
         Route::get('getTypes', 'UserController@getTypes');
         Route::get('getBy/email', 'UserController@byEmail');
+        Route::get('getBy/type', 'UserController@byType');
         Route::get('validateEmail', 'UserController@validateEmail');
         Route::get('create', 'UserController@create');
         Route::post('create', 'UserController@create');
@@ -41,6 +42,8 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/', 'AppointmentController@getAll');
         Route::get('/getByDateRange/', 'AppointmentController@getByDateRange');
         Route::get('get/{id}', 'AppointmentController@get');
+        Route::get('getStatuses', 'AppointmentController@getStatuses');
+        Route::get('create', 'AppointmentController@create');
         Route::post('create', 'AppointmentController@create');
         Route::post('schedule', 'AppointmentController@schedule');
 

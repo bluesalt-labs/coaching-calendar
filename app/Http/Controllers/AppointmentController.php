@@ -23,17 +23,46 @@ class AppointmentController extends Controller
         return Appointment::findOrFail($id);
     }
 
+    public function getStatuses(){
+        return Appointment::getStatuses();
+    }
+
     public function create(Request $request) {
+        $appointment = new Appointment();
+        $startDate = new DateTime( $request->get('start_date'));
+        // todo: figure out appointment lengths and how to use these when creating appointments
+        // todo: maybe use the API to get available appointment lengths and use a length ID here from the config?
+        $endDate = $this->getApptEndDate($startDate, $request->get('length'));
+        $status = Appointment::validateStatus($request->get('status'));
+
+        if($startDate && $endDate && $status) {
+            $appointment->start_datetime = $startDate;
+            $appointment->end_datetime = $endDate;
+            $appointment->status = $status;
+            $appointment->type = $request->get('type') || null;
+            $appointment->coach_user_id = $request->get('type') || null;
+            $appointment->member_user_id = $request->get('type') || null;
+
+            $appointment->save();
+            return response()->json($appointment);
+        } else {
+            $error = "";
+
+            // todo
+
+            return response()->json(array(
+                'error' => $error,
+            ));
+        }
+
+
         // if there is data submitted. also, have required fields, and check for duplicate users
 
         // parse attributes and do error checking, etc.
+    }
 
-        /*
-        $attributes = array();
-
-        // either return this or do something with it. maybe return a status code?
-        return Appointment::create($attributes);
-        */
+    private function getApptEndDate(DateTime $startDate, $apptLength) {
+        return $startDate->modify('+'.$apptLength.' minutes'); // todo: make sure this works
     }
 
     /*
@@ -92,7 +121,7 @@ class AppointmentController extends Controller
         if($apptID > 0) { $appt = Appointment::find($apptID); }
         else { /* must include valid appointment id; */ }
 
-        $customerID = $request->input('customer_user_id');
+        $customerID = $request->input('member_user_id');
         if($customerID > 0) { $customer = User::find($customerID); }
         else { /* must include valid customer id; */ }
 
