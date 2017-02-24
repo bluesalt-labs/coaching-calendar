@@ -6,6 +6,9 @@ var CoachingCalendar = function(year, month, day) {
 
     this.cacheArr = [];
 
+    //this.userTypes = [];
+    //this.apptTypes = [];
+
     /**
      * initializes the calendar. Called when a new CoachingCalendar object is created
      */
@@ -27,10 +30,40 @@ var CoachingCalendar = function(year, month, day) {
         document.getElementById('year-dd').innerHTML = innerHTML;
     };
 
+
+    /**
+     * Updates the agenda view with appointment data from the cache
+     * for the current date value of this.dateSelected
+     */
     this.updateAgenda = function() {
-        document.getElementById('agenda-header').innerHTML = this.dateSelected.format('dddd');
+        document.getElementById('agenda-header').innerHTML = this.dateSelected.format('dddd[,] MMM Do');
+        var agendaItems = document.getElementById('agenda-items');
 
+        agendaItems.innerHTML = "";
 
+        var y = this.dateSelected.year();
+        var m = this.dateSelected.month();
+        var d = this.dateSelected.date();
+
+        for(var i in this.cacheArr[y][m][d]['appointments']) {
+            var item = this.getAgendaItemHTML(this.cacheArr[y][m][d]['appointments'][i]);
+            agendaItems.appendChild(item);
+        }
+    };
+
+    /**
+     * Creates an HTML element to attach to the agenda container from an appointment in the cache array
+     *
+     * @param appointment[]
+     * @returns {Element}
+     */
+    this.getAgendaItemHTML = function(appointment) {
+        var item = document.createElement('div');
+        item.className = 'agenda-item';
+
+        item.innerHTML = appointment.startDateTime.format();
+
+        return item;
     };
 
     /**
@@ -72,8 +105,12 @@ var CoachingCalendar = function(year, month, day) {
             var d = document.getElementById('day-'+i);
             var dSpan = d.getElementsByClassName('day-num')[0];
 
-            d.className += " outside-month";
-            //d.addEventListener('click', this.onClick.bind(this));
+            d.className = 'day outside-month prev-month';
+
+            d.onclick = (function(e) {
+                this.onDayClick(e.target);
+            }).bind(this);
+
             dSpan.innerHTML = tempMoment.date();
 
             tempMoment.add(1, 'days');
@@ -82,9 +119,9 @@ var CoachingCalendar = function(year, month, day) {
         // We didn't need to add a day the last time through the loop above. Subtract that day.
         tempMoment.subtract(1, 'days');
 
-        for(var i = firstDayOfWeek; i < 42; i++) {
-            var d = document.getElementById('day-'+i);
-            var dSpan = d.getElementsByClassName('day-num')[0];
+        for(i = firstDayOfWeek; i < 42; i++) {
+            d = document.getElementById('day-'+i);
+            dSpan = d.getElementsByClassName('day-num')[0];
 
             var tempDay = tempMoment.date();
 
@@ -93,7 +130,8 @@ var CoachingCalendar = function(year, month, day) {
             }).bind(this);
 
             if(tempMoment.month() != thisMonth) {
-                d.className += ' outside-month';
+                d = document.getElementById('day-'+i);
+                d.className = 'day outside-month next-month';
             } else {
                 //d.removeEventListener('click', this.onClick.bind(this));
                 //d.removeEventListener('click', this.onClick.bind(this));
@@ -118,7 +156,7 @@ var CoachingCalendar = function(year, month, day) {
         }
 
         this.refreshAppointments();
-        this.updateAgenda();
+        //this.updateAgenda(); // todo: this doesn't go here, right?
     };
 
     /**
@@ -161,7 +199,7 @@ var CoachingCalendar = function(year, month, day) {
      * removes displayed appointments on the calendar
      */
     this.clearAppointments = function() {
-        // todo: clear from cache (this.cacheArr)
+        // todo: clear from cache (this.cacheArr)?
         var toRemove = document.getElementsByClassName('cal-event-count');
         var removeCap = 999;
 
@@ -320,16 +358,74 @@ var CoachingCalendar = function(year, month, day) {
 
     /**
      * Event fired when a calendar day box is clicked
+     *
+     * todo: this whole process feels dirty to me. I think it could be cleaned up and optimized.
      * @param target
      */
     this.onDayClick = function(target) {
-        this.setSelectedDay(target.id);
+        if(target) {
+            this.setSelectedDay(target);
+            this.selectDayOnCalendar();
+        }
 
-        console.log(target);
+        this.updateAgenda();
     };
 
-    this.setSelectedDay = function(dayID) {
-        // todo: if no date is selected, don't show anything in the agenda view. ?
+    this.setSelectedDay = function(dayEl) {
+        // get the day, month, and year from the dayID (if it's valid)
+        var y   = this.calendarDate.year();
+        var m   = this.calendarDate.month();
+        var d   = 0;
+
+        if(dayEl) {
+            try { d = parseInt( dayEl.getElementsByClassName('day-num')[0].innerHTML ); }
+            catch(e) {}
+
+            //console.log("day: " + d); // debug
+            if(d > 0) {
+                this.dateSelected.year(y);
+                this.dateSelected.month(m);
+                this.dateSelected.date(d);
+
+                // check if the previous or next month was clicked
+                // todo: create alternative for browsers that don't support classList
+                if(dayEl.classList.contains('prev-month')) {
+                    this.dateSelected.subtract(1, 'months');
+                    this.onPrevMonthClick();
+                }
+                else if(dayEl.classList.contains('next-month')) {
+                    this.dateSelected.add(1, 'months');
+                    this.onNextMonthClick();
+                }
+
+                //console.log("date Selected: " + this.dateSelected.format()); // debug
+
+            } else {
+                console.log("invalid day!: " + dayEl.id); // debug
+            }
+        }
+
+
+        this.selectDayOnCalendar = function() {
+            // todo: if no date is selected, don't show anything in the agenda view.
+            var dayEls = document.getElementsByClassName('day');
+
+            for(var i in dayEls) {
+                if(dayEls[i].classList){
+                    dayEls[i].classList.remove('active');
+
+                    var d = parseInt( dayEls[i].getElementsByClassName('day-num')[0].innerHTML );
+                    if(
+                        d == this.dateSelected.date() &&
+                        !dayEls[i].classList.contains('prev-month') &&
+                        !dayEls[i].classList.contains('next-month')
+                    ) {
+                        dayEls[i].className += ' active';
+                    }
+                }
+            }
+        };
+
         // set this.dateSelected
         // deselect all days on the calendar (remove the selected class name)
         // add selected class name to the day selected
@@ -392,4 +488,12 @@ var CoachingCalendar = function(year, month, day) {
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+/*
+
+// this should extract the number from a day ID, if I ever need this
+if(/(day-)\d+/.test(dayID)) {
+    var day = parseInt( dayID.replace('day-', '') );
 }
+ */

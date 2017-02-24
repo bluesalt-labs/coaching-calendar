@@ -21,7 +21,7 @@ table#calendar #calendar-header > #calendar-month,
     padding-top: 10px;
     text-align: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
 
 }
 
@@ -180,7 +180,8 @@ table#calendar .day:hover {
     cursor: pointer;
     background: #eaeaea;
 }
-table#calendar .day:active {
+table#calendar .day:active,
+table#calendar .day.active {
     background: #e2e2e2;
     -webkit-box-shadow: inset 0 0 3px 0 #333;
     -moz-box-shadow: inset 0 0 3px 0 #333;
@@ -189,7 +190,8 @@ table#calendar .day:active {
 
 table#calendar .day.today { background: rgba(123, 239, 105, 0.25); }
 table#calendar .day.today:hover { background: rgba(106, 195, 106, 0.3); }
-table#calendar .day.today:active { background: rgba(95, 160, 95, 0.3); }
+table#calendar .day.today:active,
+table#calendar .day.today.active { background: rgba(95, 160, 95, 0.3); }
 
 table#calendar .day > .day-num,
 table#calendar .day > .cal-event-count {
