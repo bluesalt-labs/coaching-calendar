@@ -108,6 +108,7 @@
     </table>
     <div id="agenda-container">
         <div id="agenda-header"></div>
+        <div id="agenda-items"></div>
     </div>
 
     <script type="text/javascript">

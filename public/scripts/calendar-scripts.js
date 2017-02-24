@@ -86,11 +86,15 @@ var CoachingCalendar = function(year, month, day) {
             var d = document.getElementById('day-'+i);
             var dSpan = d.getElementsByClassName('day-num')[0];
 
+            var tempDay = tempMoment.date();
+
+            d.onclick = (function(e) {
+                this.onDayClick(e.target);
+            }).bind(this);
+
             if(tempMoment.month() != thisMonth) {
-                //d.addEventListener('click', this.onClick.bind(this));
                 d.className += ' outside-month';
             } else {
-                var tempDay = tempMoment.date();
                 //d.removeEventListener('click', this.onClick.bind(this));
                 //d.removeEventListener('click', this.onClick.bind(this));
                 if(this.cacheArr[thisYear][thisMonth][tempDay] === undefined) {
@@ -142,7 +146,7 @@ var CoachingCalendar = function(year, month, day) {
             end_date: endDate.toISOString()
         };
 
-        var apiData = this.apiGet('appointment', 'getByDateRange', reqData, this.getAppointmentsCallback.bind(this));
+        this.apiGet('appointment', 'getByDateRange', reqData, this.getAppointmentsCallback.bind(this));
     };
 
     /**
@@ -312,6 +316,25 @@ var CoachingCalendar = function(year, month, day) {
             'date':      1
         });
         this.refreshCalendar();
+    };
+
+    /**
+     * Event fired when a calendar day box is clicked
+     * @param target
+     */
+    this.onDayClick = function(target) {
+        this.setSelectedDay(target.id);
+
+        console.log(target);
+    };
+
+    this.setSelectedDay = function(dayID) {
+        // todo: if no date is selected, don't show anything in the agenda view. ?
+        // set this.dateSelected
+        // deselect all days on the calendar (remove the selected class name)
+        // add selected class name to the day selected
+        // update the agenda view
+
     };
 
     this.apiGet = function(model, action, args, callback) {

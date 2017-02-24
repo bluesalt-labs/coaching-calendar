@@ -167,18 +167,29 @@ table#calendar .day {
     border: 1px solid #e2e2e2;
 }
 
+table#calendar .day.outside-month { background-color: #f6f6f6; }
+table#calendar .day.outside-month > .day-num { color: #aaa; }
+
 table#calendar .day {
     height: 14.3%;
     vertical-align: top;
 }
 
-/* Just for fun. Probably will take this out later
+
 table#calendar .day:hover {
-    -webkit-box-shadow: inset 0 0 3px 0 #aaa;
-    -moz-box-shadow: inset 0 0 3px 0 #aaa;
-    box-shadow: inset 0 0 3px 0 #aaa;
+    cursor: pointer;
+    background: #eaeaea;
 }
-end just for fun */
+table#calendar .day:active {
+    background: #e2e2e2;
+    -webkit-box-shadow: inset 0 0 3px 0 #333;
+    -moz-box-shadow: inset 0 0 3px 0 #333;
+    box-shadow: inset 0 0 3px 0 #333;
+}
+
+table#calendar .day.today { background: rgba(123, 239, 105, 0.25); }
+table#calendar .day.today:hover { background: rgba(106, 195, 106, 0.3); }
+table#calendar .day.today:active { background: rgba(95, 160, 95, 0.3); }
 
 table#calendar .day > .day-num,
 table#calendar .day > .cal-event-count {
@@ -205,8 +216,3 @@ table#calendar .day > .cal-event-count.label-confirmed .badge  { color: #5CE546;
 table#calendar .day > .cal-event-count.label-canceled { background-color: #FE979F; }
 table#calendar .day > .cal-event-count.label-canceled .badge { color: #FE979F; }
 
-table#calendar .day.today { background: rgba(123, 239, 105, 0.25); }
-
-table#calendar .day.outside-month { background-color: #f6f6f6; }
-
-table#calendar .day.outside-month > .day-num { color: #aaa; }
