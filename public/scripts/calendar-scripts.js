@@ -53,7 +53,7 @@ var CoachingCalendar = function(year, month, day) {
 
     /**
      * Creates an HTML element to attach to the agenda container from an appointment in the cache array
-     *
+     * todo: this obviously isn't finished.
      * @param appointment[]
      * @returns {Element}
      */

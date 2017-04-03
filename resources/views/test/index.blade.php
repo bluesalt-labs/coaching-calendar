@@ -101,7 +101,7 @@ function createAppointment() {
                     <div class="form-group">
                         <label for="appointment-year-start" class="sr-only col-xs-12 control-label">Year</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appointment-year" class="form-control" placeholder="Year" />
+                            <input type="text" id="appointment-year-start" class="form-control" placeholder="Year" />
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@ function createAppointment() {
                     <div class="form-group">
                         <label for="appointment-month-start" class="sr-only col-xs-12 control-label">Month</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appointment-month" class="form-control" placeholder="Month" />
+                            <input type="text" id="appointment-month-start" class="form-control" placeholder="Month" />
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,23 @@ function createAppointment() {
                     <div class="form-group">
                         <label for="appointment-day-start" class="sr-only col-xs-12 control-label">Day</label>
                         <div class="col-xs-12">
-                            <input type="number" id="appointment-day" class="form-control" placeholder="Day" />
+                            <input type="text" id="appointment-day-start" class="form-control" placeholder="Day" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="appointment-hour-start" class="sr-only col-xs-12 control-label">Hour</label>
+                        <div class="col-xs-12">
+                            <input type="text" id="appointment-hour-start" class="form-control" placeholder="Hour" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="appointment-minute-start" class="sr-only col-xs-12 control-label">Minute</label>
+                        <div class="col-xs-12">
+                            <input type="text" id="appointment-minute-start" class="form-control" placeholder="Minute" />
                         </div>
                     </div>
                 </div>

@@ -30,19 +30,20 @@ class AppointmentController extends Controller
     public function create(Request $request) {
         $appointment = new Appointment();
         $startDate = new DateTime( $request->get('start_date'));
+
         // todo: figure out appointment lengths and how to use these when creating appointments
         // todo: maybe use the API to get available appointment lengths and use a length ID here from the config?
-        $endDate = $this->getApptEndDate($startDate, $request->get('length'));
-        $status = Appointment::validateStatus($request->get('status'));
 
-        if($startDate && $endDate && $status) {
+        $endDate = $this->getApptEndDate($startDate, $request->get('length'));
+        $status = Appointment::validateStatus( intval($request->get('status')) );
+
+        if($startDate && $endDate && $status >= 0) {
             $appointment->start_datetime = $startDate;
             $appointment->end_datetime = $endDate;
             $appointment->status = $status;
-            $appointment->type = $request->get('type') || null;
-            $appointment->coach_user_id = $request->get('type') || null;
-            $appointment->member_user_id = $request->get('type') || null;
-
+            $appointment->type = intval($request->get('type'));
+            $appointment->coach_user_id = intval($request->get('coach_id'));
+            $appointment->member_user_id = intval($request->get('member_id'));
             $appointment->save();
             return response()->json($appointment);
         } else {

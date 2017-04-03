@@ -93,19 +93,19 @@ function createAppointment() {
     var formElements = document.getElementById('appointment-create-form').elements;
 
     var startDate = new moment({
-        year:   parseInt(formElements['appointment-year-start'])    || 0,
-        month:  parseInt(formElements['appointment-month-start'])   || 0,
-        day:    parseInt(formElements['appointment-day-start'])     || 0,
-        hour:   parseInt(formElements['appointment-hour-start'])    || 0,
-        minute: parseInt(formElements['appointment-minute-start'])  || 0
+        year:   parseInt(formElements['appointment-year-start'].value)    || 0,
+        month:  parseInt(formElements['appointment-month-start'].value)   || 0,
+        day:    parseInt(formElements['appointment-day-start'].value)     || 0,
+        hour:   parseInt(formElements['appointment-hour-start'].value)    || 0,
+        minute: parseInt(formElements['appointment-minute-start'].value)  || 0
     });
 
-    apptData['start_date'] = startDate.format('YYYY-MM-dd hh:mm');
-    apptData['length'] = parseInt( formElements['appointment-length'] );
-    apptData['status'] = parseInt( formElements['appointment-status-dd'] );
+    apptData['start_date'] = startDate.format('YYYY-MM-DD hh:mm:ss');
+    apptData['length'] = parseInt( formElements['appointment-length-dd'].value );
+    apptData['status'] = parseInt( formElements['appointment-status-dd'].value );
 
-    apptData['coach_id'] = parseInt( formElements['appointment-coach-dd'] );
-    apptData['member_id'] = parseInt( formElements['appointment-member-dd'] );
+    apptData['coach_id'] = parseInt( formElements['appointment-create-coach-dd'].value );
+    apptData['member_id'] = parseInt( formElements['appointment-create-member-dd'].value );
 
     apiGet('appointment', 'create', apptData, outputDataTo.bind(this, 'appointment-create-output'));
     updateAllAppointmentLists();
