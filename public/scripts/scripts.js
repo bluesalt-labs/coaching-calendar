@@ -48,7 +48,7 @@ function apiRequest(method, model, action, args, callback) {
             if (xhr.status === 200) {
                 callback(xhr.response);
             } else {
-                console.log('Request failed.  Returned status of ' + xhr.status);
+                console.log(method + ' request: "' + model + '/' + action + '" failed. Returned status of ' + xhr.status);
                 callback('');
             }
         }

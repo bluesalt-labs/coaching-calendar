@@ -182,6 +182,7 @@ var CoachingCalendar = function(year, month, day) {
         var reqData = {
             start_date: startDate.toISOString(),
             end_date: endDate.toISOString()
+
         };
 
         this.apiGet('appointment', 'getByDateRange', reqData, this.getAppointmentsCallback.bind(this));
@@ -473,7 +474,7 @@ var CoachingCalendar = function(year, month, day) {
                 if (xhr.status === 200) {
                     callback(xhr.response);
                 } else {
-                    console.log('Request failed.  Returned status of ' + xhr.status);
+                    console.log(method + ' request: "' + model + '/' + action + '" failed. Returned status of ' + xhr.status);
                     callback('');
                 }
             }

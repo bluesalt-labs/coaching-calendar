@@ -63,7 +63,8 @@ class AppointmentController extends Controller
     }
 
     private function getApptEndDate(DateTime $startDate, $apptLength) {
-        return $startDate->modify('+'.$apptLength.' minutes'); // todo: make sure this works
+        $endDate = new DateTime($startDate->format('Y-m-d H:i:s'));
+        return $endDate->modify('+'.$apptLength.' minutes');
     }
 
     /*
@@ -96,7 +97,7 @@ class AppointmentController extends Controller
         $startDateStr = $endDateStr = $endDate = $endDate = null;
 
         // todo: if request is authorized on back end, $availOnly = false;
-        $availOnly = true;
+        $availOnly = false;
 
         $appts = array();
 
@@ -108,7 +109,7 @@ class AppointmentController extends Controller
             $endDate = new DateTime($endDateStr);
 
             if( ($startDate && $endDate) && ($startDate <= $endDate) ) {
-                $appts = Appointment::getByDateRange($startDate, $endDate);
+                $appts = Appointment::getByDateRange($startDate, $endDate, $availOnly);
             }
         }
 

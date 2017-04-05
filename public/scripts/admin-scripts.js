@@ -10,8 +10,8 @@ function scheduleAppointment(apptId, customerId) {
             document.getElementById('test-data').innerHTML = (xhr.responseText.length > 0 ? xhr.responseText : "No Data");
             //alert('User\'s name is ' + xhr.responseText);
         } else {
-            document.getElementById('test-data').innerHTML = 'Request failed.  Returned status of ' + xhr.status;
-            //alert('Request failed.  Returned status of ' + xhr.status);
+            document.getElementById('test-data').innerHTML = method + ' request: "' + model + '/' + action + '" failed. Returned status of ' + xhr.status;
+            //alert(method + ' request: "' + model + '/' + action + '" failed. Returned status of ' + xhr.status);
         }
     };
     xhr.send(encodeURI('name=' + 'Luke'));
